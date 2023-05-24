@@ -130,17 +130,19 @@ After deleting unnecessary columns, changing column names, filtering the relevan
 ```{r}
 # Create one table
 joined_tables <- employees %>%
-  left_join(land_use,by=c("Country","Year"), relationship = "many-to-many") %>%
-  left_join(pesticides,by=c("Country","Year"), relationship = "many-to-many") %>%
-  left_join(pop,by=c("Country","Year"), relationship = "many-to-many") %>%
-  left_join(price, by=c("Country","Year"), relationship = "many-to-many") %>%
-  left_join(rainfall,by=c("Country","Year"), relationship = "many-to-many") %>%
-  left_join(temp,by=c("Country","Year"), relationship = "many-to-many") %>%
-  left_join(yield,by=c("Country","Year","Item"), relationship = "many-to-many") %>%
+  left_join(land_use,by=c("Year","Country"), relationship = "many-to-many") %>%
+  left_join(pesticides,by=c("Year","Country"), relationship = "many-to-many") %>%
+  left_join(pop,by=c("Year","Country"), relationship = "many-to-many") %>%
+  left_join(price, by=c("Year","Country"), relationship = "many-to-many") %>%
+  left_join(rainfall,by=c("Year","Country"), relationship = "many-to-many") %>%
+  left_join(temp,by=c("Year","Country"), relationship = "many-to-many") %>%
+  left_join(yield,by=c("Year","Country","Item"), relationship = "many-to-many") %>%
   arrange(Country, Year, Item)
 
 # Reordering columns
-joined_tables |>  select(Year, Country, pop_amount,number_employed_agri,avg_temp, avg_rainfall,land_price,Item, pesticides_amount, crop_price, yield)
+joined_tables <- joined_tables |>  select(Year, Country, pop_amount,number_employed_agri,avg_temp, avg_rainfall,land_price,Item, pesticides_amount, crop_price, yield)
+
+joined_tables
 ```
 
 ```{r}
