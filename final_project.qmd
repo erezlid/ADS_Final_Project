@@ -79,7 +79,6 @@ colnames(yield)[c(4,12)] <- c("Country",'yield')
 # Remove unnecessary columns and filter each table by Country
 
 employees <- employees |>
-  filter(Country %in% yield$Country) |>
   arrange(Country, Year)
 
 # Remove plus sign from country name
@@ -87,19 +86,17 @@ land_use$Country <- sapply(land_use$Country, function(x) gsub(' \\+', '', x))
 
 land_use <- land_use |>
   select(-c(unit, element, element_code, value_footnotes)) |>
-  filter((Country %in% yield$Country) & (category %in% c("agricultural_area"))) |>
+  filter(category %in% c("agricultural_area")) |>
   select(-category) |>
   arrange(Country, Year)
 
 
 pesticides <- pesticides |>
   select(-c(Unit,Element, Domain,Item)) |>
-  filter(Country %in% yield$Country) |>
   arrange(Country, Year)
 
 pop <- pop |>
   select(-country_code) |>
-  filter(Country %in% yield$Country) |>
   arrange(Country, Year)
 
 price$Item <- sapply(price$Item, function(x) gsub('corn', '', x)) %>%
@@ -108,20 +105,19 @@ price$Item <- sapply(price$Item, function(x) gsub('corn', '', x)) %>%
 price <- price |>
   select(-c(Domain.Code,Domain,Area.Code..M49.,Element.Code,Element,
             Item.Code..CPC.,Year.Code,Months.Code,Unit,Flag, Flag.Description, Months)) |>
-  arrange(Country, Year)
+  arrange(Country, Year,Item) |>
+  select(-Item)
 
 rainfall <- rainfall |>
-  filter(Country %in% yield$Country) |>
   arrange(Country, Year)
 
 temp <- temp |>
-  filter(Country %in% yield$Country) |>
   arrange(Country, Year)
 
 yield <- yield |>
   select(-c(Domain, Domain.Code,Area.Code,Element.Code,
             Element,Item.Code,Year.Code,Unit)) |>
-  arrange(Country, Year)
+  arrange(Country, Year,Item)
 ```
 
 After deleting unnecessary columns, changing column names, filtering the relevant countries and sorting the tables. It's time to join all of the tables into one big table.
@@ -129,28 +125,25 @@ After deleting unnecessary columns, changing column names, filtering the relevan
 ```{r}
 # Create one table
 joined_tables <- yield %>%
-  left_join(land_use,by=c("Year","Country"), relationship = "many-to-many") %>%
-  left_join(pesticides,by=c("Year","Country"), relationship = "many-to-many") %>%
-  left_join(pop,by=c("Year","Country"), relationship = "many-to-many") %>%
-  left_join(rainfall,by=c("Year","Country"), relationship = "many-to-many") %>%
-  left_join(temp,by=c("Year","Country"), relationship = "many-to-many") %>%
-  left_join(employees,by=c("Year","Country"), relationship = "many-to-many") %>%
-  right_join(price, by=c("Year","Item","Country"), relationship='many-to-many') %>%
+  left_join(land_use,by=c("Year","Country"), relationship = "many-to-many") |>
+  left_join(pesticides,by=c("Year","Country"), relationship = "many-to-many") |>
+  left_join(pop,by=c("Year","Country"), relationship = "many-to-many") |>
+  left_join(rainfall,by=c("Year","Country"), relationship = "many-to-many") |>
+  left_join(temp,by=c("Year","Country"), relationship = "many-to-many") |>
+  left_join(employees,by=c("Year","Country"), relationship = "many-to-many") |>
+  left_join(price, by=c("Year","Country"), relationship='many-to-many') |>
   arrange(Country, Year)
 
 # Reordering columns
-joined_tables <- joined_tables |>  select(Year, Country, pop_amount,number_employed_agri,avg_temp, avg_rainfall,land_price,Item, pesticides_amount, crop_price, yield)
+joined_tables <- joined_tables |>  select(Year, Country, pop_amount,number_employed_agri,avg_temp, avg_rainfall,land_price,Item, pesticides_amount, crop_price,yield)
 
 ```
 
 ```{r}
-
-
-
 ```
 
 ```{r}
-price
+help(join_by)
 ```
 
 
