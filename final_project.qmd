@@ -1,0 +1,153 @@
+---
+title: "ADS Final Project"
+format:
+  html:
+    theme: darkly
+    toc: true
+    number-sections: true
+---
+
+```{r include=False}
+library(ggplot2)
+library(dplyr)
+library(tidyverse)
+library(readr)
+
+```
+
+
+## Loading data
+```{r}
+
+# Employees data
+employees <- read.csv("https://raw.githubusercontent.com/erezlid/ADS_Final_Project/main/Data/Agriculture%20Employees%20/employ.csv")
+
+# Climate change data
+
+rainfall <- read.csv("https://raw.githubusercontent.com/erezlid/ADS_Final_Project/main/Data/Climate%20Change/rainfall.csv")
+
+temp <- read.csv("https://raw.githubusercontent.com/erezlid/ADS_Final_Project/main/Data/Climate%20Change/temp.csv")
+
+# Pesticides data
+
+pesticides <- read.csv("https://raw.githubusercontent.com/erezlid/ADS_Final_Project/main/Data/Climate%20Change/pesticides.csv")
+
+
+# Land Use data
+
+land_use <- read.csv("https://raw.githubusercontent.com/erezlid/ADS_Final_Project/main/Data/Land%20Use%20/fao_data_land_data.csv")
+
+# Population data
+pop <- read.csv("https://raw.githubusercontent.com/erezlid/ADS_Final_Project/main/Data/Population/population_by_country.csv")
+
+
+# Producer price data
+price <- read.csv("https://raw.githubusercontent.com/erezlid/ADS_Final_Project/main/Data/Producer%20Price/Producer_Prices.csv")
+
+# Agriculture yield data
+yield <- read.csv("https://raw.githubusercontent.com/erezlid/ADS_Final_Project/main/Data/Yield/yield.csv")
+```
+
+
+```{r}
+# First 6 rows of each table
+head(employees)
+head(land_use)
+head(pesticides)
+head(pop)
+head(price)
+head(rainfall)
+head(temp)
+head(yield)
+```
+
+Some of the tables have unnecessary columns, deleting those columns is a crucial before starting asking questions about the data
+
+```{r}
+
+# Country & Year columns uniformity
+colnames(employees)[1] <- "Country"
+colnames(land_use)[c(1,4,6)] <- c("Country","Year","land_price")
+colnames(pesticides)[c(2,7)] <- c("Country", "pesticides_amount")
+colnames(pop)[c(2,3,4)] <- c("Country","Year","pop_amount")
+colnames(price)[c(4,14)] <- c("Country","crop_price")
+colnames(rainfall)[c(1,3)] <- c("Country","avg_rainfall")
+colnames(temp)[1:2] <- c("Year","Country")
+colnames(yield)[c(4,12)] <- c("Country",'yield')
+
+
+# Remove unnecessary columns and filter each table by Country
+
+employees <- employees |>
+  filter(Country %in% yield$Country) |>
+  arrange(Country, Year)
+
+# Remove plus sign from country name
+land_use$Country <- sapply(land_use$Country, function(x) gsub(' \\+', '', x))
+
+land_use <- land_use |>
+  select(-c(unit, element, element_code, value_footnotes)) |>
+  filter((Country %in% yield$Country) & (category %in% c("agricultural_area"))) |>
+  select(-category) |>
+  arrange(Country, Year)
+
+
+pesticides <- pesticides |>
+  select(-c(Unit,Element, Domain,Item)) |>
+  filter(Country %in% yield$Country) |>
+  arrange(Country, Year)
+
+pop <- pop |>
+  select(-country_code) |>
+  filter(Country %in% yield$Country) |>
+  arrange(Country, Year)
+
+price$Item <- sapply(price$Item, function(x) gsub('corn', '', x)) %>%
+  sapply(., function(x) gsub('\\()', '', x))
+
+price <- price |>
+  select(-c(Domain.Code,Domain,Area.Code..M49.,Element.Code,Element,
+            Item.Code..CPC.,Year.Code,Months.Code,Unit,Flag, Flag.Description, Months)) |>
+  filter(Country %in% yield$Country) |>
+  arrange(Country, Year)
+
+rainfall <- rainfall |>
+  filter(Country %in% yield$Country) |>
+  arrange(Country, Year)
+
+temp <- temp |>
+  filter(Country %in% yield$Country) |>
+  arrange(Country, Year)
+
+yield <- yield |>
+  select(-c(Domain, Domain.Code,Area.Code,Element.Code,
+            Element,Item.Code,Year.Code,Unit)) |>
+  arrange(Country, Year)
+```
+
+After deleting unnecessary columns, changing column names, filtering the relevant countries and sorting the tables. It's time to join all of the tables into one big table.
+
+```{r}
+# Create one table
+joined_tables <- employees %>%
+  left_join(land_use,by=c("Country","Year"), relationship = "many-to-many") %>%
+  left_join(pesticides,by=c("Country","Year"), relationship = "many-to-many") %>%
+  left_join(pop,by=c("Country","Year"), relationship = "many-to-many") %>%
+  left_join(price, by=c("Country","Year"), relationship = "many-to-many") %>%
+  left_join(rainfall,by=c("Country","Year"), relationship = "many-to-many") %>%
+  left_join(temp,by=c("Country","Year"), relationship = "many-to-many") %>%
+  left_join(yield,by=c("Country","Year","Item"), relationship = "many-to-many") %>%
+  arrange(Country, Year, Item)
+
+# Reordering columns
+joined_tables |>  select(Year, Country, pop_amount,number_employed_agri,avg_temp, avg_rainfall,land_price,Item, pesticides_amount, crop_price, yield)
+```
+
+```{r}
+```
+
+
+
+
+
+
