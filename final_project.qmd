@@ -4,10 +4,10 @@ format:
   html:
     theme: darkly
     toc: true
-    number-sections: true
+    number-sections: false
 ---
 
-```{r include=False}
+```{r include=FALSE}
 library(ggplot2)
 library(dplyr)
 library(tidyverse)
@@ -16,7 +16,7 @@ library(readr)
 ```
 
 
-## Loading data
+# Loading data
 ```{r}
 
 # Employees data
@@ -59,10 +59,13 @@ head(price)
 head(rainfall)
 head(temp)
 head(yield)
+
+
 ```
 
 Some of the tables have unnecessary columns, deleting those columns is a crucial before starting asking questions about the data
 
+# Data Cleaning & Arranging
 ```{r}
 
 # Country & Year columns uniformity
@@ -76,7 +79,7 @@ colnames(temp)[1:2] <- c("Year","Country")
 colnames(yield)[c(4,12)] <- c("Country",'yield')
 
 
-# Remove unnecessary columns and filter each table by Country
+# Remove unnecessary columns and arrange each table by Country & Year
 
 employees <- employees |>
   arrange(Country, Year)
@@ -99,6 +102,7 @@ pop <- pop |>
   select(-country_code) |>
   arrange(Country, Year)
 
+# Change Maize(corn) to Maize only
 price$Item <- sapply(price$Item, function(x) gsub('corn', '', x)) %>%
   sapply(., function(x) gsub('\\()', '', x))
 
@@ -123,7 +127,7 @@ yield <- yield |>
 After deleting unnecessary columns, changing column names, filtering the relevant countries and sorting the tables. It's time to join all of the tables into one big table.
 
 ```{r}
-# Create one table
+# Join tables
 joined_tables <- yield %>%
   left_join(land_use,by=c("Year","Country"), relationship = "many-to-many") |>
   left_join(pesticides,by=c("Year","Country"), relationship = "many-to-many") |>
@@ -136,15 +140,105 @@ joined_tables <- yield %>%
 
 # Reordering columns
 joined_tables <- joined_tables |>  select(Year, Country, pop_amount,number_employed_agri,avg_temp, avg_rainfall,land_price,Item, pesticides_amount, crop_price,yield)
-
 ```
 
 ```{r}
+# Removing countries that have more than 80% missing values
+joined_tables <- joined_tables |>
+  group_by(Country) |>
+  mutate(missing_values_crop = sum(is.na(crop_price)),
+         missing_values_employee = sum(is.na(number_employed_agri)),
+            observations=n()) |>
+  ungroup() |>
+  filter(!((missing_values_crop/observations > 0.8) | (missing_values_employee/observations > 0.8))) |>
+  select(-c(missing_values_crop,missing_values_employee, observations))
 ```
 
+Our goal is to use mean based analysis in order to find which of the indices affect the most on crop yield outcome. Therefore, we used mean imputation to fill the missing values in each column. However, we still saved our data frame before the imputation.
 ```{r}
-help(join_by)
+filled_with_avg <- joined_tables |>
+  group_by(Country) |>
+  # Replace missing values with the column avg by country.
+  mutate_at(vars(-group_cols(), -avg_rainfall),~ ifelse(is.na(.), mean(., na.rm=T),.)) |>
+  # Fill avg_rainfall backwards
+  fill(avg_rainfall, .direction='up') |>
+  ungroup()
+
+filled_with_avg$avg_rainfall <- as.integer(filled_with_avg$avg_rainfall)
 ```
+
+
+# Data Visualization
+```{r warning=FALSE}
+filled_with_avg |>
+  filter(!is.na(pop_amount)) |>
+  group_by(Country) |>
+  summarize(avg_pop = mean(pop_amount), avg_yield = mean(yield)) |>
+  ggplot(aes(x=log(avg_pop), y=log(avg_yield), color=avg_yield)) +
+  geom_point() + 
+  geom_smooth(formula = y~x, method='lm') + 
+  labs(title='Avg crop yield VS Avg Population  (Log Scaled)')
+
+filled_with_avg |>
+  filter(!is.na(pop_amount)) |>
+  group_by(Country) |>
+  summarize(avg_employees = mean(number_employed_agri), avg_yield = mean(yield)) |>
+  ggplot(aes(x=log(avg_employees), y=log(avg_yield), color=avg_yield)) +
+  geom_point() + 
+  geom_smooth(formula = y~x, method='lm') + 
+  labs(title='Avg crop yield VS Avg Num of Employees (Log Scaled)')
+
+filled_with_avg |>
+  filter(!is.na(avg_temp)) |>
+  group_by(Country) |>
+  summarize(avg_temp =  mean(avg_temp), avg_yield = mean(yield)) |>
+  ggplot(aes(x=avg_temp, y=avg_yield, color=avg_yield)) +
+  geom_point() + 
+  geom_smooth(formula = y~x, method='lm') + 
+  labs(title='Avg crop yield VS Avg Temperature')
+
+filled_with_avg |>
+  filter(!is.na(avg_rainfall)) |>
+  group_by(Country) |>
+  summarize(avg_rainfall = mean(avg_rainfall), avg_yield = mean(yield)) |>
+  ggplot(aes(x=avg_rainfall, y=avg_yield, color=avg_yield)) + 
+  geom_point() + 
+  geom_smooth(formula = y~x, method='lm') + 
+  labs(title = 'Avg crop yield VS Avg rainfall')
+
+filled_with_avg |>
+  filter(!is.na(land_price)) |>
+  group_by(Country) |>
+  summarize(avg_land_price = mean(land_price), avg_yield = mean(yield)) |>
+  ggplot(aes(x=log(avg_land_price), y=log(avg_yield), color=avg_yield)) + 
+  geom_point() + 
+  geom_smooth(formula = y~x, method='lm') + 
+  labs(title = 'Avg crop yield VS Avg Land price (Log Scaled)')
+
+filled_with_avg |>
+  filter(!is.na(pesticides_amount)) |>
+  group_by(Country) |>
+  summarize(avg_pesticides = mean(pesticides_amount), avg_yield = mean(yield)) |>
+  ggplot(aes(x=log(avg_pesticides), y=log(avg_yield), color=avg_yield)) + 
+  geom_point() + 
+  geom_smooth(formula = y~x, method='lm') + 
+  labs(title = 'Avg crop yield VS Avg Pesticides amount (Log Scaled)')
+
+filled_with_avg |>
+  filter(!is.na(crop_price)) |>
+  group_by(Country) |>
+  summarize(avg_crop_price = mean(pesticides_amount), avg_yield = mean(yield)) |>
+  ggplot(aes(x=log(avg_crop_price), y=log(avg_yield), color=avg_yield)) + 
+  geom_point() + 
+  geom_smooth(formula = y~x, method='lm') + 
+  labs(title = 'Avg crop yield VS Avg Crop price (Log Scaled)')
+
+```
+
+
+
+
+
 
 
 
