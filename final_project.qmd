@@ -11,7 +11,8 @@ format:
 library(ggplot2)
 library(dplyr)
 library(tidyverse)
-library(readr)
+library(qqplotr)
+library(patchwork)
 
 ```
 
@@ -169,24 +170,30 @@ filled_with_avg$avg_rainfall <- as.integer(filled_with_avg$avg_rainfall)
 
 
 # Data Visualization
+
+## Scatter plots
 ```{r warning=FALSE}
 filled_with_avg |>
   filter(!is.na(pop_amount)) |>
   group_by(Country) |>
   summarize(avg_pop = mean(pop_amount), avg_yield = mean(yield)) |>
-  ggplot(aes(x=log(avg_pop), y=log(avg_yield), color=avg_yield)) +
+  ggplot(aes(x=log(avg_pop + 1), y=log(avg_yield + 1), color=avg_yield)) +
   geom_point() + 
   geom_smooth(formula = y~x, method='lm') + 
-  labs(title='Avg crop yield VS Avg Population  (Log Scaled)')
+  labs(title='Avg crop yield VS Avg Population  (Log Scaled)',
+       x='log(avg population)',
+       y='log(avg crop yield)')
 
 filled_with_avg |>
-  filter(!is.na(pop_amount)) |>
+  filter(!is.na(number_employed_agri)) |>
   group_by(Country) |>
   summarize(avg_employees = mean(number_employed_agri), avg_yield = mean(yield)) |>
-  ggplot(aes(x=log(avg_employees), y=log(avg_yield), color=avg_yield)) +
+  ggplot(aes(x=log(avg_employees + 1), y=log(avg_yield + 1), color=avg_yield)) +
   geom_point() + 
   geom_smooth(formula = y~x, method='lm') + 
-  labs(title='Avg crop yield VS Avg Num of Employees (Log Scaled)')
+  labs(title='Avg crop yield VS Avg Num of Employees (Log Scaled)',
+       x='log(avg employees)',
+       y='log(avg crop yield)')
 
 filled_with_avg |>
   filter(!is.na(avg_temp)) |>
@@ -210,28 +217,81 @@ filled_with_avg |>
   filter(!is.na(land_price)) |>
   group_by(Country) |>
   summarize(avg_land_price = mean(land_price), avg_yield = mean(yield)) |>
-  ggplot(aes(x=log(avg_land_price), y=log(avg_yield), color=avg_yield)) + 
+  ggplot(aes(x=log(avg_land_price + 1), y=log(avg_yield + 1), color=avg_yield)) + 
   geom_point() + 
   geom_smooth(formula = y~x, method='lm') + 
-  labs(title = 'Avg crop yield VS Avg Land price (Log Scaled)')
+  labs(title = 'Avg crop yield VS Avg Land price (Log Scaled)',
+       x='log(avg land price)',
+       y='log(avg crop yield)')
 
 filled_with_avg |>
   filter(!is.na(pesticides_amount)) |>
   group_by(Country) |>
   summarize(avg_pesticides = mean(pesticides_amount), avg_yield = mean(yield)) |>
-  ggplot(aes(x=log(avg_pesticides), y=log(avg_yield), color=avg_yield)) + 
+  ggplot(aes(x=log(avg_pesticides + 1), y=log(avg_yield + 1), color=avg_yield)) + 
   geom_point() + 
   geom_smooth(formula = y~x, method='lm') + 
-  labs(title = 'Avg crop yield VS Avg Pesticides amount (Log Scaled)')
+  labs(title = 'Avg crop yield VS Avg Pesticides amount (Log Scaled)',
+       x='log(avg pesticides)',
+       y='log(avg crop yield)')
 
 filled_with_avg |>
   filter(!is.na(crop_price)) |>
   group_by(Country) |>
   summarize(avg_crop_price = mean(pesticides_amount), avg_yield = mean(yield)) |>
-  ggplot(aes(x=log(avg_crop_price), y=log(avg_yield), color=avg_yield)) + 
+  ggplot(aes(x=log(avg_crop_price + 1), y=log(avg_yield + 1), color=avg_yield)) + 
   geom_point() + 
   geom_smooth(formula = y~x, method='lm') + 
-  labs(title = 'Avg crop yield VS Avg Crop price (Log Scaled)')
+  labs(title = 'Avg crop yield VS Avg Crop price (Log Scaled)',
+       x='log(avg crop price)',
+       y='log(avg crop yield)')
+
+
+
+```
+# Distribution plot
+
+Determine the distribution of our response variable "yield"
+```{r}
+yield_hist <- filled_with_avg |>
+  na.omit() |>
+  ggplot(aes(x=yield)) + 
+  geom_histogram(fill="#69b3a2", color="#e9ecef", alpha=0.8,bins=30)+ 
+  theme(axis.text.x = element_text(angle=20, hjust=0.5))
+
+yield_hist_log <- filled_with_avg |>
+  na.omit() |>
+  ggplot(aes(x=log(yield + 1))) + 
+  geom_histogram(fill="#69b3a2", color="#e9ecef", alpha=0.8,bins=30)+
+  labs(x = 'log(yield)') + 
+  theme(axis.text.x = element_text(angle=20, hjust=0.5),
+        axis.title.y = element_blank())
+
+yield_hist_sqrt <- filled_with_avg |>
+  na.omit() |>
+  ggplot(aes(x=sqrt(yield))) +
+  geom_histogram(fill="#69b3a2", color="#e9ecef", alpha=0.8,bins=30) + 
+  theme(axis.text.x = element_text(angle=20, hjust=0.5),
+        axis.title.y = element_blank())
+  
+
+  
+  
+yield_hist + yield_hist_log + yield_hist_sqrt + plot_annotation(
+  title = 'Response Variable Distribution (Yield)',
+  theme = theme(plot.title = element_text(hjust=0.5))
+)
+  
+```
+The log version of our response variable looks like it might have a normal distribution, however this needs to be tested using a statistical test. We will use Kolmogorov-Smirnov test since our data is too large for d'Agonisto & Shapiro.
+
+```{r warning=FALSE}
+
+df <- na.omit(filled_with_avg)
+
+ks.test(df$yield, 'pnorm')
+ks.test(log(df$yield), 'pnorm')
+ks.test(sqrt(df$yield), 'pnorm')
 
 ```
 
