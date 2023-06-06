@@ -296,7 +296,6 @@ Data is not normal,therefore it might have some other distribution. We do know t
 
 ```{r}
 # Compare mean to variance
-
 var(filled_with_avg$yield)/mean(filled_with_avg$yield)
 ```
 Since its bigger than one our data might exhibits over dispersion (Variance > Mean).
@@ -324,6 +323,7 @@ yield3 <- filled_with_avg |>
 yield4 <- filled_with_avg |>
   filter(yield > quantiles['75%']) |>
   select(yield)
+
 
 # mean and variance of each group in a data frame
 yield_groups_var_and_mean <- data.frame(
@@ -356,8 +356,6 @@ The Negative Binomial model assumes that $Var(X) = Mean(X) + Mean(X)^2/k$
 fit_qpoi <- glm(variance ~ mean, data=yield_groups_var_and_mean, family = quasipoisson(link = 'log'))
 summary(fit_qpoi)
 
-cat("Quasi Poisson Deviance:",fit_qpoi$deviance)
-cat("Quasi Poisson Residuals:",fit_qpoi$residuals)
 cat("Quasi Poisson R^2:", 1 - fit_qpoi$deviance/fit_qpoi$null.deviance)
 ```
 ```{r}
@@ -365,8 +363,6 @@ cat("Quasi Poisson R^2:", 1 - fit_qpoi$deviance/fit_qpoi$null.deviance)
 fit_nb <- MASS::glm.nb(variance ~ mean, data= yield_groups_var_and_mean, link='log')
 summary(fit_nb)
 
-cat("NegBin Deviance:",fit_nb$deviance)
-cat("NegBin Residuals:",fit_nb$residuals)
 cat("NegBin R^2:", 1 - fit_nb$deviance/fit_nb$null.deviance)
 ```
 
@@ -383,10 +379,10 @@ yield_groups_var_and_mean |>
   geom_line(aes(x=mean, y=nb_pred, color= 'Negative Binomial'))+
   geom_line(aes(x=mean, y=qpoi_pred, color = 'Quasi Poisson')) + 
   labs(x = 'Mean', y='Variance', colour = 'Models', title = 'Real Values Vs Predicted Values (NB vs QPoi)')  + 
-  geom_text(x=50000,y=6e+09,label = paste("NB R^2: ", round(1 - fit_nb$deviance/fit_nb$null.deviance, 2))) + 
-  geom_text(x=50000, y=5.5e+09, label = paste("QPoi R^2: ", round(1 - fit_qpoi$deviance/fit_qpoi$null.deviance, 3)))
+  geom_text(x=50000,y=4e+09,label = paste("NB R^2: ", round(1 - fit_nb$deviance/fit_nb$null.deviance, 2))) + 
+  geom_text(x=50000, y=4.5e+09, label = paste("QPoi R^2: ", round(1 - fit_qpoi$deviance/fit_qpoi$null.deviance, 3)))
 ```
-The plot we created compares the real values vs the predicted ones of each model.By observing the plot we can clearly tell that the quasi poisson model is better at predicting & explaining our data than the negative binomial model.
+The plot we created compares the real values vs the predicted ones of each model.By observing the plot we can clearly tell that the quasi poisson model is better at predicting & explaining our data than the negative binomial model. 
 
 ```{r}
 

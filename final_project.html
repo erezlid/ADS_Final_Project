@@ -68,6 +68,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="final_project_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="final_project_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="dark">
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 </head>
 
@@ -281,41 +283,40 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove plus sign from country name</span></span>
 <span id="cb18-18"><a href="#cb18-18" aria-hidden="true" tabindex="-1"></a>land_use<span class="sc">$</span>Country <span class="ot">&lt;-</span> <span class="fu">sapply</span>(land_use<span class="sc">$</span>Country, <span class="cf">function</span>(x) <span class="fu">gsub</span>(<span class="st">' </span><span class="sc">\\</span><span class="st">+'</span>, <span class="st">''</span>, x))</span>
 <span id="cb18-19"><a href="#cb18-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-20"><a href="#cb18-20" aria-hidden="true" tabindex="-1"></a>land_use <span class="ot">&lt;-</span> land_use <span class="sc">|&gt;</span></span>
-<span id="cb18-21"><a href="#cb18-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span><span class="fu">c</span>(unit, element, element_code, value_footnotes)) <span class="sc">|&gt;</span></span>
+<span id="cb18-20"><a href="#cb18-20" aria-hidden="true" tabindex="-1"></a><span class="fu">require</span>(dplyr)</span>
+<span id="cb18-21"><a href="#cb18-21" aria-hidden="true" tabindex="-1"></a>land_use <span class="ot">&lt;-</span> land_use <span class="sc">|&gt;</span></span>
 <span id="cb18-22"><a href="#cb18-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(category <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"agricultural_area"</span>)) <span class="sc">|&gt;</span></span>
-<span id="cb18-23"><a href="#cb18-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>category) <span class="sc">|&gt;</span></span>
+<span id="cb18-23"><a href="#cb18-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span><span class="fu">c</span>(category,unit,element,element_code, value_footnotes)) <span class="sc">|&gt;</span></span>
 <span id="cb18-24"><a href="#cb18-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(Country, Year)</span>
 <span id="cb18-25"><a href="#cb18-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-26"><a href="#cb18-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-27"><a href="#cb18-27" aria-hidden="true" tabindex="-1"></a>pesticides <span class="ot">&lt;-</span> pesticides <span class="sc">|&gt;</span></span>
-<span id="cb18-28"><a href="#cb18-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span><span class="fu">c</span>(Unit,Element, Domain,Item)) <span class="sc">|&gt;</span></span>
-<span id="cb18-29"><a href="#cb18-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(Country, Year)</span>
-<span id="cb18-30"><a href="#cb18-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-31"><a href="#cb18-31" aria-hidden="true" tabindex="-1"></a>pop <span class="ot">&lt;-</span> pop <span class="sc">|&gt;</span></span>
-<span id="cb18-32"><a href="#cb18-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>country_code) <span class="sc">|&gt;</span></span>
-<span id="cb18-33"><a href="#cb18-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(Country, Year)</span>
-<span id="cb18-34"><a href="#cb18-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-35"><a href="#cb18-35" aria-hidden="true" tabindex="-1"></a><span class="co"># Change Maize(corn) to Maize only</span></span>
-<span id="cb18-36"><a href="#cb18-36" aria-hidden="true" tabindex="-1"></a>price<span class="sc">$</span>Item <span class="ot">&lt;-</span> <span class="fu">sapply</span>(price<span class="sc">$</span>Item, <span class="cf">function</span>(x) <span class="fu">gsub</span>(<span class="st">'corn'</span>, <span class="st">''</span>, x)) <span class="sc">%&gt;%</span></span>
-<span id="cb18-37"><a href="#cb18-37" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sapply</span>(., <span class="cf">function</span>(x) <span class="fu">gsub</span>(<span class="st">'</span><span class="sc">\\</span><span class="st">()'</span>, <span class="st">''</span>, x))</span>
-<span id="cb18-38"><a href="#cb18-38" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-39"><a href="#cb18-39" aria-hidden="true" tabindex="-1"></a>price <span class="ot">&lt;-</span> price <span class="sc">|&gt;</span></span>
-<span id="cb18-40"><a href="#cb18-40" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span><span class="fu">c</span>(Domain.Code,Domain,Area.Code..M49.,Element.Code,Element,</span>
-<span id="cb18-41"><a href="#cb18-41" aria-hidden="true" tabindex="-1"></a>            Item.Code..CPC.,Year.Code,Months.Code,Unit,Flag, Flag.Description, Months)) <span class="sc">|&gt;</span></span>
-<span id="cb18-42"><a href="#cb18-42" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(Country, Year,Item) <span class="sc">|&gt;</span></span>
-<span id="cb18-43"><a href="#cb18-43" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>Item)</span>
-<span id="cb18-44"><a href="#cb18-44" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-45"><a href="#cb18-45" aria-hidden="true" tabindex="-1"></a>rainfall <span class="ot">&lt;-</span> rainfall <span class="sc">|&gt;</span></span>
-<span id="cb18-46"><a href="#cb18-46" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(Country, Year)</span>
-<span id="cb18-47"><a href="#cb18-47" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-48"><a href="#cb18-48" aria-hidden="true" tabindex="-1"></a>temp <span class="ot">&lt;-</span> temp <span class="sc">|&gt;</span></span>
-<span id="cb18-49"><a href="#cb18-49" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(Country, Year)</span>
-<span id="cb18-50"><a href="#cb18-50" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-51"><a href="#cb18-51" aria-hidden="true" tabindex="-1"></a>yield <span class="ot">&lt;-</span> yield <span class="sc">|&gt;</span></span>
-<span id="cb18-52"><a href="#cb18-52" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span><span class="fu">c</span>(Domain, Domain.Code,Area.Code,Element.Code,</span>
-<span id="cb18-53"><a href="#cb18-53" aria-hidden="true" tabindex="-1"></a>            Element,Item.Code,Year.Code,Unit)) <span class="sc">|&gt;</span></span>
-<span id="cb18-54"><a href="#cb18-54" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(Country, Year,Item)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb18-26"><a href="#cb18-26" aria-hidden="true" tabindex="-1"></a>pesticides <span class="ot">&lt;-</span> pesticides <span class="sc">|&gt;</span></span>
+<span id="cb18-27"><a href="#cb18-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span><span class="fu">c</span>(Unit,Element, Domain,Item)) <span class="sc">|&gt;</span></span>
+<span id="cb18-28"><a href="#cb18-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(Country, Year)</span>
+<span id="cb18-29"><a href="#cb18-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-30"><a href="#cb18-30" aria-hidden="true" tabindex="-1"></a>pop <span class="ot">&lt;-</span> pop <span class="sc">|&gt;</span></span>
+<span id="cb18-31"><a href="#cb18-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>country_code) <span class="sc">|&gt;</span></span>
+<span id="cb18-32"><a href="#cb18-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(Country, Year)</span>
+<span id="cb18-33"><a href="#cb18-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-34"><a href="#cb18-34" aria-hidden="true" tabindex="-1"></a><span class="co"># Change Maize(corn) to Maize only</span></span>
+<span id="cb18-35"><a href="#cb18-35" aria-hidden="true" tabindex="-1"></a>price<span class="sc">$</span>Item <span class="ot">&lt;-</span> <span class="fu">sapply</span>(price<span class="sc">$</span>Item, <span class="cf">function</span>(x) <span class="fu">gsub</span>(<span class="st">'corn'</span>, <span class="st">''</span>, x)) <span class="sc">%&gt;%</span></span>
+<span id="cb18-36"><a href="#cb18-36" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sapply</span>(., <span class="cf">function</span>(x) <span class="fu">gsub</span>(<span class="st">'</span><span class="sc">\\</span><span class="st">()'</span>, <span class="st">''</span>, x))</span>
+<span id="cb18-37"><a href="#cb18-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-38"><a href="#cb18-38" aria-hidden="true" tabindex="-1"></a>price <span class="ot">&lt;-</span> price <span class="sc">|&gt;</span></span>
+<span id="cb18-39"><a href="#cb18-39" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span><span class="fu">c</span>(Domain.Code,Domain,Area.Code..M49.,Element.Code,Element,</span>
+<span id="cb18-40"><a href="#cb18-40" aria-hidden="true" tabindex="-1"></a>            Item.Code..CPC.,Year.Code,Months.Code,Unit,Flag, Flag.Description, Months)) <span class="sc">|&gt;</span></span>
+<span id="cb18-41"><a href="#cb18-41" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(Country, Year,Item) <span class="sc">|&gt;</span></span>
+<span id="cb18-42"><a href="#cb18-42" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>Item)</span>
+<span id="cb18-43"><a href="#cb18-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-44"><a href="#cb18-44" aria-hidden="true" tabindex="-1"></a>rainfall <span class="ot">&lt;-</span> rainfall <span class="sc">|&gt;</span></span>
+<span id="cb18-45"><a href="#cb18-45" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(Country, Year)</span>
+<span id="cb18-46"><a href="#cb18-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-47"><a href="#cb18-47" aria-hidden="true" tabindex="-1"></a>temp <span class="ot">&lt;-</span> temp <span class="sc">|&gt;</span></span>
+<span id="cb18-48"><a href="#cb18-48" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(Country, Year)</span>
+<span id="cb18-49"><a href="#cb18-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-50"><a href="#cb18-50" aria-hidden="true" tabindex="-1"></a>yield <span class="ot">&lt;-</span> yield <span class="sc">|&gt;</span></span>
+<span id="cb18-51"><a href="#cb18-51" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span><span class="fu">c</span>(Domain, Domain.Code,Area.Code,Element.Code,</span>
+<span id="cb18-52"><a href="#cb18-52" aria-hidden="true" tabindex="-1"></a>            Element,Item.Code,Year.Code,Unit)) <span class="sc">|&gt;</span></span>
+<span id="cb18-53"><a href="#cb18-53" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(Country, Year,Item)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>After deleting unnecessary columns, changing column names, filtering the relevant countries and sorting the tables. It’s time to join all of the tables into one big table.</p>
 <div class="cell">
@@ -459,7 +460,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>yield_hist <span class="ot">&lt;-</span> filled_with_avg <span class="sc">|&gt;</span></span>
 <span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">na.omit</span>() <span class="sc">|&gt;</span></span>
 <span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>yield)) <span class="sc">+</span> </span>
-<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">fill=</span><span class="st">"#69b3a2"</span>, <span class="at">color=</span><span class="st">"#e9ecef"</span>, <span class="at">alpha=</span><span class="fl">0.8</span>,<span class="at">bins=</span><span class="dv">30</span>)<span class="sc">+</span> </span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">fill=</span><span class="st">"#69b3a2"</span>, <span class="at">color=</span><span class="st">"#e9ecef"</span>, <span class="at">alpha=</span><span class="fl">0.8</span>,<span class="at">bins=</span><span class="dv">30</span>)<span class="sc">+</span></span>
 <span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle=</span><span class="dv">20</span>, <span class="at">hjust=</span><span class="fl">0.5</span>))</span>
 <span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>yield_hist_log <span class="ot">&lt;-</span> filled_with_avg <span class="sc">|&gt;</span></span>
@@ -478,12 +479,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb29-20"><a href="#cb29-20" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.title.y =</span> <span class="fu">element_blank</span>())</span>
 <span id="cb29-21"><a href="#cb29-21" aria-hidden="true" tabindex="-1"></a>  </span>
 <span id="cb29-22"><a href="#cb29-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-23"><a href="#cb29-23" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb29-24"><a href="#cb29-24" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb29-25"><a href="#cb29-25" aria-hidden="true" tabindex="-1"></a>yield_hist <span class="sc">+</span> yield_hist_log <span class="sc">+</span> yield_hist_sqrt <span class="sc">+</span> <span class="fu">plot_annotation</span>(</span>
-<span id="cb29-26"><a href="#cb29-26" aria-hidden="true" tabindex="-1"></a>  <span class="at">title =</span> <span class="st">'Response Variable Distribution (Yield)'</span>,</span>
-<span id="cb29-27"><a href="#cb29-27" aria-hidden="true" tabindex="-1"></a>  <span class="at">theme =</span> <span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust=</span><span class="fl">0.5</span>))</span>
-<span id="cb29-28"><a href="#cb29-28" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb29-23"><a href="#cb29-23" aria-hidden="true" tabindex="-1"></a>yield_hist <span class="sc">+</span> yield_hist_log <span class="sc">+</span> yield_hist_sqrt <span class="sc">+</span> <span class="fu">plot_annotation</span>(</span>
+<span id="cb29-24"><a href="#cb29-24" aria-hidden="true" tabindex="-1"></a>  <span class="at">title =</span> <span class="st">'Response Variable Distribution (Yield)'</span>,</span>
+<span id="cb29-25"><a href="#cb29-25" aria-hidden="true" tabindex="-1"></a>  <span class="at">theme =</span> <span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust=</span><span class="fl">0.5</span>))</span>
+<span id="cb29-26"><a href="#cb29-26" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="final_project_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid" width="672"></p>
 </div>
@@ -520,6 +519,181 @@ D = 1, p-value &lt; 2.2e-16
 alternative hypothesis: two-sided</code></pre>
 </div>
 </div>
+<p>Data is not normal,therefore it might have some other distribution. We do know that our data has a positive skew which indicates it might has a negative binomial / geometric / exponential / gamma / poisson distribution. However, since our data is discrete it can only has a discrete distribution, in addition the data is count data which means it’ll could fit negative binomial distribution or poisson distribution.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Compare mean to variance</span></span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="fu">var</span>(filled_with_avg<span class="sc">$</span>yield)<span class="sc">/</span><span class="fu">mean</span>(filled_with_avg<span class="sc">$</span>yield)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 80406.67</code></pre>
+</div>
+</div>
+<p>Since its bigger than one our data might exhibits over dispersion (Variance &gt; Mean).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>filled_with_avg<span class="sc">$</span>yield <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(filled_with_avg<span class="sc">$</span>yield)</span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate quantiles</span></span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>quantiles <span class="ot">&lt;-</span> <span class="fu">quantile</span>(filled_with_avg<span class="sc">$</span>yield,<span class="at">probs =</span> <span class="fu">c</span>(<span class="fl">0.25</span>,<span class="fl">0.50</span>,<span class="fl">0.75</span>))</span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Separate into groups</span></span>
+<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a>yield1 <span class="ot">&lt;-</span> filled_with_avg <span class="sc">|&gt;</span></span>
+<span id="cb38-8"><a href="#cb38-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(yield <span class="sc">&lt;=</span> quantiles[<span class="st">'25%'</span>]) <span class="sc">|&gt;</span></span>
+<span id="cb38-9"><a href="#cb38-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(yield)</span>
+<span id="cb38-10"><a href="#cb38-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-11"><a href="#cb38-11" aria-hidden="true" tabindex="-1"></a>yield2 <span class="ot">&lt;-</span> filled_with_avg <span class="sc">|&gt;</span></span>
+<span id="cb38-12"><a href="#cb38-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(yield <span class="sc">&gt;</span> quantiles[<span class="st">'25%'</span>] <span class="sc">&amp;</span> yield <span class="sc">&lt;=</span> quantiles[<span class="st">'50%'</span>]) <span class="sc">|&gt;</span></span>
+<span id="cb38-13"><a href="#cb38-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(yield)</span>
+<span id="cb38-14"><a href="#cb38-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-15"><a href="#cb38-15" aria-hidden="true" tabindex="-1"></a>yield3 <span class="ot">&lt;-</span> filled_with_avg <span class="sc">|&gt;</span></span>
+<span id="cb38-16"><a href="#cb38-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(yield <span class="sc">&gt;</span> quantiles[<span class="st">'50%'</span>] <span class="sc">&amp;</span> yield <span class="sc">&lt;=</span> quantiles[<span class="st">'75%'</span>]) <span class="sc">|&gt;</span></span>
+<span id="cb38-17"><a href="#cb38-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(yield)</span>
+<span id="cb38-18"><a href="#cb38-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-19"><a href="#cb38-19" aria-hidden="true" tabindex="-1"></a>yield4 <span class="ot">&lt;-</span> filled_with_avg <span class="sc">|&gt;</span></span>
+<span id="cb38-20"><a href="#cb38-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(yield <span class="sc">&gt;</span> quantiles[<span class="st">'75%'</span>]) <span class="sc">|&gt;</span></span>
+<span id="cb38-21"><a href="#cb38-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(yield)</span>
+<span id="cb38-22"><a href="#cb38-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-23"><a href="#cb38-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-24"><a href="#cb38-24" aria-hidden="true" tabindex="-1"></a><span class="co"># mean and variance of each group in a data frame</span></span>
+<span id="cb38-25"><a href="#cb38-25" aria-hidden="true" tabindex="-1"></a>yield_groups_var_and_mean <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb38-26"><a href="#cb38-26" aria-hidden="true" tabindex="-1"></a>  <span class="at">group =</span> <span class="fu">c</span>(<span class="st">"yield1"</span>,<span class="st">"yield2"</span>,<span class="st">"yield3"</span>,<span class="st">"yield4"</span>),</span>
+<span id="cb38-27"><a href="#cb38-27" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb38-28"><a href="#cb38-28" aria-hidden="true" tabindex="-1"></a>  <span class="at">mean =</span> <span class="fu">c</span>(<span class="fu">mean</span>(yield1<span class="sc">$</span>yield),</span>
+<span id="cb38-29"><a href="#cb38-29" aria-hidden="true" tabindex="-1"></a>           <span class="fu">mean</span>(yield2<span class="sc">$</span>yield),<span class="fu">mean</span>(yield3<span class="sc">$</span>yield),</span>
+<span id="cb38-30"><a href="#cb38-30" aria-hidden="true" tabindex="-1"></a>           <span class="fu">mean</span>(yield4<span class="sc">$</span>yield)),</span>
+<span id="cb38-31"><a href="#cb38-31" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb38-32"><a href="#cb38-32" aria-hidden="true" tabindex="-1"></a>  <span class="at">variance =</span> <span class="fu">c</span>(<span class="fu">var</span>(yield1<span class="sc">$</span>yield),</span>
+<span id="cb38-33"><a href="#cb38-33" aria-hidden="true" tabindex="-1"></a>               <span class="fu">var</span>(yield2<span class="sc">$</span>yield),<span class="fu">var</span>(yield3<span class="sc">$</span>yield),</span>
+<span id="cb38-34"><a href="#cb38-34" aria-hidden="true" tabindex="-1"></a>               <span class="fu">var</span>(yield4<span class="sc">$</span>yield))</span>
+<span id="cb38-35"><a href="#cb38-35" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>After calculating the mean &amp; variance of each group we can now try to fit a poisson regression on the data.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>fit_poi <span class="ot">&lt;-</span> <span class="fu">glm</span>(variance <span class="sc">~</span> mean, <span class="at">data=</span> yield_groups_var_and_mean, <span class="at">family =</span> <span class="fu">poisson</span>(<span class="at">link=</span><span class="st">'log'</span>))</span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit_poi)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+glm(formula = variance ~ mean, family = poisson(link = "log"), 
+    data = yield_groups_var_and_mean)
+
+Deviance Residuals: 
+    1      2      3      4  
+-5863  -6767   7534   -484  
+
+Coefficients:
+             Estimate Std. Error z value Pr(&gt;|z|)    
+(Intercept) 1.745e+01  7.208e-05  242156   &lt;2e-16 ***
+mean        2.731e-05  4.153e-10   65755   &lt;2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+(Dispersion parameter for poisson family taken to be 1)
+
+    Null deviance: 1.1858e+10  on 3  degrees of freedom
+Residual deviance: 1.3716e+08  on 2  degrees of freedom
+AIC: 137160788
+
+Number of Fisher Scoring iterations: 5</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>fit_poi<span class="sc">$</span>deviance<span class="sc">/</span>fit_poi<span class="sc">$</span>rank</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 68580351</code></pre>
+</div>
+</div>
+<p>Since the deviance/degrees of freedom is bigger our model underestimate the standard error and thus the p value is small. Therefore, the poisson regression might not be the best fit to our data and we thus need to try fitting a quasi poisson or a negative binomial regression, since these two types of regression are used when the data is count and the poisson regression is underestimating the standard error of the model.</p>
+<p>The Quasi Poisson model assumes that <span class="math inline">\(Var(X) = \theta * Mean(X)\)</span> The Negative Binomial model assumes that <span class="math inline">\(Var(X) = Mean(X) + Mean(X)^2/k\)</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Quasi poisson model</span></span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>fit_qpoi <span class="ot">&lt;-</span> <span class="fu">glm</span>(variance <span class="sc">~</span> mean, <span class="at">data=</span>yield_groups_var_and_mean, <span class="at">family =</span> <span class="fu">quasipoisson</span>(<span class="at">link =</span> <span class="st">'log'</span>))</span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit_qpoi)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+glm(formula = variance ~ mean, family = quasipoisson(link = "log"), 
+    data = yield_groups_var_and_mean)
+
+Deviance Residuals: 
+    1      2      3      4  
+-5863  -6767   7534   -484  
+
+Coefficients:
+             Estimate Std. Error t value Pr(&gt;|t|)   
+(Intercept) 1.745e+01  5.710e-01   30.57  0.00107 **
+mean        2.731e-05  3.290e-06    8.30  0.01421 * 
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+(Dispersion parameter for quasipoisson family taken to be 62760939)
+
+    Null deviance: 1.1858e+10  on 3  degrees of freedom
+Residual deviance: 1.3716e+08  on 2  degrees of freedom
+AIC: NA
+
+Number of Fisher Scoring iterations: 5</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Quasi Poisson R^2:"</span>, <span class="dv">1</span> <span class="sc">-</span> fit_qpoi<span class="sc">$</span>deviance<span class="sc">/</span>fit_qpoi<span class="sc">$</span>null.deviance)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Quasi Poisson R^2: 0.9884334</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Negative binomial model</span></span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>fit_nb <span class="ot">&lt;-</span> MASS<span class="sc">::</span><span class="fu">glm.nb</span>(variance <span class="sc">~</span> mean, <span class="at">data=</span> yield_groups_var_and_mean, <span class="at">link=</span><span class="st">'log'</span>)</span>
+<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit_nb)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+MASS::glm.nb(formula = variance ~ mean, data = yield_groups_var_and_mean, 
+    link = "log", init.theta = 3.127564897)
+
+Deviance Residuals: 
+      1        2        3        4  
+-0.8492  -0.8378   1.5352  -0.6566  
+
+Coefficients:
+             Estimate Std. Error z value Pr(&gt;|z|)    
+(Intercept) 1.672e+01  4.146e-01  40.341  &lt; 2e-16 ***
+mean        3.357e-05  4.307e-06   7.793 6.52e-15 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+(Dispersion parameter for Negative Binomial(3.1276) family taken to be 1)
+
+    Null deviance: 52.6635  on 3  degrees of freedom
+Residual deviance:  4.2111  on 2  degrees of freedom
+AIC: 164.56
+
+Number of Fisher Scoring iterations: 8
+
+              Theta:  3.13 
+          Std. Err.:  2.10 
+
+ 2 x log-likelihood:  -158.564 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"NegBin R^2:"</span>, <span class="dv">1</span> <span class="sc">-</span> fit_nb<span class="sc">$</span>deviance<span class="sc">/</span>fit_nb<span class="sc">$</span>null.deviance)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>NegBin R^2: 0.9200381</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a>nb_pred <span class="ot">&lt;-</span> <span class="fu">predict</span>(fit_nb, <span class="at">newdata =</span> yield_groups_var_and_mean, <span class="at">type =</span> <span class="st">'response'</span>)</span>
+<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a>qpoi_pred <span class="ot">&lt;-</span> <span class="fu">predict</span>(fit_qpoi, <span class="at">newdata =</span> yield_groups_var_and_mean, <span class="at">type =</span> <span class="st">'response'</span>)</span>
+<span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-4"><a href="#cb51-4" aria-hidden="true" tabindex="-1"></a>yield_groups_var_and_mean<span class="sc">$</span>nb_pred <span class="ot">&lt;-</span> nb_pred</span>
+<span id="cb51-5"><a href="#cb51-5" aria-hidden="true" tabindex="-1"></a>yield_groups_var_and_mean<span class="sc">$</span>qpoi_pred <span class="ot">&lt;-</span> qpoi_pred</span>
+<span id="cb51-6"><a href="#cb51-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-7"><a href="#cb51-7" aria-hidden="true" tabindex="-1"></a>yield_groups_var_and_mean <span class="sc">|&gt;</span></span>
+<span id="cb51-8"><a href="#cb51-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>mean, <span class="at">y=</span>variance)) <span class="sc">+</span></span>
+<span id="cb51-9"><a href="#cb51-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb51-10"><a href="#cb51-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x=</span>mean, <span class="at">y=</span>nb_pred, <span class="at">color=</span> <span class="st">'Negative Binomial'</span>))<span class="sc">+</span></span>
+<span id="cb51-11"><a href="#cb51-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x=</span>mean, <span class="at">y=</span>qpoi_pred, <span class="at">color =</span> <span class="st">'Quasi Poisson'</span>)) <span class="sc">+</span> </span>
+<span id="cb51-12"><a href="#cb51-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">'Mean'</span>, <span class="at">y=</span><span class="st">'Variance'</span>, <span class="at">colour =</span> <span class="st">'Models'</span>, <span class="at">title =</span> <span class="st">'Real Values Vs Predicted Values (NB vs QPoi)'</span>)  <span class="sc">+</span> </span>
+<span id="cb51-13"><a href="#cb51-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">x=</span><span class="dv">50000</span>,<span class="at">y=</span><span class="fl">4e+09</span>,<span class="at">label =</span> <span class="fu">paste</span>(<span class="st">"NB R^2: "</span>, <span class="fu">round</span>(<span class="dv">1</span> <span class="sc">-</span> fit_nb<span class="sc">$</span>deviance<span class="sc">/</span>fit_nb<span class="sc">$</span>null.deviance, <span class="dv">2</span>))) <span class="sc">+</span> </span>
+<span id="cb51-14"><a href="#cb51-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">x=</span><span class="dv">50000</span>, <span class="at">y=</span><span class="fl">4.5e+09</span>, <span class="at">label =</span> <span class="fu">paste</span>(<span class="st">"QPoi R^2: "</span>, <span class="fu">round</span>(<span class="dv">1</span> <span class="sc">-</span> fit_qpoi<span class="sc">$</span>deviance<span class="sc">/</span>fit_qpoi<span class="sc">$</span>null.deviance, <span class="dv">3</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="final_project_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>The plot we created compares the real values vs the predicted ones of each model.By observing the plot we can clearly tell that the quasi poisson model is better at predicting &amp; explaining our data than the negative binomial model.</p>
 </section>
 
 </main>
