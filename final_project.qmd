@@ -13,7 +13,7 @@ library(dplyr)
 library(tidyverse)
 library(qqplotr)
 library(patchwork)
-
+library(ggpmisc)
 ```
 
 
@@ -88,12 +88,11 @@ employees <- employees |>
 # Remove plus sign from country name
 land_use$Country <- sapply(land_use$Country, function(x) gsub(' \\+', '', x))
 
+require(dplyr)
 land_use <- land_use |>
-  select(-c(unit, element, element_code, value_footnotes)) |>
   filter(category %in% c("agricultural_area")) |>
-  select(-category) |>
+  select(-c(category,unit,element,element_code, value_footnotes)) |>
   arrange(Country, Year)
-
 
 pesticides <- pesticides |>
   select(-c(Unit,Element, Domain,Item)) |>
@@ -256,7 +255,7 @@ Determine the distribution of our response variable "yield"
 yield_hist <- filled_with_avg |>
   na.omit() |>
   ggplot(aes(x=yield)) + 
-  geom_histogram(fill="#69b3a2", color="#e9ecef", alpha=0.8,bins=30)+ 
+  geom_histogram(fill="#69b3a2", color="#e9ecef", alpha=0.8,bins=30)+
   theme(axis.text.x = element_text(angle=20, hjust=0.5))
 
 yield_hist_log <- filled_with_avg |>
@@ -275,8 +274,6 @@ yield_hist_sqrt <- filled_with_avg |>
         axis.title.y = element_blank())
   
 
-  
-  
 yield_hist + yield_hist_log + yield_hist_sqrt + plot_annotation(
   title = 'Response Variable Distribution (Yield)',
   theme = theme(plot.title = element_text(hjust=0.5))
@@ -292,8 +289,109 @@ df <- na.omit(filled_with_avg)
 ks.test(df$yield, 'pnorm')
 ks.test(log(df$yield), 'pnorm')
 ks.test(sqrt(df$yield), 'pnorm')
+```
+
+Data is not normal,therefore it might have some other distribution. We do know that our data has a positive skew which indicates it might has a negative binomial / geometric /  exponential / gamma / poisson distribution. However, since our data is discrete it can only has a discrete distribution, in addition the data is count data which means it'll could fit negative binomial distribution or poisson distribution.
+
+
+```{r}
+# Compare mean to variance
+
+var(filled_with_avg$yield)/mean(filled_with_avg$yield)
+```
+Since its bigger than one our data might exhibits over dispersion (Variance > Mean).
+
+```{r}
+
+filled_with_avg$yield <- as.numeric(filled_with_avg$yield)
+
+# Calculate quantiles
+quantiles <- quantile(filled_with_avg$yield,probs = c(0.25,0.50,0.75))
+
+# Separate into groups
+yield1 <- filled_with_avg |>
+  filter(yield <= quantiles['25%']) |>
+  select(yield)
+
+yield2 <- filled_with_avg |>
+  filter(yield > quantiles['25%'] & yield <= quantiles['50%']) |>
+  select(yield)
+
+yield3 <- filled_with_avg |>
+  filter(yield > quantiles['50%'] & yield <= quantiles['75%']) |>
+  select(yield)
+
+yield4 <- filled_with_avg |>
+  filter(yield > quantiles['75%']) |>
+  select(yield)
+
+# mean and variance of each group in a data frame
+yield_groups_var_and_mean <- data.frame(
+  group = c("yield1","yield2","yield3","yield4"),
+  
+  mean = c(mean(yield1$yield),
+           mean(yield2$yield),mean(yield3$yield),
+           mean(yield4$yield)),
+  
+  variance = c(var(yield1$yield),
+               var(yield2$yield),var(yield3$yield),
+               var(yield4$yield))
+)
+```
+After calculating the mean & variance of each group we can now try to fit a poisson regression on the data.
+
+```{r}
+fit_poi <- glm(variance ~ mean, data= yield_groups_var_and_mean, family = poisson(link='log'))
+summary(fit_poi)
+
+fit_poi$deviance/fit_poi$rank
+```
+Since the deviance/degrees of freedom is bigger our model underestimate the standard error and thus the p value is small. Therefore, the poisson regression might not be the best fit to our data and we thus need to try fitting a quasi poisson or a negative binomial regression, since these two types of regression are used when the data is count and the poisson regression is underestimating the standard error of the model.
+
+The Quasi Poisson model assumes that $Var(X) = \theta * Mean(X)$
+The Negative Binomial model assumes that $Var(X) = Mean(X) + Mean(X)^2/k$
+
+```{r}
+# Quasi poisson model
+fit_qpoi <- glm(variance ~ mean, data=yield_groups_var_and_mean, family = quasipoisson(link = 'log'))
+summary(fit_qpoi)
+
+cat("Quasi Poisson Deviance:",fit_qpoi$deviance)
+cat("Quasi Poisson Residuals:",fit_qpoi$residuals)
+cat("Quasi Poisson R^2:", 1 - fit_qpoi$deviance/fit_qpoi$null.deviance)
+```
+```{r}
+# Negative binomial model
+fit_nb <- MASS::glm.nb(variance ~ mean, data= yield_groups_var_and_mean, link='log')
+summary(fit_nb)
+
+cat("NegBin Deviance:",fit_nb$deviance)
+cat("NegBin Residuals:",fit_nb$residuals)
+cat("NegBin R^2:", 1 - fit_nb$deviance/fit_nb$null.deviance)
+```
+
+```{r}
+nb_pred <- predict(fit_nb, newdata = yield_groups_var_and_mean, type = 'response')
+qpoi_pred <- predict(fit_qpoi, newdata = yield_groups_var_and_mean, type = 'response')
+
+yield_groups_var_and_mean$nb_pred <- nb_pred
+yield_groups_var_and_mean$qpoi_pred <- qpoi_pred
+
+yield_groups_var_and_mean |>
+  ggplot(aes(x=mean, y=variance)) +
+  geom_point() + 
+  geom_line(aes(x=mean, y=nb_pred, color= 'Negative Binomial'))+
+  geom_line(aes(x=mean, y=qpoi_pred, color = 'Quasi Poisson')) + 
+  labs(x = 'Mean', y='Variance', colour = 'Models', title = 'Real Values Vs Predicted Values (NB vs QPoi)')  + 
+  geom_text(x=50000,y=6e+09,label = paste("NB R^2: ", round(1 - fit_nb$deviance/fit_nb$null.deviance, 2))) + 
+  geom_text(x=50000, y=5.5e+09, label = paste("QPoi R^2: ", round(1 - fit_qpoi$deviance/fit_qpoi$null.deviance, 3)))
+```
+The plot we created compares the real values vs the predicted ones of each model.By observing the plot we can clearly tell that the quasi poisson model is better at predicting & explaining our data than the negative binomial model.
+
+```{r}
 
 ```
+
 
 
 
