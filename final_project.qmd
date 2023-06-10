@@ -14,7 +14,7 @@ library(tidyverse)
 library(qqplotr)
 library(patchwork)
 library(ggpmisc)
-library(pscl)
+library(AICcmodavg)
 ```
 
 
@@ -302,28 +302,25 @@ var(filled_with_avg$yield)/mean(filled_with_avg$yield)
 Since its bigger than one our data might exhibits over dispersion (Variance > Mean).
 
 ```{r}
-
 filled_with_avg$yield <- as.numeric(filled_with_avg$yield)
 
-yield_by_cntry <- filled_with_avg |>
+# Creating groups
+yield_groups <- filled_with_avg |>
   na.omit() |>
-  select(Country, yield) |>
-  group_by(Country) |>
-  mutate(mean = mean(yield),
-         variance = var(yield))
+  select(yield) |>
+  mutate(group = ntile(yield, 100)) |>
+  group_by(group) |>
+  mutate(mean = floor(mean(yield)), variance = floor(var(yield))) |>
+  select(group, mean , variance) |>
+  distinct(group, .keep_all = T) |>
+  arrange(group)
 
-yield_mean_var <- 
-  data.frame(
-    cntry = unique(yield_by_cntry$Country),
-    mean = unique(yield_by_cntry$mean),
-    variance = unique(yield_by_cntry$variance)
-  )
 
 ```
 After calculating the mean & variance of each group we can now try to fit a poisson regression on the data.
 
 ```{r}
-fit_poi <- glm(variance ~ mean, data= yield_mean_var, family = poisson(link='log'))
+fit_poi <- glm(variance ~ mean, data= yield_groups, family = poisson(link='log'))
 summary(fit_poi)
 
 fit_poi$deviance/fit_poi$rank
@@ -335,43 +332,62 @@ The Negative Binomial model assumes that $Var(X) = Mean(X) + Mean(X)^2/k$
 
 ```{r}
 # Quasi poisson model
-fit_qpoi <- glm(variance ~ mean, data=yield_mean_var, family = quasipoisson(link = 'log'))
+fit_qpoi <- glm(variance ~ mean, data=yield_groups, family = quasipoisson(link='log'))
 summary(fit_qpoi)
 
 cat("Quasi Poisson R^2:", 1 - fit_qpoi$deviance/fit_qpoi$null.deviance)
 ```
+
 ```{r}
 # Negative binomial model
-fit_nb <- MASS::glm.nb(variance ~ mean, data= yield_mean_var, link='log', control = glm.control(maxit=1e7))
+fit_nb <- MASS::glm.nb(variance ~ mean, data= yield_groups)
 summary(fit_nb)
 
 cat("NegBin R^2:", 1 - fit_nb$deviance/fit_nb$null.deviance)
-
-
 ```
 
+
 ```{r}
-nb_pred <- predict(fit_nb, newdata = yield_mean_var, type = 'response')
-qpoi_pred <- predict(fit_qpoi, newdata = yield_mean_var, type = 'response')
+# Residual Analysis
+nb_pred <- predict(fit_nb, newdata = yield_groups, type = 'response')
+qpoi_pred <- predict(fit_qpoi, newdata = yield_groups, type = 'response')
 
-yield_mean_var$nb_pred <- nb_pred
-yield_mean_var$qpoi_pred <- qpoi_pred
+yield_groups$qpoi_pred <- qpoi_pred
+yield_groups$nb_pred <- nb_pred
 
-#yield_groups_var_and_mean$nb_pred <- nb_pred
-#yield_groups_var_and_mean$qpoi_pred <- qpoi_pred
+yield_groups <- yield_groups |>
+  mutate(
+    qpoi_resid = variance  - qpoi_pred,
+    nb_resid = variance - nb_pred
+  )
 
-yield_mean_var |>
+poi_resid_plot <- yield_groups |>
+  ggplot(aes(x=qpoi_pred, y=qpoi_resid)) +
+  geom_point()+
+  geom_hline(yintercept=0,linetype='dashed', color='red')
+
+nb_resid_plot <- yield_groups |>
+  ggplot(aes(x=nb_pred, y=nb_resid)) +
+  geom_point() + 
+  geom_hline(yintercept=0, linetype='dashed', color='red')
+
+poi_resid_plot + nb_resid_plot + plot_annotation(
+  title = 'Residual Analysis'
+)
+yield_groups |>
   ggplot(aes(x=mean, y=variance)) +
   geom_point() + 
   geom_line(aes(x=mean, y=nb_pred, color= 'Negative Binomial'))+
   geom_line(aes(x=mean, y=qpoi_pred, color = 'Quasi Poisson')) + 
   labs(x = 'Mean', y='Variance', colour = 'Models', title = 'Real Values Vs Predicted Values (NB vs QPoi)')  + 
-  geom_text(x=50000,y=4e+10,label = paste("NB R^2: ", round(1 - fit_nb$deviance/fit_nb$null.deviance, 2))) + 
-  geom_text(x=50000, y=4.5e+10, label = paste("QPoi R^2: ", round(1 - fit_qpoi$deviance/fit_qpoi$null.deviance, 3)))
+  geom_text(x=50000,y=1.5e+09,label = paste("NB R^2: ", round(1 - fit_nb$deviance/fit_nb$null.deviance, 2))) + 
+  geom_text(x=50000, y=1.3e+09, label = paste("QPoi R^2: ", round(1 - fit_qpoi$deviance/fit_qpoi$null.deviance, 3)))
 ```
-The plot we created compares the real values vs the predicted ones of each model.By observing the plot we can clearly tell that the quasi poisson model is better at predicting & explaining our data than the negative binomial model. 
+The plot we created compares the real values vs the predicted ones of each model.By observing the plot we can clearly tell that the quasi poisson model is better at predicting & explaining our data than the negative binomial model. In addition, we also created a residual plot for our residual analysis in order to determine which model fits the overall trend of the data however, both models seems to fit the overall trend of the data. 
 
+By both plots examinations we decided that our response variable distribution is Quasi Poisson.
 ```{r}
+
 ```
 
 
