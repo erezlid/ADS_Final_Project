@@ -14,7 +14,8 @@ library(tidyverse)
 library(qqplotr)
 library(patchwork)
 library(ggpmisc)
-library(AICcmodavg)
+library(corrplot)
+library(Kendall)
 ```
 
 
@@ -61,8 +62,9 @@ head(price)
 head(rainfall)
 head(temp)
 head(yield)
-```
 
+
+```
 Some of the tables have unnecessary columns, deleting those columns is a crucial before starting asking questions about the data
 
 # Data Cleaning & Arranging
@@ -177,7 +179,7 @@ filled_with_avg |>
   summarize(avg_pop = mean(pop_amount), avg_yield = mean(yield)) |>
   ggplot(aes(x=log(avg_pop + 1), y=log(avg_yield + 1), color=avg_yield)) +
   geom_point() + 
-  geom_smooth(formula = y~x, method='lm') + 
+  geom_smooth(formula = y~x, method='glm') + 
   labs(title='Avg crop yield VS Avg Population  (Log Scaled)',
        x='log(avg population)',
        y='log(avg crop yield)')
@@ -188,7 +190,7 @@ filled_with_avg |>
   summarize(avg_employees = mean(number_employed_agri), avg_yield = mean(yield)) |>
   ggplot(aes(x=log(avg_employees + 1), y=log(avg_yield + 1), color=avg_yield)) +
   geom_point() + 
-  geom_smooth(formula = y~x, method='lm') + 
+  geom_smooth(formula = y~x, method='glm') + 
   labs(title='Avg crop yield VS Avg Num of Employees (Log Scaled)',
        x='log(avg employees)',
        y='log(avg crop yield)')
@@ -199,7 +201,7 @@ filled_with_avg |>
   summarize(avg_temp =  mean(avg_temp), avg_yield = mean(yield)) |>
   ggplot(aes(x=avg_temp, y=avg_yield, color=avg_yield)) +
   geom_point() + 
-  geom_smooth(formula = y~x, method='lm') + 
+  geom_smooth(formula = y~x, method='glm') + 
   labs(title='Avg crop yield VS Avg Temperature')
 
 filled_with_avg |>
@@ -208,7 +210,7 @@ filled_with_avg |>
   summarize(avg_rainfall = mean(avg_rainfall), avg_yield = mean(yield)) |>
   ggplot(aes(x=avg_rainfall, y=avg_yield, color=avg_yield)) + 
   geom_point() + 
-  geom_smooth(formula = y~x, method='lm') + 
+  geom_smooth(formula = y~x, method='glm') + 
   labs(title = 'Avg crop yield VS Avg rainfall')
 
 filled_with_avg |>
@@ -217,7 +219,7 @@ filled_with_avg |>
   summarize(avg_land_price = mean(land_price), avg_yield = mean(yield)) |>
   ggplot(aes(x=log(avg_land_price + 1), y=log(avg_yield + 1), color=avg_yield)) + 
   geom_point() + 
-  geom_smooth(formula = y~x, method='lm') + 
+  geom_smooth(formula = y~x, method='glm') + 
   labs(title = 'Avg crop yield VS Avg Land price (Log Scaled)',
        x='log(avg land price)',
        y='log(avg crop yield)')
@@ -228,7 +230,7 @@ filled_with_avg |>
   summarize(avg_pesticides = mean(pesticides_amount), avg_yield = mean(yield)) |>
   ggplot(aes(x=log(avg_pesticides + 1), y=log(avg_yield + 1), color=avg_yield)) + 
   geom_point() + 
-  geom_smooth(formula = y~x, method='lm') + 
+  geom_smooth(formula = y~x, method='glm') + 
   labs(title = 'Avg crop yield VS Avg Pesticides amount (Log Scaled)',
        x='log(avg pesticides)',
        y='log(avg crop yield)')
@@ -308,7 +310,7 @@ filled_with_avg$yield <- as.numeric(filled_with_avg$yield)
 yield_groups <- filled_with_avg |>
   na.omit() |>
   select(yield) |>
-  mutate(group = ntile(yield, 100)) |>
+  mutate(group = ntile(yield, 30)) |>
   group_by(group) |>
   mutate(mean = floor(mean(yield)), variance = floor(var(yield))) |>
   select(group, mean , variance) |>
@@ -317,18 +319,12 @@ yield_groups <- filled_with_avg |>
 
 
 ```
-After calculating the mean & variance of each group we can now try to fit a poisson regression on the data.
-
-```{r}
-fit_poi <- glm(variance ~ mean, data= yield_groups, family = poisson(link='log'))
-summary(fit_poi)
-
-fit_poi$deviance/fit_poi$rank
-```
-Since the deviance/degrees of freedom is bigger our model underestimate the standard error and thus the p value is small. Therefore, the poisson regression might not be the best fit to our data and we thus need to try fitting a quasi poisson or a negative binomial regression, since these two types of regression are used when the data is count and the poisson regression is underestimating the standard error of the model.
+When it comes to linear models, we usualy model over dispersed data using the Quasi Poisson model or the Negative Binomial model.
 
 The Quasi Poisson model assumes that $Var(X) = \theta * Mean(X)$
 The Negative Binomial model assumes that $Var(X) = Mean(X) + Mean(X)^2/k$
+
+In order to find the family distribution that fit the data the most we separated the data into 30 groups and calculated each group mean and variance, then we fit a GLM model in order to find the right family distribution. 
 
 ```{r}
 # Quasi poisson model
@@ -340,7 +336,8 @@ cat("Quasi Poisson R^2:", 1 - fit_qpoi$deviance/fit_qpoi$null.deviance)
 
 ```{r}
 # Negative binomial model
-fit_nb <- MASS::glm.nb(variance ~ mean, data= yield_groups)
+fit_nb <- MASS::glm.nb(variance ~ mean, data= yield_groups, control = glm.control(maxit=1e10))
+
 summary(fit_nb)
 
 cat("NegBin R^2:", 1 - fit_nb$deviance/fit_nb$null.deviance)
@@ -380,22 +377,53 @@ yield_groups |>
   geom_line(aes(x=mean, y=nb_pred, color= 'Negative Binomial'))+
   geom_line(aes(x=mean, y=qpoi_pred, color = 'Quasi Poisson')) + 
   labs(x = 'Mean', y='Variance', colour = 'Models', title = 'Real Values Vs Predicted Values (NB vs QPoi)')  + 
-  geom_text(x=50000,y=1.5e+09,label = paste("NB R^2: ", round(1 - fit_nb$deviance/fit_nb$null.deviance, 2))) + 
-  geom_text(x=50000, y=1.3e+09, label = paste("QPoi R^2: ", round(1 - fit_qpoi$deviance/fit_qpoi$null.deviance, 3)))
+  geom_text(x=50000,y=2e+09,label = paste("NB R^2: ", round(1 - fit_nb$deviance/fit_nb$null.deviance, 2))) + 
+  geom_text(x=50000, y=1.8e+09, label = paste("QPoi R^2: ", round(1 - fit_qpoi$deviance/fit_qpoi$null.deviance, 3)))
 ```
-The plot we created compares the real values vs the predicted ones of each model.By observing the plot we can clearly tell that the quasi poisson model is better at predicting & explaining our data than the negative binomial model. In addition, we also created a residual plot for our residual analysis in order to determine which model fits the overall trend of the data however, both models seems to fit the overall trend of the data. 
+We created a plot that compares the real values with the predicted values from each model. Upon observing the plot, it is evident that the quasi-Poisson model performs better in predicting and explaining the data compared to the negative binomial model. Furthermore, both models appear to adequately fit the data based on the analysis of the residuals, as the majority of the residuals cluster around zero. However, when considering the dispersion parameter, the Negative Binomial model outperforms the Quasi Poisson model indicating a better fit to the data. Therefore, based of this analysis, it won't matter what model we'll choose to use.
 
-By both plots examinations we decided that our response variable distribution is Quasi Poisson.
+
+## Correlation Analysis
+```{r}
+agri_df <- filled_with_avg |>
+  na.omit()
+
+corel <- agri_df |>
+  select(-yield) |>
+  select_if(is.numeric) |>
+  lapply(function(col) cor.test(col,agri_df$yield,method='spearman',exact=F))
+
+```
+
+| Variable                 | P-value  | rho        | 
+| ------------------------ |----------|------------|
+| Population               | 2.2e-16  |0.02524405  |
+| Employees in agriculture | 2.2e-16  |-0.1049963  |
+| Avg Temp                 | 2.2e-16  |-0.09457474 |
+| Avg Rainfall             | 2.2e-16  |0.05122064  |
+| Land price               | 0.001354 |0.007765627 |
+| Pesticides               | 2.2e-16  |0.1296358   |
+| Crop Price               | 2.2e-16  |0.07438538  |
+| Year                     | 2.2e-16  |0.152361    |
+
+: Spearman's Rank Correlation Test Results
+
+
+Each p-value in the table is lower than 0.05 thus, we can say that every numeric variable in the data is correlated with the yield variable. However, the rho values are relatively small which means that the monotonic relation between the variables in the data and the yield variable isn't strong.
+
+## Chisq Test
+
+Since the country column is a categorical variable we can't conduct a correlation test thus, we'll use the chi squared test for independence in order to check if the yield variable is dependent of the country variable.
+
 ```{r}
 
+agri_df |>
+  select(yield, Country) |>
+  group_by(Country) |>
+  mutate(total_yield = sum(yield)) |>
+  select(Country, total_yield) |>
+  with(chisq.test(table(Country, total_yield), simulate.p.value = T))
 ```
-
-
-
-
-
-
-
 
 
 
