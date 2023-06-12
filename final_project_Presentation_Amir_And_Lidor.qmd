@@ -1,0 +1,102 @@
+---
+title: "ADS Final Project - What effects agriculture"
+author: "Amir Boger & Lidor Erez"
+format: revealjs
+editor: visual
+---
+
+## Introduction
+
+-   Agriculture, in today's world, is considered a central part of our lives. because of it, our lives and other people's lives have forever changed. therefore, it's important to understand what can truly affect it.
+
+-   In this project we will Present our findings as well as our data we gathered regarding what can influence our agriculture output, and will try to understand what can affect our agricultural industry
+
+## Our Research Hypothesis
+
+We believe that there is a connection between several factors and agriculture. Some aspects might have a positive effect on the agriculture industry, While others may have a negative one
+
+so, for this project, we will be focusing on the correlation's and Regression's between agriculture's output compared to: Population, climate change, Land use, employment and product price
+
+![](images/research-01.JPG){width="377"}
+
+## Literature Review
+
+the purpus of the Literature Review was to understand what should we be expecting to see when we analysis our data. while some of the articls we found have confirmed what we where expecting to see, others had shown a to be different then what we expecting to see
+
+![](images/books.JPG){width="448"}
+
+## Literature Review
+
+[Climate change]{.underline} - Unlike some of our indexes, the effects of climate change on agriculture are more complex, since it can impact it in more than one way (kane, et.al, 1992)
+
+[Population]{.underline} - Regarding the size of population and it's connection to agriculture, we have learned that population growth doesn't necessarily mean higher crop amount. in fact, according to a research done in Ethiopia, it was discovered that more rapid population growth led to low per capita income (Mekuria, 2018)
+
+## Data gathering
+
+For this project, we gathered our data from a couple of resourses, including:
+
+-   Kaggle
+
+-   Our world in data
+
+-   FAO (Food and agricluture orginaization of the united nations)
+
+## Data pre processing - first inspection
+
+For our project, we first took our raw data and inspected it. for example:
+
+```{r, echo=TRUE}
+# Agriculture yield data
+yield <- read.csv("https://raw.githubusercontent.com/erezlid/ADS_Final_Project/main/Data/Yield/yield.csv")
+head(yield)
+```
+
+## Data pre processing - Cleaning and orginizing data
+
+since the data we revived also contained some unnecessary elements (such as country codes etc...), we removed it. In addition, we organized the data by renaming and arranging the columns:
+
+```{r,echo=TRUE}
+library(dplyr)
+colnames(yield)[c(4,12)] <- c("Country",'yield')
+yield <- yield |>
+  select(-c(Domain, Domain.Code,Area.Code,Element.Code,
+            Element,Item.Code,Year.Code,Unit)) |>
+  arrange(Country, Year,Item)
+head(yield)
+```
+
+## Data pre processing - Joins
+
+we merged the tables by preforming a LEFT JOIN (to maintain all the "Yield" data):
+
+```{r, echo=TRUE}
+land_use <- read.csv("https://raw.githubusercontent.com/erezlid/ADS_Final_Project/main/Data/Land%20Use%20/fao_data_land_data.csv")
+colnames(land_use)[c(1,4,6)] <- c("Country","Year","land_price")
+joined_tables <- yield %>%
+  left_join(land_use,by=c("Year","Country"), relationship = "many-to-many")
+head(joined_tables)
+```
+
+## Data Visualization
+
+After the data was ready, and prior to the analysing, we started by visualising it using ggplot. here is an example:
+
+![](images/pescidies_graph.png){width="531"}
+
+## Data analysis
+
+After the data was processed and organized, we started to analyse it in order to:
+
+-   Understand the distribution of the data
+
+-   understand what tests should we be using
+
+-   find the right correlations and regrestions
+
+![](images/573.png){fig-align="right" width="256"}
+
+## So what's next?
+
+-   we will continue with the correlation's and regression's checks
+-   we will continue to gather info from Literature
+-   From both our Literature and our data, we will discuss and conclude what we have learned from this project
