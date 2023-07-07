@@ -1,0 +1,539 @@
+---
+title: "ADS Final Project - What effects agriculture"
+author: "Amir Boger & Lidor Erez"
+format: revealjs
+editor: visual
+---
+
+## Introduction
+
+-   Agriculture, in today's world, is considered a central part of our lives. because of it, our lives and other people's lives have forever changed. therefore, it's important to understand what can truly affect it.
+
+-   In this project we will Present our findings as well as our data we gathered regarding what can influence our agriculture output, and will try to understand what can affect our agricultural industry
+
+## Our Research Hypothesis
+
+We believe that there is a connection between several factors and agriculture. Some aspects might have a positive effect on the agriculture industry, While others may have a negative one
+
+so, for this project, we will be focusing on the correlation's and Regression's between agriculture's output compared to: Population, climate change, Land use, employment and product price
+
+![](images/research-01.JPG){width="377"}
+
+## Literature Review
+
+the purpus of the Literature Review was to understand what should we be expecting to see when we analysis our data. while some of the articls we found have confirmed what we where expecting to see, others had shown a to be different then what we expecting to see
+
+![](images/books.JPG){width="448"}
+
+## Literature Review
+
+[Climate change]{.underline} - Unlike some of our indexes, the effects of climate change on agriculture are more complex, since it can impact it in more than one way (kane, et.al, 1992)
+
+[Population]{.underline} - Regarding the size of population and it's connection to agriculture, we have learned that population growth doesn't necessarily mean higher crop amount. in fact, according to a research done in Ethiopia, it was discovered that more rapid population growth led to low per capita income (Mekuria, 2018)
+
+
+## Data gathering
+
+For this project, we gathered our data from a couple of resourses, including:
+
+-   Kaggle
+
+-   Our world in data
+
+-   FAO (Food and agricluture orginaization of the united nations)
+
+## Data pre processing - first inspection
+
+For our project, we first took our raw data and inspected it. for example:
+
+```{r, echo=TRUE}
+# Employees data
+employees <- read.csv("https://raw.githubusercontent.com/erezlid/ADS_Final_Project/main/Data/Agriculture%20Employees%20/employ.csv")
+
+# Climate change data
+
+rainfall <- read.csv("https://raw.githubusercontent.com/erezlid/ADS_Final_Project/main/Data/Climate%20Change/rainfall.csv")
+
+temp <- read.csv("https://raw.githubusercontent.com/erezlid/ADS_Final_Project/main/Data/Climate%20Change/temp.csv")
+
+# Pesticides data
+
+pesticides <- read.csv("https://raw.githubusercontent.com/erezlid/ADS_Final_Project/main/Data/Climate%20Change/pesticides.csv")
+
+
+# Land Use data
+
+land_use <- read.csv("https://raw.githubusercontent.com/erezlid/ADS_Final_Project/main/Data/Land%20Use%20/fao_data_land_data.csv")
+
+# Population data
+pop <- read.csv("https://raw.githubusercontent.com/erezlid/ADS_Final_Project/main/Data/Population/population_by_country.csv")
+
+
+# Producer price data
+price <- read.csv("https://raw.githubusercontent.com/erezlid/ADS_Final_Project/main/Data/Producer%20Price/crop_prices.csv")
+
+# Agriculture yield data
+yield <- read.csv("https://raw.githubusercontent.com/erezlid/ADS_Final_Project/main/Data/Yield/yield.csv")
+```
+
+libraries loading:
+
+```{r, echo=TRUE, warning=FALSE}
+library(ggplot2)
+library(dplyr)
+library(data.table)
+library(tidyverse)
+library(patchwork)
+library(qqplotr)
+library(mixtools)
+library(nortest)
+library(LaplacesDemon)
+```
+
+## Data pre processing - Cleaning and orginizing data
+
+since the data we revived also contained some unnecessary elements (such as country codes etc...), we removed it. In addition, we organized the data by renaming and arranging the columns:
+
+```{r,echo=TRUE}
+# Country & Year columns uniformity
+employees <- employees %>%
+  rename(Country = Entity)
+
+land_use <- land_use %>%
+  rename(Country = country_or_area,
+         Year = year,
+         land_price = value)
+
+pesticides <- pesticides %>%
+  rename(Country = Area,
+         pesticides_amount = Value)
+
+pop <- pop %>%
+  rename(Country = country_name,
+         Year = year,
+         pop_amount = value)
+
+price <- price %>%
+  rename(Country = Area,
+         crop_price = Value)
+
+rainfall <- rainfall %>%
+  rename(Country = Area,
+         avg_rainfall = average_rain_fall_mm_per_year)
+
+temp <- temp %>%
+  rename(Year=year,
+         Country=country)
+
+yield <- yield %>%
+  rename(Country = Area,
+         yield = Value)
+```
+
+
+```{r, echo=TRUE}
+# Remove unnecessary columns and arrange each table by Country & Year
+
+employees <- employees |>
+  arrange(Country, Year)
+
+# Remove plus sign from country name
+land_use$Country <- sapply(land_use$Country, function(x) gsub(' \\+', '', x))
+
+
+land_use <- land_use |>
+  filter(category %in% c("agricultural_area")) |>
+  select(-c(category,unit,element,element_code, value_footnotes)) |>
+  arrange(Country, Year)
+
+pesticides <- pesticides |>
+  select(-c(Unit,Element, Domain,Item)) |>
+  arrange(Country, Year)
+
+pop <- pop |>
+  select(-country_code) |>
+  arrange(Country, Year)
+
+# Change Maize(corn) to Maize only
+price$Item <- sapply(price$Item, function(x) gsub('corn', '', x)) %>%
+  sapply(., function(x) gsub('\\()', '', x))
+
+price <- price |>
+  select(-c(Domain.Code,Domain,Area.Code..M49.,Element.Code,Element,
+            Item.Code..CPC.,Year.Code,Months.Code,Flag, Flag.Description, Months)) |>
+  arrange(Country, Year,Item)
+
+rainfall <- rainfall |>
+  arrange(Country, Year)
+
+temp <- temp |>
+  arrange(Country, Year)
+
+yield <- yield |>
+  select(-c(Domain, Domain.Code,Area.Code,Element.Code,
+            Element,Item.Code,Year.Code,Unit)) |>
+  arrange(Country, Year,Item)
+```
+
+### Tidy Data:
+
+We tidy the price table and change the currency to usd only.
+```{r, echo=TRUE}
+# get only the countries that use USD
+usd_countries <- price %>%
+  filter(Unit == 'USD') %>%
+  select(Country) %>% distinct()
+
+# Only SLC countries
+slc_countries_data <- price %>%
+  filter(Unit != 'LCU' & Unit != 'USD') %>% filter(!(Country %in% usd_countries$Country))
+
+
+# Tidy and change the SLC to USD
+price <- price %>%
+  filter(Unit != 'LCU') %>% filter(Unit != 'SLC') %>% bind_rows(slc_countries_data) %>%
+  arrange(Country, Year) %>%
+  mutate(crop_price=
+    case_when(
+      Unit == 'SLC' ~ crop_price * 0.001537,
+      T ~ crop_price
+    )
+  ) %>%
+  select(-Unit) %>%
+  pivot_wider(
+    names_from=Item, 
+    values_from = crop_price
+  )
+
+# Rename columns:
+
+price <- price %>% 
+  rename(Maize.price= `Maize ` ,
+         Potatoes.price = Potatoes,
+         Rice.price = Rice,
+         Wheat.price = Wheat,
+         Soyabeans.price = `Soya beans`,
+         Sorghum.price = Sorghum,
+         Cassava.price = `Cassava, fresh`,
+         SweetPotatoes.price = `Sweet potatoes`,
+         Yams.price = Yams,
+         Plantains.price = Plantains)
+  
+```
+
+
+We tidy the yield data
+```{r}
+# Tidy Yield Data:
+yield <- yield %>%
+  pivot_wider(names_from = Item, values_from = yield, values_fill = 0)
+
+# Rename columns:
+yield <- yield %>%
+  rename(
+    Maize.amount = Maize,
+    Potatoes.amount = Potatoes,
+    Rice.amount = `Rice, paddy`,
+    Wheat.amount = Wheat,
+    Soyabeans.amount = Soybeans,
+    Sorghum.amount = Sorghum,
+    Cassava.amount = Cassava,
+    SweetPotatoes.amount = `Sweet potatoes`,
+    Yams.amount = Yams,
+    Plantains.amount = `Plantains and others`
+  )
+
+```
+
+
+### Joins:
+
+After tiding the data, cleaning it and processing it we joined the tables into one big table.
+```{r}
+# Join tables
+full_data <- yield %>%
+  inner_join(price,by=c("Year","Country")) |>
+  left_join(pesticides,by=c("Year","Country")) |>
+  left_join(pop,by=c("Year","Country")) |>
+  left_join(rainfall,by=c("Year","Country")) |>
+  left_join(temp,by=c("Year","Country")) |>
+  left_join(employees,by=c("Year","Country")) |>
+  left_join(land_use, by=c("Year","Country")) |>
+  arrange(Country, Year)
+
+# Reordering columns
+full_data <- full_data |>  select(Year, Country, pop_amount,number_employed_agri,avg_temp, avg_rainfall,land_price, pesticides_amount, ends_with('.price'), ends_with('.amount')) %>% mutate(avg_rainfall = as.integer(avg_rainfall))
+```
+
+More preprocessing and cleaning:
+```{r}
+setDT(full_data)
+
+# Get the crop amount columns
+amounts <- full_data %>%
+  select(ends_with('.amount')) %>%
+  colnames()
+
+# get the crop price columns
+prices_cols <- full_data %>%
+  select(ends_with('.price')) %>%
+  colnames()
+
+# Place zeros when the amount of a certain crop is 0 using data.table.
+for (i in 1:length(amounts)) {
+  full_data[full_data[[amounts[i]]] == 0, (prices_cols[i]) := 0]
+}
+
+
+# Removing countries with less than 5 observations. 
+full_data <- full_data %>%
+  group_by(Country) %>%
+  mutate_at(vars(-group_cols()),~ ifelse(is.na(.), mean(., na.rm=T),.))  %>%
+  mutate(n = n()) %>%
+  filter(n > 4 ) %>%
+  select(-n) %>%
+  ungroup() %>% setDT()
+```
+
+Our goal is to use mean based analysis in order to find which of the indices affect the most on crop yield outcome. Therefore, we used mean imputation to fill the missing values in each column.
+
+```{r}
+# Change every na value into -1 -> -1 indicates that there's no data about the price.
+full_data[, (prices_cols) := lapply(.SD, function(x) ifelse(is.na(x),-1,x)), .SDcols = prices_cols]
+
+# Adding a crop price column.
+full_data$avg_crop_price <- full_data %>%
+  select(all_of(prices_cols)) %>%
+  rowMeans(na.rm=T)
+
+# Add a total_yield column
+
+full_data$total_yield <- full_data %>%
+  select(all_of(amounts)) %>%
+  rowSums(na.rm=T)
+```
+
+
+## Data Visualization
+
+After the data was ready, and prior to the analyzing, we started by visualizing it using ggplot.
+
+
+### Scatter plots
+
+We used scatter plots in order to understand the relation between our variables and our response variable (total_yield). In order to make the plots readable, we grouped the data by country and calculated each feature average and then plotted it.
+
+```{r ,echo=TRUE, warning=FALSE}
+full_data |>
+  filter(!is.na(pop_amount)) |>
+  group_by(Country) |>
+  summarize(avg_pop = mean(pop_amount), avg_yield = mean(total_yield)) |>
+  ggplot(aes(x=log(avg_pop + 1), y=log(avg_yield + 1), color=avg_yield)) +
+  geom_point() + 
+  geom_smooth(formula = y~x, method='glm',se=F) + 
+  labs(title='Avg crop yield VS Avg Population  (Log Scaled)',
+       x='log(avg population)',
+       y='log(avg crop yield)')
+```
+
+```{r ,echo=TRUE, warning=FALSE}
+full_data |>
+  filter(!is.na(number_employed_agri)) |>
+  group_by(Country) |>
+  summarize(avg_employees = mean(number_employed_agri), avg_yield = mean(total_yield)) |>
+  ggplot(aes(x=log(avg_employees + 1), y=log(avg_yield + 1), color=avg_yield)) +
+  geom_point() + 
+  geom_smooth(formula = y~x, method='glm',se=F) + 
+  labs(title='Avg crop yield VS Avg Num of Employees (Log Scaled)',
+       x='log(avg employees)',
+       y='log(avg crop yield)')
+```
+
+```{r ,echo=TRUE, warning=FALSE}
+full_data |>
+  filter(!is.na(avg_temp)) |>
+  group_by(Country) |>
+  summarize(avg_temp =  mean(avg_temp), avg_yield = mean(total_yield)) |>
+  ggplot(aes(x=avg_temp, y=avg_yield, color=avg_yield)) +
+  geom_point() + 
+  geom_smooth(formula = y~x, method='glm',se=F) + 
+  labs(title='Avg crop yield VS Avg Temperature')
+```
+
+```{r ,echo=TRUE, warning=FALSE}
+full_data |>
+  filter(!is.na(avg_rainfall)) |>
+  group_by(Country) |>
+  summarize(avg_rainfall = mean(avg_rainfall), avg_yield = mean(total_yield)) |>
+  ggplot(aes(x=avg_rainfall, y=avg_yield, color=avg_yield)) + 
+  geom_point() + 
+  geom_smooth(formula = y~x, method='glm',se=F) + 
+  labs(title = 'Avg crop yield VS Avg rainfall')
+
+```
+
+```{r ,echo=TRUE, warning=FALSE}
+full_data |>
+  filter(!is.na(land_price)) |>
+  group_by(Country) |>
+  summarize(avg_land_price = mean(land_price), avg_yield = mean(total_yield)) |>
+  ggplot(aes(x=log(avg_land_price + 1), y=log(avg_yield + 1), color=avg_yield)) + 
+  geom_point() + 
+  geom_smooth(formula = y~x, method='glm',se=F) + 
+  labs(title = 'Avg crop yield VS Avg Land price (Log Scaled)',
+       x='log(avg land price)',
+       y='log(avg crop yield)')
+```
+
+```{r ,echo=TRUE, warning=FALSE}
+full_data |>
+  filter(!is.na(pesticides_amount)) |>
+  group_by(Country) |>
+  summarize(avg_pesticides = mean(pesticides_amount), avg_yield = mean(total_yield)) |>
+  ggplot(aes(x=log(avg_pesticides+1), y=log(avg_yield+1), color=avg_yield)) + 
+  geom_point() + 
+  geom_smooth(formula = y~x, method='glm',se=F) + 
+  labs(title = 'Avg crop yield VS Avg Pesticides amount (Log Scaled)',
+       x='log(avg pesticides)',
+       y='log(avg crop yield)')
+```
+
+```{r ,echo=TRUE, warning=FALSE}
+full_data |>
+  filter(!is.na(avg_crop_price)) |>
+  group_by(Country) |>
+  summarize(avg_crop_price = mean(avg_crop_price), avg_yield = mean(total_yield)) |>
+  ggplot(aes(x=log(avg_crop_price + 1), y=log(avg_yield + 1), color=avg_yield)) +
+  geom_point() + 
+  geom_smooth(formula = y~x, method='glm',se=F) + 
+  labs(
+    title = 'Avg crop yield VS Avg crop price (Log Scaled)',
+    x= 'log(avg crop price)',
+    y= 'log(avg crop yield)'
+  )
+```
+
+### Distribution plot
+
+Prior to our analysis, we also wanted to understand what is the distribution of our response variable. Thus, we created a density plot to present it's distribution. Furthermore, we also tried to use various transformation to transform the distribution into a normal one.
+
+```{r, echo=TRUE}
+
+yield_hist <- full_data |>
+  na.omit() |>
+  ggplot(aes(x=total_yield)) + 
+  geom_histogram(fill="#69b3a2", color="#e9ecef", alpha=0.8)+
+  theme(axis.text.x = element_text(angle=20, hjust=0.5))
+
+yield_hist_log <- full_data |>
+  na.omit() |>
+  ggplot(aes(x=log(total_yield + 1))) + 
+  geom_histogram(fill="#69b3a2", color="#e9ecef", alpha=0.8)+
+  labs(x = 'log(yield)') + 
+  theme(axis.text.x = element_text(angle=20, hjust=0.5),
+        axis.title.y = element_blank())
+
+yield_hist_sqrt <- full_data |>
+  na.omit() |>
+  ggplot(aes(x=sqrt(total_yield))) +
+  geom_histogram(fill="#69b3a2", color="#e9ecef", alpha=0.8) + 
+  theme(axis.text.x = element_text(angle=20, hjust=0.5),
+        axis.title.y = element_blank())
+
+yield_hist_log10 <- full_data |>
+  na.omit() |>
+  ggplot(aes(x=log(total_yield + 1,base=10))) + 
+  geom_histogram(fill="#69b3a2", color="#e9ecef", alpha=0.8) + 
+  theme(axis.text.x = element_text(angle=20, hjust=0.5),
+        axis.title.y = element_blank()) + 
+  labs(x='log_10(total_yield)')
+
+yield_hist + yield_hist_log + yield_hist_sqrt +  yield_hist_log10 + plot_annotation(
+  title = 'Response Variable Distribution (Yield)',
+  theme = theme(plot.title = element_text(hjust=0.5)))
+```
+From the plot, we understood our data could be bi-modal(two modes). Thus, it'll be hard to change it into a normal distribution using monotonic transformation. However, we still used a statistical test to show that the data isn't normal.
+
+```{r, echo=TRUE}
+ad.test(full_data$total_yield)
+ad.test(log(full_data$total_yield + 1))
+ad.test(sqrt(full_data$total_yield))
+ad.test(log(full_data$total_yield + 1, base=10))
+
+qqplot(qnorm(ppoints(length(full_data$total_yield))),full_data$total_yield, xlab = 'Theoretical Quantials',ylab = 'Observed Yield Quantiles')
+qqline(full_data$total_yield,distribution=qnorm)
+```
+When doing an analysis to a bi-modal distributed response variable one needs to try to separate the data into clusters and conduct his analysis on each of the clusters. However, we used a mixed model to understand each cluster distribution.
+
+```{r , echo=TRUE}
+
+x <- normalmixEM(full_data$total_yield,k=2)
+mu  <- x$mu
+sigma <- x$sigma
+
+full_data %>%
+  ggplot(aes(x=total_yield))+
+  geom_histogram(aes(y=..density..),fill="#69b3a2", color="#e9ecef", bins=30) +
+  stat_function(fun = function(x) dnorm(x,mean=mu[2],sd=sigma[2]),color='blue') + 
+  stat_function(fun = function(x) dnorm(x,mean=mu[1],sd=sigma[1]),color='red') +
+  labs(x='Yield', title = 'Normality Approachness check')
+```
+Though we can't really determine if the data distribute normally or not, we can say that each cluster is approaching to a normal distribution and now we can start our analysis.
+
+
+## Data analysis
+
+### Regression Analysis
+```{r,echo=TRUE}
+lm.data <- full_data %>%
+  select(-ends_with('.amount'),-ends_with('.price'),-Country) 
+
+lm.data %>%
+  lm(total_yield~., data=.) %>% summary()
+```
+
+```{r, echo=TRUE}
+lm.data %>%
+  lm(total_yield~pop_amount*number_employed_agri+avg_temp*avg_rainfall+land_price+pesticides_amount+avg_crop_price, data=.) %>% summary()
+  
+```
+
+```{r,echo=TRUE}
+lm.data %>%
+  lm(total_yield~pop_amount*number_employed_agri+avg_temp*avg_rainfall+land_price+pesticides_amount+avg_crop_price + pop_amount*land_price, data=.) %>% summary()
+```
+
+
+### Correlation Analysis
+
+```{r}
+corel <- full_data |>
+  select(-total_yield, -ends_with('.amount'), -ends_with('.price'),-Country) |>
+  select_if(is.numeric) |>
+  lapply(function(col) cor.test(col,full_data$total_yield,method = 'kendal'))
+
+```
+
+| Variable                 | P-value  | tau        | 
+| ------------------------ |----------|------------|
+| Population               | 2.2e-16  |            |
+| Employees in agriculture | 2.2e-16  |            |
+| Avg Temp                 | 2.2e-16  |            |
+| Avg Rainfall             | 2.2e-16  |            |
+| Land price               | 2.2e-16  |            |
+| Pesticides               | 2.2e-16  |            |
+| Crop Price               | 2.2e-16  |            |
+| Year                     | 2.2e-16  |            |
+
+: Kendal Correlation Test Results
+
+
+### Chisquared - Test
+
+```{r}
+full_data |>
+  group_by(Country) |>
+  select(Country, total_yield) |>
+  with(chisq.test(table(Country, total_yield) , simulate.p.value = T))
+```
+
