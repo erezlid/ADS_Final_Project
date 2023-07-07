@@ -223,7 +223,7 @@ price <- price %>%
 
 
 We tidy the yield data
-```{r}
+```{r, echo=TRUE}
 # Tidy Yield Data:
 yield <- yield %>%
   pivot_wider(names_from = Item, values_from = yield, values_fill = 0)
@@ -249,7 +249,7 @@ yield <- yield %>%
 ### Joins:
 
 After tiding the data, cleaning it and processing it we joined the tables into one big table.
-```{r}
+```{r, echo=TRUE}
 # Join tables
 full_data <- yield %>%
   inner_join(price,by=c("Year","Country")) |>
@@ -266,7 +266,7 @@ full_data <- full_data |>  select(Year, Country, pop_amount,number_employed_agri
 ```
 
 More preprocessing and cleaning:
-```{r}
+```{r, echo=TRUE}
 setDT(full_data)
 
 # Get the crop amount columns
@@ -297,7 +297,7 @@ full_data <- full_data %>%
 
 Our goal is to use mean based analysis in order to find which of the indices affect the most on crop yield outcome. Therefore, we used mean imputation to fill the missing values in each column.
 
-```{r}
+```{r,echo=TRUE }
 # Change every na value into -1 -> -1 indicates that there's no data about the price.
 full_data[, (prices_cols) := lapply(.SD, function(x) ifelse(is.na(x),-1,x)), .SDcols = prices_cols]
 
@@ -506,7 +506,7 @@ lm.data %>%
 
 ### Correlation Analysis
 
-```{r}
+```{r, echo=TRUE}
 corel <- full_data |>
   select(-total_yield, -ends_with('.amount'), -ends_with('.price'),-Country) |>
   select_if(is.numeric) |>
@@ -530,7 +530,7 @@ corel <- full_data |>
 
 ### Chisquared - Test
 
-```{r}
+```{r, echo=TRUE}
 full_data |>
   group_by(Country) |>
   select(Country, total_yield) |>
