@@ -1,0 +1,707 @@
+---
+title: "ADS Final Project - What affect agriculture"
+author: "Amir Boger 208989954 & Lidor Erez 318661444"
+format: 
+  revealjs:
+    smaller: true
+    scrollable: true
+    theme: dark
+editor: visual
+---
+
+## Introduction
+
+-   Agriculture, in our modern world, holds a central position in our lives. It has ushered in transformative changes that have forever impacted us and others. Therefore, it's important to understand what can truly affect it.
+
+-   In this project, we will present our findings along with the data we collected regarding the factors that can influence our agriculture output, and will try to understand what can affect our agricultural industry.
+
+## Our Research Hypothesis
+
+We believe that there is a connection between several factors and agriculture. Some aspects, might have a positive effect on the agriculture industry, While others may have a negative one. Therefore, our project aims to investigate the correlations and regressions between the agriculture output and the key variables, namely population, climate change, land use, employment and product price.
+
+![](https://github.com/erezlid/ADS_Final_Project/blob/main/images/research.png?raw=true){width="377"}
+
+## Literature Review
+
+the purpose of the literature review was to gain an understanding of what should be anticipated when analyzing our data. while some of the articles we found aligned with what we where anticipating to observe, others didn't.
+
+![](https://github.com/erezlid/ADS_Final_Project/blob/main/images/books.JPG?raw=true){width="448"}
+
+## Literature Review
+
+[Climate change]{.underline} - Regarding the climate change index, Unlike some of our indices, the effects of climate change on agriculture are more complex. Namely, it might impact agriculture in more than one way (kane, et.al, 1992).On this project, we decided to focus on data of pesticides, temperature and rainfall amount.
+
+[Population]{.underline} - Regarding the size of population and it's connection to agriculture, we have learned that population growth doesn't necessarily mean higher crop amount. In fact, according to a research done in Ethiopia, it was discovered that more rapid population growth led to low per capita income (Mekuria, 2018)
+
+## Literature Review
+
+[employment and labor]{.underline} - as for the labor index, we wanted to understand the impact of changes in agriculture employment on agricultural output. For instance, a study conducted in China, revealed that areas with higher concentration of agricultural labor tend to experience higher level of productivity in the agricultural sector. (Dazhuan et.al, 2018).
+
+[Land use]{.underline} - although Land use might have an effect on agricultural output, the literature we read has shown no straight connection between the Land use's change and the agriculture yield. The findings confirm that recovery of cropland to forest or grassland at western China did not result in significant loss of agricultural production (Yan et.al, 2009).  
+
+[economy]{.underline} - regarding the economy index, we decided to focus on the producer crop price, as it can have both positive and negative affects on the agriculture output. higher products prices encourage producers to increase their production, because high prices mean higher income. on the other hand, lower products prices would decrease production, which would cause the income of the producers to be smaller (Cruz-Lazaro, et.al, 2023)
+
+## Data gathering
+
+For this project, we gathered our data from the following resources:
+
+-   Kaggle
+
+-   Our world in data
+
+-   FAO (Food and agriculture organization of the united nations)
+
+## Data pre processing - first inspection
+
+Firstly, we loaded our raw data and inspected it.
+
+```{r echo=TRUE}
+# Employees data
+employees <- read.csv("https://raw.githubusercontent.com/erezlid/ADS_Final_Project/main/Data/Agriculture%20Employees%20/employ.csv")
+
+# Climate change data
+
+rainfall <- read.csv("https://raw.githubusercontent.com/erezlid/ADS_Final_Project/main/Data/Climate%20Change/rainfall.csv")
+
+temp <- read.csv("https://raw.githubusercontent.com/erezlid/ADS_Final_Project/main/Data/Climate%20Change/temp.csv")
+
+# Pesticides data
+
+pesticides <- read.csv("https://raw.githubusercontent.com/erezlid/ADS_Final_Project/main/Data/Climate%20Change/pesticides.csv")
+
+
+# Land Use data
+
+land_use <- read.csv("https://raw.githubusercontent.com/erezlid/ADS_Final_Project/main/Data/Land%20Use%20/fao_data_land_data.csv")
+
+# Population data
+pop <- read.csv("https://raw.githubusercontent.com/erezlid/ADS_Final_Project/main/Data/Population/population_by_country.csv")
+
+
+# Producer price data
+price <- read.csv("https://raw.githubusercontent.com/erezlid/ADS_Final_Project/main/Data/Producer%20Price/crop_prices.csv")
+
+# Agriculture yield data
+yield <- read.csv("https://raw.githubusercontent.com/erezlid/ADS_Final_Project/main/Data/Yield/yield.csv")
+
+head(yield)
+```
+
+## Libraries
+
+Aside from the usual libraries we used in class, we decided to use some other libraries, such as "mix tools" and "nortests". Here are the libraries we used for this project:
+
+```{r echo=TRUE, warning=FALSE}
+library(ggplot2)
+library(dplyr)
+library(data.table)
+library(tidyverse)
+library(patchwork)
+library(qqplotr)
+library(mixtools)
+library(nortest)
+library(LaplacesDemon)
+```
+
+# Data pre processing 
+ - Ensuring columns uniformity
+ - Arranging & Organizing data
+ - Cleaing Data (remvoing unnecessary columns)
+ - Tiding Data
+ - Join tables
+ - Filling missing values
+ - Cleaning Data (removing unnecessary observations)
+ - Mean Imputation
+ 
+## Columns uniformity
+
+We encountered different naming for the country and year columns  across different tables. Our initial priority was to ensure uniformity of these columns so the first thing we did was renaming them.
+
+```{r echo=TRUE}
+# Country & Year columns uniformity
+employees <- employees %>%
+  rename(Country = Entity)
+
+land_use <- land_use %>%
+  rename(Country = country_or_area,
+         Year = year,
+         land_price = value)
+
+pesticides <- pesticides %>%
+  rename(Country = Area,
+         pesticides_amount = Value)
+
+pop <- pop %>%
+  rename(Country = country_name,
+         Year = year,
+         pop_amount = value)
+
+price <- price %>%
+  rename(Country = Area,
+         crop_price = Value)
+
+rainfall <- rainfall %>%
+  rename(Country = Area,
+         avg_rainfall = average_rain_fall_mm_per_year)
+
+temp <- temp %>%
+  rename(Year=year,
+         Country=country)
+
+yield <- yield %>%
+  rename(Country = Area,
+         yield = Value)
+```
+
+## Arranging & Organizing Data
+
+Another thing we had to do was to remove some unnecessary notes inside the cells themselves.
+
+for example: in the "price" table, we removed unnecessary notes which where inside the "items" columns:
+```{r echo=TRUE}
+# Change Maize(corn) to Maize only
+price$Item <- sapply(price$Item, function(x) gsub('corn', '', x)) %>%
+  sapply(., function(x) gsub('\\()', '', x))
+
+price <- price |>
+  select(-c(Domain.Code,Domain,Area.Code..M49.,Element.Code,Element,
+            Item.Code..CPC.,Year.Code,Months.Code,Flag, Flag.Description, Months)) |>
+  arrange(Country, Year,Item)
+```
+
+```{r echo=TRUE}
+# Remove plus sign from country name
+land_use$Country <- sapply(land_use$Country, function(x) gsub(' \\+', '', x))
+
+
+land_use <- land_use |>
+  filter(category %in% c("agricultural_area")) |>
+  select(-c(category,unit,element,element_code, value_footnotes)) |>
+  arrange(Country, Year)
+```
+
+
+
+We also encountered unnecessary columns such as: Unit, Item.code, Year.Code etc,which won't contribute to our analysis. Therefore, we removed the unnecessary columns from each table.
+
+```{r echo=TRUE}
+# Remove unnecessary columns and arrange each table by Country & Year
+pesticides <- pesticides |>
+  select(-c(Unit,Element, Domain,Item)) |>
+  arrange(Country, Year)
+
+yield <- yield |>
+  select(-c(Domain, Domain.Code,Area.Code,Element.Code,
+            Element,Item.Code,Year.Code,Unit)) |>
+  arrange(Country, Year,Item)
+
+pop <- pop |>
+  select(-country_code) |>
+  arrange(Country, Year)
+
+rainfall <- rainfall |>
+  arrange(Country, Year)
+
+temp <- temp |>
+  arrange(Country, Year)
+
+employees <- employees |>
+  arrange(Country, Year)
+```
+
+
+
+## Tiding the data
+
+After the tables where organized and ready, we standardized the prices to ensure consistency by converting all of the price data to USD. Then we tidy the price data to make it more readable:
+
+```{r echo=TRUE}
+# get only the countries that use USD
+usd_countries <- price %>%
+  filter(Unit == 'USD') %>%
+  select(Country) %>% distinct()
+
+# Only SLC countries
+slc_countries_data <- price %>%
+  filter(Unit != 'LCU' & Unit != 'USD') %>% filter(!(Country %in% usd_countries$Country))
+
+price <- price %>%
+  filter(Unit != 'LCU') %>% filter(Unit != 'SLC') %>% bind_rows(slc_countries_data) %>%
+  arrange(Country, Year) %>%
+  mutate(crop_price=
+    case_when(
+      Unit == 'SLC' ~ crop_price * 0.001537,
+      T ~ crop_price
+    )
+  ) %>%
+  select(-Unit) %>%
+  pivot_wider(
+    names_from=Item, 
+    values_from = crop_price
+  )
+```
+
+## Tiding the data
+
+Although we have renamed some of the columns in the pre processing procedure, we decided to once again rename the columns so it'd be more easier to work with them:
+
+```{r echo=TRUE}
+
+# Rename columns:
+
+price <- price %>% 
+  rename(Maize.price= `Maize ` ,
+         Potatoes.price = Potatoes,
+         Rice.price = Rice,
+         Wheat.price = Wheat,
+         Soyabeans.price = `Soya beans`,
+         Sorghum.price = Sorghum,
+         Cassava.price = `Cassava, fresh`,
+         SweetPotatoes.price = `Sweet potatoes`,
+         Yams.price = Yams,
+         Plantains.price = Plantains)
+  
+```
+
+we did the same procedure to the yield table:
+
+```{r echo=TRUE}
+# Tidy Yield Data:
+yield <- yield %>%
+  pivot_wider(names_from = Item, values_from = yield, values_fill = 0)
+
+# Rename columns:
+yield <- yield %>%
+  rename(
+    Maize.amount = Maize,
+    Potatoes.amount = Potatoes,
+    Rice.amount = `Rice, paddy`,
+    Wheat.amount = Wheat,
+    Soyabeans.amount = Soybeans,
+    Sorghum.amount = Sorghum,
+    Cassava.amount = Cassava,
+    SweetPotatoes.amount = `Sweet potatoes`,
+    Yams.amount = Yams,
+    Plantains.amount = `Plantains and others`
+  )
+
+```
+
+## Joins
+
+In order to analyse the entire data in the most efficient way, we joined all of our tables into one big table:
+
+```{r echo=TRUE}
+# Join tables
+full_data <- yield %>%
+  inner_join(price,by=c("Year","Country")) |>
+  left_join(pesticides,by=c("Year","Country")) |>
+  left_join(pop,by=c("Year","Country")) |>
+  left_join(rainfall,by=c("Year","Country")) |>
+  left_join(temp,by=c("Year","Country")) |>
+  left_join(employees,by=c("Year","Country")) |>
+  left_join(land_use, by=c("Year","Country")) |>
+  arrange(Country, Year)
+
+# Reordering columns
+full_data <- full_data |>  select(Year, Country, pop_amount,number_employed_agri,avg_temp, avg_rainfall,land_price, pesticides_amount, ends_with('.price'), ends_with('.amount')) %>% mutate(avg_rainfall = as.integer(avg_rainfall))
+
+head(full_data)
+```
+
+After joining the tables, we decided to work with the main crops in our data so we removed the rest from the table.
+
+```{r echo=TRUE}
+
+# Choose only 5 crops to focus on
+full_data <- full_data %>%
+  select(
+    -c(
+      Sorghum.price,
+      Cassava.price,
+      SweetPotatoes.price,
+      Yams.price,
+      Plantains.price,
+      Sorghum.amount,
+      Cassava.amount,
+      SweetPotatoes.amount,
+      Yams.amount,
+      Plantains.amount
+    )
+  )
+```
+
+## Filling missing values
+
+To make our data more reasonable and also to deal with missing values, we decided to place 0 at the respective price column when a certain crop's amount is 0. For example: if Maize.amount == 0 then Maize.price should be zero as well. by doing that we ensure that when there's no yield for a certain crop, the price will be zero.
+
+```{r echo=TRUE}
+setDT(full_data)
+
+# Get the crop amount columns
+amounts <- full_data %>%
+  select(ends_with('.amount')) %>%
+  colnames()
+
+# get the crop price columns
+prices_cols <- full_data %>%
+  select(ends_with('.price')) %>%
+  colnames()
+```
+
+```{r echo=TRUE}
+# Place zeros when the amount of a certain crop is 0 using data.table.
+for (i in 1:length(amounts)) {
+  full_data[full_data[[amounts[i]]] == 0, (prices_cols[i]) := 0]
+}
+```
+
+## Removing unnecessary rows
+
+we also removed countries that has less than 5 observations.
+
+```{r echo=TRUE}
+full_data <- full_data %>%
+  group_by(Country) %>%
+  mutate_at(vars(-group_cols()),~ ifelse(is.na(.), mean(., na.rm=T),.))  %>%
+  mutate(n = n()) %>%
+  filter(n > 4 ) %>%
+  select(-n) %>%
+  ungroup() %>% setDT()
+```
+
+## Mean Imputation
+
+At the end, we used mean imputation, since our goal is to use mean-based analysis in order to find which of the indices affect the most on crop yield outcome.
+```{r echo=TRUE }
+# Change every na value into -1 -> -1 indicates that there's no data about the price.
+full_data[, (prices_cols) := lapply(.SD, function(x) ifelse(is.na(x),-1,x)), .SDcols = prices_cols]
+
+# Adding a crop price column.
+full_data$avg_crop_price <- full_data %>%
+  select(all_of(prices_cols)) %>%
+  rowMeans(na.rm=T)
+
+# Add a total_yield column
+
+full_data$total_yield <- full_data %>%
+  select(all_of(amounts)) %>%
+  rowSums(na.rm=T)
+```
+
+# Data Visualization
+
+To better understand the relation between our different independent variables and our dependent variable (total_yield) we visualize the data using scatter plots. In order to make the plots readable, for each plot, we sampled 800 observations from our data.
+
+## Scatter plots
+
+```{r echo=TRUE, warning=FALSE}
+set.seed(42)
+full_data |>
+  sample_n(800, replace=F) |>
+  ggplot(aes(x=log(pop_amount + 1), y=log(total_yield + 1), color=log(total_yield + 1))) +
+  geom_point() + 
+  geom_smooth(formula = y~x, method='lm',se=F, color="black") + 
+  labs(title='Total Yield VS Population  (Log Scaled)',
+       x='log(Population)',
+       y='log(Total Yield)',
+       colour = "log(Total Yield)")
+```
+
+```{r echo=TRUE, warning=FALSE}
+set.seed(42)
+full_data |>
+  sample_n(800, replace=F) |>
+  ggplot(aes(x=log(number_employed_agri + 1), y=log(total_yield+1), color=log(total_yield + 1))) +
+  geom_point() + 
+  geom_smooth(formula = y~x, method='lm', color = 'black',se=F) + 
+  labs(title='Total Yield VS Number of Employees (Log Scaled)',
+       x='log(Employees)',
+       y='log(Total Yield)',
+       colour = "log(Total Yield)")
+```
+
+```{r echo=TRUE, warning=FALSE}
+set.seed(42)
+full_data |>
+  sample_n(800,replace=F) |>
+  ggplot(aes(x=log(avg_temp + 1), y=log(total_yield + 1), color=log(total_yield + 1))) +
+  geom_point() + 
+  geom_smooth(formula = y~x, method='lm',se=F,color='black') +
+  labs(title='Total Yield VS Avg Temperature (Log Scaled)',
+       colour = "log(Total Yield)",
+       x= 'log(Avg Temp)',
+       y= "log(Total Yield)")
+```
+
+```{r echo=TRUE, warning=FALSE}
+set.seed(42)
+full_data |>
+  sample_n(800, replace=F) |>
+  ggplot(aes(x=log(avg_rainfall + 1), y=log(total_yield + 1), color=log(total_yield + 1))) + 
+  geom_point() + 
+  geom_smooth(formula = y~x, method='lm',se=F, color='black') + 
+  labs(title = 'Total Yield VS Avg Rainfall (Log Scaled)',
+       x= "log(Avg Rainfall)",
+       y="log(Total Yield)",
+       colour = "log(Total Yield)")
+
+```
+
+```{r echo=TRUE, warning=FALSE}
+set.seed(42)
+full_data |>
+  sample_n(800, replace=F) |>
+  ggplot(aes(x=log(land_price + 1), y=log(total_yield + 1), color=log(total_yield + 1))) + 
+  geom_point() + 
+  geom_smooth(formula = y~x, method='lm',se=F, color='black') + 
+  labs(title = 'Total Yield VS Land Price (Log Scaled)',
+       x='log(Land Price)',
+       y='log(Total Yield)',
+       colour = "log(Total Yield)")
+```
+
+```{r echo=TRUE, warning=FALSE}
+set.seed(42)
+full_data |>
+  sample_n(800,replace=F) |>
+  ggplot(aes(x=log(pesticides_amount+1), y=log(total_yield+1), color=log(total_yield+1))) + 
+  geom_point() + 
+  geom_smooth(formula = y~x, method='lm',se=F, color="black") + 
+  labs(title = 'Total Yield VS Amount of Pesticides used (Log Scaled)',
+       x='log(Amount of Pesticides)',
+       y='log(Total Yield)',
+       colour = "log(Total Yield)")
+```
+
+```{r echo=TRUE, warning=FALSE}
+set.seed(42)
+full_data |>
+  sample_n(800,replace=F) |>
+  ggplot(aes(x=log(avg_crop_price+1), y=log(total_yield+1), color=log(total_yield+1))) + 
+  geom_point() + 
+  geom_smooth(formula = y~x, method='lm',se=F, color="black") + 
+  labs(title = 'Total Yield VS Avg Crop Price (Log Scaled)',
+       x='log(Avg Crop Price)',
+       y='log(Total Yield)',
+       colour = "log(Total Yield)")
+```
+
+# Distribution analysis
+
+Prior to our analysis, we also wanted to understand what is the distribution of our response variable. Thus, we created a histogram to present it's distribution. Furthermore, we also tried to use various transformation to transform the distribution into a normal one.
+
+```{r echo=TRUE}
+
+yield_hist <- full_data |>
+  na.omit() |>
+  ggplot(aes(x=total_yield)) + 
+  geom_histogram(fill="#69b3a2", color="black", alpha=0.8,bins=30)+
+  theme(axis.text.x = element_text(angle=20, hjust=0.5)) + labs(y="")
+```
+
+```{r echo=TRUE}
+yield_hist_log <- full_data |>
+  na.omit() |>
+  ggplot(aes(x=log(total_yield + 1))) + 
+  geom_histogram(fill="#69b3a2", color="black", alpha=0.8,bins=30)+
+  labs(x = 'log(yield)') + 
+  theme(axis.text.x = element_text(angle=20, hjust=0.5),
+        axis.title.y = element_blank())
+```
+
+```{r echo=TRUE}
+yield_hist_sqrt <- full_data |>
+  na.omit() |>
+  ggplot(aes(x=sqrt(total_yield))) +
+  geom_histogram(fill="#69b3a2", color="black", alpha=0.8 ,bins=30) + 
+  theme(axis.text.x = element_text(angle=20, hjust=0.5),
+        axis.title.y = element_blank())
+```
+
+```{r echo=TRUE}
+yield_hist_log10 <- full_data |>
+  na.omit() |>
+  ggplot(aes(x=log(total_yield + 1,base=10))) + 
+  geom_histogram(fill="#69b3a2", color="black", alpha=0.8 ,bins=30) + 
+  theme(axis.text.x = element_text(angle=20, hjust=0.5),
+        axis.title.y = element_blank()) + 
+  labs(x='log_10(total_yield)')
+```
+
+## Distribution plot
+
+From the plot, we understood our data could be bi-modal(two modes). Thus, it'll be hard to change it into a normal distribution using monotonic transformation.
+
+```{r, echo=TRUE}
+full_plot <- yield_hist + yield_hist_log + yield_hist_sqrt +  yield_hist_log10 + plot_annotation(
+  title = 'Response Variable Distribution (Yield)',
+  theme = theme(plot.title = element_text(hjust=0.5)))
+
+
+full_plot
+```
+
+## Bi-modal Test
+
+We used the Laplace demon R package in order to check whether the distribution of our response variable is bi-modal or not. In addition to that, we also calculated the modes of the distribution (bi-modal = two modes).
+
+```{r, echo=TRUE}
+is.bimodal(full_data$total_yield)
+Modes(full_data$total_yield)
+```
+
+## Normality check
+
+```{r, echo=TRUE}
+ad.test(full_data$total_yield)
+ad.test(log(full_data$total_yield + 1))
+ad.test(sqrt(full_data$total_yield))
+ad.test(log(full_data$total_yield + 1, base=10))
+```
+
+## QQPlot (another normality check)
+
+```{r}
+qqplot(qnorm(ppoints(length(full_data$total_yield))),full_data$total_yield, xlab = 'Theoretical Quantials',ylab = 'Observed Yield Quantiles')
+qqline(full_data$total_yield,distribution=qnorm)
+```
+
+When doing an analysis to a bi-modal distributed response variable one needs to try to separate the data into clusters and conduct his analysis on each of the clusters. However, one can also use a mixed model in order to understand the distribution of each cluster.
+
+## Mixed Model
+
+```{r, echo=TRUE}
+gmm.model <- normalmixEM(full_data$total_yield,k=2)
+mu  <- gmm.model$mu
+sigma <- gmm.model$sigma
+```
+
+We fit a GMM (Gaussian Mixed Model) into our response variable (total_yield) in order to determine whether each cluster distribution follows a Gaussian or at least approaches to a Gaussian.
+
+```{r , echo=TRUE}
+
+full_data %>%
+  ggplot(aes(x=total_yield))+
+  geom_histogram(aes(y=..density..),fill="#69b3a2", color="black", bins=30) +
+  stat_function(fun = function(x) dnorm(x,mean=mu[2],sd=sigma[2]),color='blue') + 
+  stat_function(fun = function(x) dnorm(x,mean=mu[1],sd=sigma[1]),color='red') +
+  labs(x='Yield', title = 'Gaussian Mixed Model Fit')
+```
+
+Though we can't really determine if the data distribute normally or not, we can say that each cluster is approaching to a normal distribution. Thus, we can use the linear regression model.
+
+# Data Analysis
+
+-   Regression analysis using linear regression
+-   Correlation analysis using Kendall
+
+
+## Regression Analysis
+
+```{r echo = TRUE}
+lm.data <- full_data %>%
+  select(-ends_with('.amount'),-ends_with('.price'),-Country) %>% na.omit()
+```
+
+
+When we observed the scatter plots we understood it might be more appropriate to model our response variable in log scale. Since, most of the plots pointed a linear relation between the independent and dependent variable.
+
+```{r,echo=TRUE}
+model <- lm.data %>% select(-Year) %>%
+  lm(log(total_yield + 1)~log(pop_amount + 1) + log(number_employed_agri + 1) + log(avg_temp + 1) + log(avg_rainfall + 1) + log(land_price + 1) + log(avg_crop_price + 1) + log(pesticides_amount + 1) , data=.)
+
+model %>% summary()
+```
+When using log transformation each coefficient represent the percentage of change in Y (dependent variable) with one unit change in X (independent variable).Therefore, we interpreted the regression results as the following:
+
+| Variable                 |Coefficient|% of change in crop yield|
+|--------------------------|-----------|-------------------------|
+| Population               |  0.281078 |Increase of 28%          |
+| Employees in agriculture | -0.199061 |Decrease of 19.9%        |
+| Avg Temp                 | -0.202036 |Decrease of 20%          |
+| Avg Rainfall             | -0.042985 |Decrease of 4%           |
+| Land price               | -0.017809 |Decrease of 1.7%         |
+| Pesticides               |  0.164797 |Increase of 16%          |
+| Crop Price               |  0.053845 |Increase of 5%           |
+
+The following indices are contributing to an increase in the agricultural output:
+
+ - Population
+ - Amount of Pesticides used
+ - Producer Crop Price
+ 
+The following indices are contributing to a decrease in the agricultural output:
+
+ - Climate Change (Avg Temp & Avg Rainfall)
+ - Agricultural Employees
+ - Land Price 
+
+
+## Correlation Analysis
+
+```{r, echo=TRUE}
+corel <- full_data |>
+  select(-total_yield, -ends_with('.amount'), -ends_with('.price'),-Country,-Year) |>
+  select_if(is.numeric) |>
+  lapply(function(col) cor.test(col,full_data$total_yield,method = 'kendal'))
+```
+
+| Variable                 | P-value   | tau        |
+|--------------------------|-----------|------------|
+| Population               | 2.2e-16   |  0.1485648 |
+| Employees in agriculture | 7.723e-09 | -0.0555603 |
+| Avg Temp                 | 2.2e-16   | -0.2638102 |
+| Avg Rainfall             | 2.2e-16   | -0.1430611 |
+| Land price               | 2.2e-16   |  0.1466927 |
+| Pesticides               | 2.2e-16   |  0.3617226 |
+| Crop Price               | 2.2e-16   |  0.09188591|
+
+
+: Kendal Correlation Test Results
+
+The following indices have a positive monotonic relation with the agricultural output:
+
+ - Population
+ - Amount of Pesticides used
+ - Producer Crop Price
+ - Land price 
+ 
+The following indices have a negative monotonic relation with the agricultural output:
+
+ - Climate Change (Avg Temp & Avg Rainfall)
+ - Agricultural Employees
+
+The results of our correlation analysis seem to show the same as our regression analysis results did. However, the correlation analysis pointed out that there might be a positive relation between the land use and the agricultural output which is the opposite of the result in our regression analysis.
+
+
+# Conclusions
+
+After comparing our results to our literature, we found out that although some of our indices have indeed proved what the literature told us,others have shown a different type of results.
+
+For example: the "labor" index was predicted to have a positive effect on the agricultural output. However, the results of our analysis pointed out that the effect of the labor index may be negative.
+
+On the other hand, the "crop price" index has shown a positive connection to the yield, just as it was expected to be seen according to the literature.
+
+Having said that, we can not fully conclude that our model can predict those connections, since it was a general one. In order to understand the connections better, further research, aimed to be more focused on the connections individually needs to be done, for there may be a connection which we could not tell.
+
+
+# Bibliography
+
+Cruz-Lázaro, L. M., Banda-Ortiz, H., & Vivanco-Palacios, P. I. (2023). Agricultural production and market prices in Mexico. Agro Productividad.
+
+Ge, D., Long, H., Zhang, Y., & Tu, S. (2018). Analysis of the coupled relationship between grain yields and agricultural labor changes in China. Journal of Geographical Sciences, 28, 93-108.‏
+
+Kane, S., Reilly, J., & Tobey, J. (1992). An empirical study of the economic effects of climate change on world agriculture. Climatic change, 21(1), 17-35.‏
+
+Mekuria, W. (2018). The link between agricultural production and population dynamics in Ethiopia: A review. Adv. Plants Agric. Res, 8(4), 348-353.‏
+
+Yan, H., Liu, J., Huang, H. Q., Tao, B., & Cao, M. (2009). Assessing the consequence of land use change on agricultural productivity in China. Global and planetary change, 67(1-2), 13-19.‏
+
+
+# Additional Resources:
+
+- [Our GitHub Repository](https://github.com/erezlid/ADS_Final_Project/tree/main)
+- [FAO](https://www.fao.org/faostat/en/#data)
+- [Kaggle](https://www.kaggle.com/)
+- [Our World in Data](https://ourworldindata.org/)
