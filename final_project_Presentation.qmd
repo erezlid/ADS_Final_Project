@@ -31,10 +31,18 @@ the purpus of the Literature Review was to understand what should we be expectin
 
 ## Literature Review
 
-[Climate change]{.underline} - Unlike some of our indexes, the effects of climate change on agriculture are more complex, since it can impact it in more than one way (kane, et.al, 1992)
+[Climate change]{.underline} - Regarding the climate change index, Unlike some of our indexes, the effects of climate change on agriculture are more complex, since it can impact it in more than one way (kane, et.al, 1992). so, for this project, we decided to fouces on data of pesticides and temperature
 
 [Population]{.underline} - Regarding the size of population and it's connection to agriculture, we have learned that population growth doesn't necessarily mean higher crop amount. in fact, according to a research done in Ethiopia, it was discovered that more rapid population growth led to low per capita income (Mekuria, 2018)
 
+## Literature Review
+
+[employment and labor]{.underline} - as for the labor index, we wanted to see how much does changes in the employment in agriculture affects the agriculture's output. for example, one research done in china showed that in some places where there is more agricultural labor, grain yields are higher as well (Dazhuan et.al, 2018)
+
+[Land use]{.underline} - although Land use might have affect on the agricultur's Yield output, our literature has shown no straight connection between the Land use's change and the agricultures output. the findings\
+confirm that recovery of cropland to forest or grassland at western China did not result in significant loss of agricultural production (Yan et.al, 2009)
+
+[economy]{.underline} - regarding the economy index, we decided to focuse on the crop's price, as it can have both positive and negative affects on the agriculture output. higher products prices encurage producers to increase their production, because high prices mean higher income. on the other hand, lower products prices would decrease production, which would cause the income of the producers to be smaller (cruz-lazaro, et.al, 2023)
 
 ## Data gathering
 
@@ -82,7 +90,9 @@ yield <- read.csv("https://raw.githubusercontent.com/erezlid/ADS_Final_Project/m
 head(yield)
 ```
 
-## Libraries:
+## Libraries
+
+Aside from the usual libraries we used in calss, we decided to use some other libraries, such as "mixtools" and "nortests". Here are the libraries we used for this project:
 
 ```{r echo=TRUE, warning=FALSE}
 library(ggplot2)
@@ -96,9 +106,9 @@ library(nortest)
 library(LaplacesDemon)
 ```
 
-## Data pre processing - Cleaning and orginizing data
+## Data pre processing - Cleaning and organizing data
 
-since the data we revived also contained some unnecessary elements (such as country codes etc...), we removed it. In addition, we organized the data by renaming and arranging the columns:
+since the raw data we gained was unorganized, the first thing we did was to rename the columns so that we can work with it more efficient
 
 ```{r echo=TRUE}
 # Country & Year columns uniformity
@@ -136,6 +146,9 @@ yield <- yield %>%
          yield = Value)
 ```
 
+## Data pre processing - Cleaning and organizing data
+
+after we renamed our columns, we removed some of them since they contained some unnecessary data for this project:
 
 ```{r echo=TRUE}
 # Remove unnecessary columns and arrange each table by Country & Year
@@ -162,6 +175,12 @@ employees <- employees |>
   arrange(Country, Year)
 ```
 
+## Data pre processing - Cleaning and organizing data
+
+Another thing we had to do was to remove some unnecessary notes inside the cells themselves.
+
+for example: in the "price" table, we removed unnecessary notes which where inside the "items" columns:
+
 ```{r echo=TRUE}
 # Change Maize(corn) to Maize only
 price$Item <- sapply(price$Item, function(x) gsub('corn', '', x)) %>%
@@ -184,11 +203,10 @@ land_use <- land_use |>
   arrange(Country, Year)
 ```
 
+## Tiding the data
 
-## Tiding the data:
+After the tables where organized and ready, we standardized the prices to ensure consistency by converting all of the price data to USD. Then we tidy the price data to make it more readable:
 
-First, we standardized the prices to ensure consistency by converting all of the price data to USD.
-Then we tidy the price data to make it more readable.
 ```{r echo=TRUE}
 # get only the countries that use USD
 usd_countries <- price %>%
@@ -215,8 +233,11 @@ price <- price %>%
   )
 ```
 
-at last, we renamed the columns so it'd be more easier to manipulate them.
-``` {r echo=TRUE}
+## Tiding the data
+
+Although we have renamed some of the columns in the pre processing procedure, we decided to once again rename the columns so it'd be more easier to work with them:
+
+```{r echo=TRUE}
 
 # Rename columns:
 
@@ -234,8 +255,8 @@ price <- price %>%
   
 ```
 
+we did the same procedure to the yield table:
 
-In addition to tidying the price table, we also did the same to the yield table.
 ```{r echo=TRUE}
 # Tidy Yield Data:
 yield <- yield %>%
@@ -258,10 +279,10 @@ yield <- yield %>%
 
 ```
 
+## Joins
 
-## Joins:
+In order to analyse the entire data in the most efficent way, we joined all of our tables into one big table:
 
-After tidying the data, cleaning it and processing it we joined the tables into one big table.
 ```{r echo=TRUE}
 # Join tables
 full_data <- yield %>%
@@ -281,6 +302,7 @@ head(full_data)
 ```
 
 After joining the tables, we decided to work with the main crops in our data so we removed the rest from the table.
+
 ```{r echo=TRUE}
 
 # Choose only 5 crops to focus on
@@ -301,9 +323,10 @@ full_data <- full_data %>%
   )
 ```
 
-## Data preperation
+## Filling missing values
 
-To make our data more reasonable and also to deal with missing values, we decided to place 0 at the respective price column when a certain crop's amount is 0. For example: if Maize.amount == 0 then Maize.price should be zero as well by doing that we ensure that when there's no yield for a certain crop the price will be zero.
+To make our data more reasonable and also to deal with missing values, we decided to place 0 at the respective price column when a certain crop's amount is 0. For example: if Maize.amount == 0 then Maize.price should be zero as well. by doing that we ensure that when there's no yield for a certain crop, the price will be zero.
+
 ```{r echo=TRUE}
 setDT(full_data)
 
@@ -325,9 +348,11 @@ for (i in 1:length(amounts)) {
 }
 ```
 
+## Removing unnecessary rows
 
 we also removed countries that has less than 5 observations.
-``` {r echo=TRUE}
+
+```{r echo=TRUE}
 full_data <- full_data %>%
   group_by(Country) %>%
   mutate_at(vars(-group_cols()),~ ifelse(is.na(.), mean(., na.rm=T),.))  %>%
@@ -336,7 +361,6 @@ full_data <- full_data %>%
   select(-n) %>%
   ungroup() %>% setDT()
 ```
-
 
 At the end, we used mean imputation since our goal is to use mean based analysis in order to find which of the indices affect the most on crop yield outcome.
 
@@ -355,10 +379,6 @@ full_data$total_yield <- full_data %>%
   select(all_of(amounts)) %>%
   rowSums(na.rm=T)
 ```
-
-
-# Data Visualization
-- After the data was ready, we started by visualizing it using ggplot.
 
 ## Scatter plots
 
@@ -454,11 +474,9 @@ full_data |>
   )
 ```
 
-
 # Distribution analysis
 
 Prior to our analysis, we also wanted to understand what is the distribution of our response variable. Thus, we created a density plot to present it's distribution. Furthermore, we also tried to use various transformation to transform the distribution into a normal one.
-
 
 ```{r}
 
@@ -500,7 +518,8 @@ yield_hist_log10 <- full_data |>
 
 ## Distribution plot
 
-From the plot, we understood our data could be bi-modal(two modes). Thus, it'll be hard to change it into a normal distribution using monotonic transformation. 
+From the plot, we understood our data could be bi-modal(two modes). Thus, it'll be hard to change it into a normal distribution using monotonic transformation.
+
 ```{r, echo=TRUE}
 full_plot <- yield_hist + yield_hist_log + yield_hist_sqrt +  yield_hist_log10 + plot_annotation(
   title = 'Response Variable Distribution (Yield)',
@@ -513,12 +532,14 @@ full_plot
 ## Bi-modal Test
 
 We used the Laplace demon R package in order to check whether the distribution of our response variable is bi-modal or not. In addition to that, we also calculated the modes of the distribution (bi-modal = two modes).
+
 ```{r, echo=TRUE}
 is.bimodal(full_data$total_yield)
 Modes(full_data$total_yield)
 ```
 
 ## Normality check
+
 ```{r, echo=TRUE}
 ad.test(full_data$total_yield)
 ad.test(log(full_data$total_yield + 1))
@@ -527,6 +548,7 @@ ad.test(log(full_data$total_yield + 1, base=10))
 ```
 
 ## QQPlot (another normality check)
+
 ```{r}
 qqplot(qnorm(ppoints(length(full_data$total_yield))),full_data$total_yield, xlab = 'Theoretical Quantials',ylab = 'Observed Yield Quantiles')
 qqline(full_data$total_yield,distribution=qnorm)
@@ -534,7 +556,7 @@ qqline(full_data$total_yield,distribution=qnorm)
 
 When doing an analysis to a bi-modal distributed response variable one needs to try to separate the data into clusters and conduct his analysis on each of the clusters. However, one can also use a mixed model in order to understand the distribution of each cluster.
 
-## Mixed Model 
+## Mixed Model
 
 ```{r, echo=TRUE}
 ggm.model <- normalmixEM(full_data$total_yield,k=2)
@@ -553,18 +575,19 @@ full_data %>%
   stat_function(fun = function(x) dnorm(x,mean=mu[1],sd=sigma[1]),color='red') +
   labs(x='Yield', title = 'Gaussian Mixed Model Fit')
 ```
+
 Though we can't really determine if the data distribute normally or not, we can say that each cluster is approaching to a normal distribution. Thus, we can use simple linear regression.
 
-
 # Data Analysis
-- Regression analysis using simple linear regression
-- Correlation analysis using Kendall
-- Chi-squared test for independence between country and total_yield
 
+-   Regression analysis using simple linear regression
+-   Correlation analysis using Kendall
+-   Chi-squared test for independence between country and total_yield
 
 ## Regression Analysis
 
 ### Model 1
+
 ```{r,echo=TRUE}
 lm.data <- full_data %>%
   select(-ends_with('.amount'),-ends_with('.price'),-Country) 
@@ -576,6 +599,7 @@ model.1 %>% summary()
 ```
 
 ### Model 2
+
 ```{r, echo=TRUE}
 model.2 <- lm.data %>%
   lm(total_yield~pop_amount*number_employed_agri+avg_temp*avg_rainfall+land_price+pesticides_amount+avg_crop_price, data=.)
@@ -584,14 +608,13 @@ model.2 %>% summary()
 ```
 
 ### Model 3
+
 ```{r,echo=TRUE}
 model.3 <- lm.data %>%
   lm(total_yield~pop_amount*number_employed_agri+avg_temp*avg_rainfall+land_price+pesticides_amount+avg_crop_price + pop_amount*land_price, data=.)
 
 model.3 %>% summary()
 ```
-
-
 
 ## Correlation Analysis
 
@@ -602,19 +625,18 @@ corel <- full_data |>
   lapply(function(col) cor.test(col,full_data$total_yield,method = 'kendal'))
 ```
 
-| Variable                 | P-value  | tau        | 
-| ------------------------ |----------|------------|
-| Population               | 2.2e-16  |  0.1485648 |
-| Employees in agriculture | 7.723e-09| -0.0555603 |
-| Avg Temp                 | 2.2e-16  | -0.2638102 |
-| Avg Rainfall             | 2.2e-16  | -0.1430611 |
-| Land price               | 2.2e-16  |  0.1466927 |
-| Pesticides               | 2.2e-16  |  0.3617226 |
-| Crop Price               | 2.2e-16  | 0.09188591 |
-| Year                     | 2.2e-16  |  0.1529316 |
+| Variable                 | P-value   | tau        |
+|--------------------------|-----------|------------|
+| Population               | 2.2e-16   | 0.1485648  |
+| Employees in agriculture | 7.723e-09 | -0.0555603 |
+| Avg Temp                 | 2.2e-16   | -0.2638102 |
+| Avg Rainfall             | 2.2e-16   | -0.1430611 |
+| Land price               | 2.2e-16   | 0.1466927  |
+| Pesticides               | 2.2e-16   | 0.3617226  |
+| Crop Price               | 2.2e-16   | 0.09188591 |
+| Year                     | 2.2e-16   | 0.1529316  |
 
 : Kendal Correlation Test Results
-
 
 ## Chisquared - Test
 
@@ -624,4 +646,3 @@ full_data |>
   select(Country, total_yield) |>
   with(chisq.test(table(Country, total_yield)))
 ```
-
