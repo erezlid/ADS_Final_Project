@@ -474,7 +474,7 @@ full_data |>
   )
 ```
 
-# Distribution analysis
+## Distribution analysis
 
 Prior to our analysis, we also wanted to understand what is the distribution of our response variable. Thus, we created a density plot to present it's distribution. Furthermore, we also tried to use various transformation to transform the distribution into a normal one.
 
@@ -538,7 +538,9 @@ is.bimodal(full_data$total_yield)
 Modes(full_data$total_yield)
 ```
 
-## Normality check
+## Normality check - AD test
+
+As with most projects and researches, we also checked whether the data has a normality distribution or not. We used the ad test, the QQplot, and the mixed model
 
 ```{r, echo=TRUE}
 ad.test(full_data$total_yield)
@@ -547,7 +549,7 @@ ad.test(sqrt(full_data$total_yield))
 ad.test(log(full_data$total_yield + 1, base=10))
 ```
 
-## QQPlot (another normality check)
+## Normality check - QQPlot 
 
 ```{r}
 qqplot(qnorm(ppoints(length(full_data$total_yield))),full_data$total_yield, xlab = 'Theoretical Quantials',ylab = 'Observed Yield Quantiles')
@@ -556,7 +558,7 @@ qqline(full_data$total_yield,distribution=qnorm)
 
 When doing an analysis to a bi-modal distributed response variable one needs to try to separate the data into clusters and conduct his analysis on each of the clusters. However, one can also use a mixed model in order to understand the distribution of each cluster.
 
-## Mixed Model
+## Normality check -Mixed Model
 
 ```{r, echo=TRUE}
 ggm.model <- normalmixEM(full_data$total_yield,k=2)
@@ -578,13 +580,15 @@ full_data %>%
 
 Though we can't really determine if the data distribute normally or not, we can say that each cluster is approaching to a normal distribution. Thus, we can use simple linear regression.
 
-# Data Analysis
+## Data analysis
 
 -   Regression analysis using simple linear regression
 -   Correlation analysis using Kendall
 -   Chi-squared test for independence between country and total_yield
 
 ## Regression Analysis
+
+for this project, we desided to use 3 different types of regretion models. while they all used linear regertion, each one had it's own method of calculation.
 
 ### Model 1
 
@@ -646,3 +650,13 @@ full_data |>
   select(Country, total_yield) |>
   with(chisq.test(table(Country, total_yield)))
 ```
+
+## Conclusions
+
+After comparing our results to our literature, we found out that although some of our indexes have indeed proved what the literature told us,others have shown a different type of results.
+
+For example: the "labor" index was predicted to have a postivie affect on the yield's output. However,our modle has shown a negative connection, both in the correlation and in the regertion modles.
+
+On the other hand, the "crop price" index has shown a positive connection to the yield, just as itwas expected to be seen from the literature.
+
+Having said that, we can't fully conclude that our molde can predict those connections, since it was mostly general one. In order to understand the connections better, further reaserch, aimed to be more focused on the connections individually, needs to be done, for there may be a connection which we could not tell
