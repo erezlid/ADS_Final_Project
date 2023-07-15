@@ -7,11 +7,11 @@
 <link href="index_files/libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="index_files/libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="index_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
-<link href="index_files/libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+<link href="index_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.3.296">
 
   <meta name="author" content="Amir Boger &amp; Lidor Erez">
-  <title>ADS Final Project - What affect agriculture</title>
+  <title>Key Factors effects on Agricultural Yield</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -56,46 +56,47 @@
         -khtml-user-select: none; -moz-user-select: none;
         -ms-user-select: none; user-select: none;
         padding: 0 4px; width: 4em;
+        color: #aaaaaa;
       }
-    pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
     div.sourceCode
-      { color: #f8f8f2;  }
+      { color: #003b4f; background-color: #f1f3f5; }
     @media screen {
     pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
     }
-    code span { color: #f8f8f2; } /* Normal */
-    code span.al { color: #f07178; background-color: #2a0f15; font-weight: bold; } /* Alert */
-    code span.an { color: #d4d0ab; } /* Annotation */
-    code span.at { color: #00e0e0; } /* Attribute */
-    code span.bn { color: #d4d0ab; } /* BaseN */
-    code span.bu { color: #abe338; } /* BuiltIn */
-    code span.cf { color: #ffa07a; font-weight: bold; } /* ControlFlow */
-    code span.ch { color: #abe338; } /* Char */
-    code span.cn { color: #ffd700; } /* Constant */
-    code span.co { color: #f8f8f2; font-style: italic; } /* Comment */
-    code span.cv { color: #ffd700; } /* CommentVar */
-    code span.do { color: #f8f8f2; } /* Documentation */
-    code span.dt { color: #ffa07a; } /* DataType */
-    code span.dv { color: #d4d0ab; } /* DecVal */
-    code span.er { color: #f07178; text-decoration: underline; } /* Error */
-    code span.ex { color: #00e0e0; font-weight: bold; } /* Extension */
-    code span.fl { color: #d4d0ab; } /* Float */
-    code span.fu { color: #ffa07a; } /* Function */
-    code span.im { color: #abe338; } /* Import */
-    code span.in { color: #d4d0ab; } /* Information */
-    code span.kw { color: #ffa07a; font-weight: bold; } /* Keyword */
-    code span.op { color: #ffa07a; } /* Operator */
-    code span.ot { color: #00e0e0; } /* Other */
-    code span.pp { color: #dcc6e0; } /* Preprocessor */
-    code span.re { color: #00e0e0; background-color: #f8f8f2; } /* RegionMarker */
-    code span.sc { color: #abe338; } /* SpecialChar */
-    code span.ss { color: #abe338; } /* SpecialString */
-    code span.st { color: #abe338; } /* String */
-    code span.va { color: #00e0e0; } /* Variable */
-    code span.vs { color: #abe338; } /* VerbatimString */
-    code span.wa { color: #dcc6e0; } /* Warning */
+    code span { color: #003b4f; } /* Normal */
+    code span.al { color: #ad0000; } /* Alert */
+    code span.an { color: #5e5e5e; } /* Annotation */
+    code span.at { color: #657422; } /* Attribute */
+    code span.bn { color: #ad0000; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #003b4f; } /* ControlFlow */
+    code span.ch { color: #20794d; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #5e5e5e; } /* Comment */
+    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+    code span.dt { color: #ad0000; } /* DataType */
+    code span.dv { color: #ad0000; } /* DecVal */
+    code span.er { color: #ad0000; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #ad0000; } /* Float */
+    code span.fu { color: #4758ab; } /* Function */
+    code span.im { color: #00769e; } /* Import */
+    code span.in { color: #5e5e5e; } /* Information */
+    code span.kw { color: #003b4f; } /* Keyword */
+    code span.op { color: #5e5e5e; } /* Operator */
+    code span.ot { color: #003b4f; } /* Other */
+    code span.pp { color: #ad0000; } /* Preprocessor */
+    code span.sc { color: #5e5e5e; } /* SpecialChar */
+    code span.ss { color: #20794d; } /* SpecialString */
+    code span.st { color: #20794d; } /* String */
+    code span.va { color: #111111; } /* Variable */
+    code span.vs { color: #20794d; } /* VerbatimString */
+    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
   <link rel="stylesheet" href="index_files/libs/revealjs/dist/theme/quarto.css" id="theme">
+  <link rel="stylesheet" href="custom.css">
   <link href="index_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="index_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="index_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -386,12 +387,12 @@
     }
   </style>
 </head>
-<body class="quarto-dark">
+<body class="quarto-light">
   <div class="reveal">
     <div class="slides">
 
 <section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">ADS Final Project - What affect agriculture</h1>
+  <h1 class="title">Key Factors effects on Agricultural Yield</h1>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -439,39 +440,55 @@ Amir Boger &amp; Lidor Erez
 <li><p>FAO (Food and agriculture organization of the united nations)</p></li>
 </ul>
 </section>
-<section id="data-pre-processing---first-inspection" class="slide level2">
-<h2>Data pre processing - first inspection</h2>
+<section id="libraries" class="slide level2">
+<h2>Libraries</h2>
+<p>Aside from the usual libraries we used in class, we decided to use some other libraries, such as “mix tools” and “nortests”. Here are the libraries we used for this project:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="fu">library</span>(data.table)</span>
+<span id="cb1-4"><a href="#cb1-4"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-5"><a href="#cb1-5"></a><span class="fu">library</span>(patchwork)</span>
+<span id="cb1-6"><a href="#cb1-6"></a><span class="fu">library</span>(qqplotr)</span>
+<span id="cb1-7"><a href="#cb1-7"></a><span class="fu">library</span>(mixtools)</span>
+<span id="cb1-8"><a href="#cb1-8"></a><span class="fu">library</span>(nortest)</span>
+<span id="cb1-9"><a href="#cb1-9"></a><span class="fu">library</span>(LaplacesDemon)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="first-inspection-of-the-data" class="slide level2">
+<h2>First Inspection of the Data</h2>
 <p>Firstly, we loaded our raw data and inspected it.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="co"># Employees data</span></span>
-<span id="cb1-2"><a href="#cb1-2"></a>employees <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"https://raw.githubusercontent.com/erezlid/ADS_Final_Project/main/Data/Agriculture%20Employees%20/employ.csv"</span>)</span>
-<span id="cb1-3"><a href="#cb1-3"></a></span>
-<span id="cb1-4"><a href="#cb1-4"></a><span class="co"># Climate change data</span></span>
-<span id="cb1-5"><a href="#cb1-5"></a></span>
-<span id="cb1-6"><a href="#cb1-6"></a>rainfall <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"https://raw.githubusercontent.com/erezlid/ADS_Final_Project/main/Data/Climate%20Change/rainfall.csv"</span>)</span>
-<span id="cb1-7"><a href="#cb1-7"></a></span>
-<span id="cb1-8"><a href="#cb1-8"></a>temp <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"https://raw.githubusercontent.com/erezlid/ADS_Final_Project/main/Data/Climate%20Change/temp.csv"</span>)</span>
-<span id="cb1-9"><a href="#cb1-9"></a></span>
-<span id="cb1-10"><a href="#cb1-10"></a><span class="co"># Pesticides data</span></span>
-<span id="cb1-11"><a href="#cb1-11"></a></span>
-<span id="cb1-12"><a href="#cb1-12"></a>pesticides <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"https://raw.githubusercontent.com/erezlid/ADS_Final_Project/main/Data/Climate%20Change/pesticides.csv"</span>)</span>
-<span id="cb1-13"><a href="#cb1-13"></a></span>
-<span id="cb1-14"><a href="#cb1-14"></a></span>
-<span id="cb1-15"><a href="#cb1-15"></a><span class="co"># Land Use data</span></span>
-<span id="cb1-16"><a href="#cb1-16"></a></span>
-<span id="cb1-17"><a href="#cb1-17"></a>land_use <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"https://raw.githubusercontent.com/erezlid/ADS_Final_Project/main/Data/Land%20Use%20/fao_data_land_data.csv"</span>)</span>
-<span id="cb1-18"><a href="#cb1-18"></a></span>
-<span id="cb1-19"><a href="#cb1-19"></a><span class="co"># Population data</span></span>
-<span id="cb1-20"><a href="#cb1-20"></a>pop <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"https://raw.githubusercontent.com/erezlid/ADS_Final_Project/main/Data/Population/population_by_country.csv"</span>)</span>
-<span id="cb1-21"><a href="#cb1-21"></a></span>
-<span id="cb1-22"><a href="#cb1-22"></a></span>
-<span id="cb1-23"><a href="#cb1-23"></a><span class="co"># Producer price data</span></span>
-<span id="cb1-24"><a href="#cb1-24"></a>price <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"https://raw.githubusercontent.com/erezlid/ADS_Final_Project/main/Data/Producer%20Price/crop_prices.csv"</span>)</span>
-<span id="cb1-25"><a href="#cb1-25"></a></span>
-<span id="cb1-26"><a href="#cb1-26"></a><span class="co"># Agriculture yield data</span></span>
-<span id="cb1-27"><a href="#cb1-27"></a>yield <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"https://raw.githubusercontent.com/erezlid/ADS_Final_Project/main/Data/Yield/yield.csv"</span>)</span>
-<span id="cb1-28"><a href="#cb1-28"></a></span>
-<span id="cb1-29"><a href="#cb1-29"></a><span class="fu">head</span>(yield)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="co"># Employees data</span></span>
+<span id="cb2-2"><a href="#cb2-2"></a>employees <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"https://raw.githubusercontent.com/erezlid/ADS_Final_Project/main/Data/Agriculture%20Employees%20/employ.csv"</span>)</span>
+<span id="cb2-3"><a href="#cb2-3"></a></span>
+<span id="cb2-4"><a href="#cb2-4"></a><span class="co"># Climate change data</span></span>
+<span id="cb2-5"><a href="#cb2-5"></a></span>
+<span id="cb2-6"><a href="#cb2-6"></a>rainfall <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"https://raw.githubusercontent.com/erezlid/ADS_Final_Project/main/Data/Climate%20Change/rainfall.csv"</span>)</span>
+<span id="cb2-7"><a href="#cb2-7"></a></span>
+<span id="cb2-8"><a href="#cb2-8"></a>temp <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"https://raw.githubusercontent.com/erezlid/ADS_Final_Project/main/Data/Climate%20Change/temp.csv"</span>)</span>
+<span id="cb2-9"><a href="#cb2-9"></a></span>
+<span id="cb2-10"><a href="#cb2-10"></a><span class="co"># Pesticides data</span></span>
+<span id="cb2-11"><a href="#cb2-11"></a></span>
+<span id="cb2-12"><a href="#cb2-12"></a>pesticides <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"https://raw.githubusercontent.com/erezlid/ADS_Final_Project/main/Data/Climate%20Change/pesticides.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="co"># Land Use data</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a></span>
+<span id="cb3-3"><a href="#cb3-3"></a>land_use <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"https://raw.githubusercontent.com/erezlid/ADS_Final_Project/main/Data/Land%20Use%20/fao_data_land_data.csv"</span>)</span>
+<span id="cb3-4"><a href="#cb3-4"></a></span>
+<span id="cb3-5"><a href="#cb3-5"></a><span class="co"># Population data</span></span>
+<span id="cb3-6"><a href="#cb3-6"></a>pop <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"https://raw.githubusercontent.com/erezlid/ADS_Final_Project/main/Data/Population/population_by_country.csv"</span>)</span>
+<span id="cb3-7"><a href="#cb3-7"></a></span>
+<span id="cb3-8"><a href="#cb3-8"></a></span>
+<span id="cb3-9"><a href="#cb3-9"></a><span class="co"># Producer price data</span></span>
+<span id="cb3-10"><a href="#cb3-10"></a>price <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"https://raw.githubusercontent.com/erezlid/ADS_Final_Project/main/Data/Producer%20Price/crop_prices.csv"</span>)</span>
+<span id="cb3-11"><a href="#cb3-11"></a></span>
+<span id="cb3-12"><a href="#cb3-12"></a><span class="co"># Agriculture yield data</span></span>
+<span id="cb3-13"><a href="#cb3-13"></a>yield <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"https://raw.githubusercontent.com/erezlid/ADS_Final_Project/main/Data/Yield/yield.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="fu">head</span>(yield)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  Domain.Code Domain Area.Code        Area Element.Code Element Item.Code  Item
 1          QC  Crops         2 Afghanistan         5419   Yield        56 Maize
@@ -488,21 +505,6 @@ Amir Boger &amp; Lidor Erez
 5      1965 1965 hg/ha 14400
 6      1966 1966 hg/ha 14400</code></pre>
 </div>
-</div>
-</section>
-<section id="libraries" class="slide level2">
-<h2>Libraries</h2>
-<p>Aside from the usual libraries we used in class, we decided to use some other libraries, such as “mix tools” and “nortests”. Here are the libraries we used for this project:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb3-2"><a href="#cb3-2"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb3-3"><a href="#cb3-3"></a><span class="fu">library</span>(data.table)</span>
-<span id="cb3-4"><a href="#cb3-4"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb3-5"><a href="#cb3-5"></a><span class="fu">library</span>(patchwork)</span>
-<span id="cb3-6"><a href="#cb3-6"></a><span class="fu">library</span>(qqplotr)</span>
-<span id="cb3-7"><a href="#cb3-7"></a><span class="fu">library</span>(mixtools)</span>
-<span id="cb3-8"><a href="#cb3-8"></a><span class="fu">library</span>(nortest)</span>
-<span id="cb3-9"><a href="#cb3-9"></a><span class="fu">library</span>(LaplacesDemon)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section>
@@ -523,39 +525,39 @@ Amir Boger &amp; Lidor Erez
 <h2>Columns uniformity</h2>
 <p>We encountered different naming for the country and year columns across different tables. Our initial priority was to ensure uniformity of these columns so the first thing we did was renaming them.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="co"># Country &amp; Year columns uniformity</span></span>
-<span id="cb4-2"><a href="#cb4-2"></a>employees <span class="ot">&lt;-</span> employees <span class="sc">%&gt;%</span></span>
-<span id="cb4-3"><a href="#cb4-3"></a>  <span class="fu">rename</span>(<span class="at">Country =</span> Entity)</span>
-<span id="cb4-4"><a href="#cb4-4"></a></span>
-<span id="cb4-5"><a href="#cb4-5"></a>land_use <span class="ot">&lt;-</span> land_use <span class="sc">%&gt;%</span></span>
-<span id="cb4-6"><a href="#cb4-6"></a>  <span class="fu">rename</span>(<span class="at">Country =</span> country_or_area,</span>
-<span id="cb4-7"><a href="#cb4-7"></a>         <span class="at">Year =</span> year,</span>
-<span id="cb4-8"><a href="#cb4-8"></a>         <span class="at">land_price =</span> value)</span>
-<span id="cb4-9"><a href="#cb4-9"></a></span>
-<span id="cb4-10"><a href="#cb4-10"></a>pesticides <span class="ot">&lt;-</span> pesticides <span class="sc">%&gt;%</span></span>
-<span id="cb4-11"><a href="#cb4-11"></a>  <span class="fu">rename</span>(<span class="at">Country =</span> Area,</span>
-<span id="cb4-12"><a href="#cb4-12"></a>         <span class="at">pesticides_amount =</span> Value)</span>
-<span id="cb4-13"><a href="#cb4-13"></a></span>
-<span id="cb4-14"><a href="#cb4-14"></a>pop <span class="ot">&lt;-</span> pop <span class="sc">%&gt;%</span></span>
-<span id="cb4-15"><a href="#cb4-15"></a>  <span class="fu">rename</span>(<span class="at">Country =</span> country_name,</span>
-<span id="cb4-16"><a href="#cb4-16"></a>         <span class="at">Year =</span> year,</span>
-<span id="cb4-17"><a href="#cb4-17"></a>         <span class="at">pop_amount =</span> value)</span>
-<span id="cb4-18"><a href="#cb4-18"></a></span>
-<span id="cb4-19"><a href="#cb4-19"></a>price <span class="ot">&lt;-</span> price <span class="sc">%&gt;%</span></span>
-<span id="cb4-20"><a href="#cb4-20"></a>  <span class="fu">rename</span>(<span class="at">Country =</span> Area,</span>
-<span id="cb4-21"><a href="#cb4-21"></a>         <span class="at">crop_price =</span> Value)</span>
-<span id="cb4-22"><a href="#cb4-22"></a></span>
-<span id="cb4-23"><a href="#cb4-23"></a>rainfall <span class="ot">&lt;-</span> rainfall <span class="sc">%&gt;%</span></span>
-<span id="cb4-24"><a href="#cb4-24"></a>  <span class="fu">rename</span>(<span class="at">Country =</span> Area,</span>
-<span id="cb4-25"><a href="#cb4-25"></a>         <span class="at">avg_rainfall =</span> average_rain_fall_mm_per_year)</span>
-<span id="cb4-26"><a href="#cb4-26"></a></span>
-<span id="cb4-27"><a href="#cb4-27"></a>temp <span class="ot">&lt;-</span> temp <span class="sc">%&gt;%</span></span>
-<span id="cb4-28"><a href="#cb4-28"></a>  <span class="fu">rename</span>(<span class="at">Year=</span>year,</span>
-<span id="cb4-29"><a href="#cb4-29"></a>         <span class="at">Country=</span>country)</span>
-<span id="cb4-30"><a href="#cb4-30"></a></span>
-<span id="cb4-31"><a href="#cb4-31"></a>yield <span class="ot">&lt;-</span> yield <span class="sc">%&gt;%</span></span>
-<span id="cb4-32"><a href="#cb4-32"></a>  <span class="fu">rename</span>(<span class="at">Country =</span> Area,</span>
-<span id="cb4-33"><a href="#cb4-33"></a>         <span class="at">yield =</span> Value)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="co"># Country &amp; Year columns uniformity</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a>employees <span class="ot">&lt;-</span> employees <span class="sc">%&gt;%</span></span>
+<span id="cb6-3"><a href="#cb6-3"></a>  <span class="fu">rename</span>(<span class="at">Country =</span> Entity)</span>
+<span id="cb6-4"><a href="#cb6-4"></a></span>
+<span id="cb6-5"><a href="#cb6-5"></a>land_use <span class="ot">&lt;-</span> land_use <span class="sc">%&gt;%</span></span>
+<span id="cb6-6"><a href="#cb6-6"></a>  <span class="fu">rename</span>(<span class="at">Country =</span> country_or_area,</span>
+<span id="cb6-7"><a href="#cb6-7"></a>         <span class="at">Year =</span> year,</span>
+<span id="cb6-8"><a href="#cb6-8"></a>         <span class="at">land_price =</span> value)</span>
+<span id="cb6-9"><a href="#cb6-9"></a></span>
+<span id="cb6-10"><a href="#cb6-10"></a>pesticides <span class="ot">&lt;-</span> pesticides <span class="sc">%&gt;%</span></span>
+<span id="cb6-11"><a href="#cb6-11"></a>  <span class="fu">rename</span>(<span class="at">Country =</span> Area,</span>
+<span id="cb6-12"><a href="#cb6-12"></a>         <span class="at">pesticides_amount =</span> Value)</span>
+<span id="cb6-13"><a href="#cb6-13"></a></span>
+<span id="cb6-14"><a href="#cb6-14"></a>pop <span class="ot">&lt;-</span> pop <span class="sc">%&gt;%</span></span>
+<span id="cb6-15"><a href="#cb6-15"></a>  <span class="fu">rename</span>(<span class="at">Country =</span> country_name,</span>
+<span id="cb6-16"><a href="#cb6-16"></a>         <span class="at">Year =</span> year,</span>
+<span id="cb6-17"><a href="#cb6-17"></a>         <span class="at">pop_amount =</span> value)</span>
+<span id="cb6-18"><a href="#cb6-18"></a></span>
+<span id="cb6-19"><a href="#cb6-19"></a>price <span class="ot">&lt;-</span> price <span class="sc">%&gt;%</span></span>
+<span id="cb6-20"><a href="#cb6-20"></a>  <span class="fu">rename</span>(<span class="at">Country =</span> Area,</span>
+<span id="cb6-21"><a href="#cb6-21"></a>         <span class="at">crop_price =</span> Value)</span>
+<span id="cb6-22"><a href="#cb6-22"></a></span>
+<span id="cb6-23"><a href="#cb6-23"></a>rainfall <span class="ot">&lt;-</span> rainfall <span class="sc">%&gt;%</span></span>
+<span id="cb6-24"><a href="#cb6-24"></a>  <span class="fu">rename</span>(<span class="at">Country =</span> Area,</span>
+<span id="cb6-25"><a href="#cb6-25"></a>         <span class="at">avg_rainfall =</span> average_rain_fall_mm_per_year)</span>
+<span id="cb6-26"><a href="#cb6-26"></a></span>
+<span id="cb6-27"><a href="#cb6-27"></a>temp <span class="ot">&lt;-</span> temp <span class="sc">%&gt;%</span></span>
+<span id="cb6-28"><a href="#cb6-28"></a>  <span class="fu">rename</span>(<span class="at">Year=</span>year,</span>
+<span id="cb6-29"><a href="#cb6-29"></a>         <span class="at">Country=</span>country)</span>
+<span id="cb6-30"><a href="#cb6-30"></a></span>
+<span id="cb6-31"><a href="#cb6-31"></a>yield <span class="ot">&lt;-</span> yield <span class="sc">%&gt;%</span></span>
+<span id="cb6-32"><a href="#cb6-32"></a>  <span class="fu">rename</span>(<span class="at">Country =</span> Area,</span>
+<span id="cb6-33"><a href="#cb6-33"></a>         <span class="at">yield =</span> Value)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="arranging-organizing-data" class="slide level2">
@@ -563,139 +565,143 @@ Amir Boger &amp; Lidor Erez
 <p>Another thing we had to do was to remove some unnecessary notes inside the cells themselves.</p>
 <p>for example: in the “price” table, we removed unnecessary notes which where inside the “items” columns:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="co"># Change Maize(corn) to Maize only</span></span>
-<span id="cb5-2"><a href="#cb5-2"></a>price<span class="sc">$</span>Item <span class="ot">&lt;-</span> <span class="fu">sapply</span>(price<span class="sc">$</span>Item, <span class="cf">function</span>(x) <span class="fu">gsub</span>(<span class="st">'corn'</span>, <span class="st">''</span>, x)) <span class="sc">%&gt;%</span></span>
-<span id="cb5-3"><a href="#cb5-3"></a>  <span class="fu">sapply</span>(., <span class="cf">function</span>(x) <span class="fu">gsub</span>(<span class="st">'</span><span class="sc">\\</span><span class="st">()'</span>, <span class="st">''</span>, x))</span>
-<span id="cb5-4"><a href="#cb5-4"></a></span>
-<span id="cb5-5"><a href="#cb5-5"></a>price <span class="ot">&lt;-</span> price <span class="sc">|&gt;</span></span>
-<span id="cb5-6"><a href="#cb5-6"></a>  <span class="fu">select</span>(<span class="sc">-</span><span class="fu">c</span>(Domain.Code,Domain,Area.Code..M49.,Element.Code,Element,</span>
-<span id="cb5-7"><a href="#cb5-7"></a>            Item.Code..CPC.,Year.Code,Months.Code,Flag, Flag.Description, Months)) <span class="sc">|&gt;</span></span>
-<span id="cb5-8"><a href="#cb5-8"></a>  <span class="fu">arrange</span>(Country, Year,Item)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="co"># Change Maize(corn) to Maize only</span></span>
+<span id="cb7-2"><a href="#cb7-2"></a>price<span class="sc">$</span>Item <span class="ot">&lt;-</span> <span class="fu">sapply</span>(price<span class="sc">$</span>Item, <span class="cf">function</span>(x) <span class="fu">gsub</span>(<span class="st">'corn'</span>, <span class="st">''</span>, x)) <span class="sc">%&gt;%</span></span>
+<span id="cb7-3"><a href="#cb7-3"></a>  <span class="fu">sapply</span>(., <span class="cf">function</span>(x) <span class="fu">gsub</span>(<span class="st">'</span><span class="sc">\\</span><span class="st">()'</span>, <span class="st">''</span>, x))</span>
+<span id="cb7-4"><a href="#cb7-4"></a></span>
+<span id="cb7-5"><a href="#cb7-5"></a>price <span class="ot">&lt;-</span> price <span class="sc">|&gt;</span></span>
+<span id="cb7-6"><a href="#cb7-6"></a>  <span class="fu">select</span>(<span class="sc">-</span><span class="fu">c</span>(Domain.Code,Domain,Area.Code..M49.,Element.Code,Element,</span>
+<span id="cb7-7"><a href="#cb7-7"></a>            Item.Code..CPC.,Year.Code,Months.Code,Flag, Flag.Description, Months)) <span class="sc">|&gt;</span></span>
+<span id="cb7-8"><a href="#cb7-8"></a>  <span class="fu">arrange</span>(Country, Year,Item)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="co"># Remove plus sign from country name</span></span>
-<span id="cb6-2"><a href="#cb6-2"></a>land_use<span class="sc">$</span>Country <span class="ot">&lt;-</span> <span class="fu">sapply</span>(land_use<span class="sc">$</span>Country, <span class="cf">function</span>(x) <span class="fu">gsub</span>(<span class="st">' </span><span class="sc">\\</span><span class="st">+'</span>, <span class="st">''</span>, x))</span>
-<span id="cb6-3"><a href="#cb6-3"></a></span>
-<span id="cb6-4"><a href="#cb6-4"></a></span>
-<span id="cb6-5"><a href="#cb6-5"></a>land_use <span class="ot">&lt;-</span> land_use <span class="sc">|&gt;</span></span>
-<span id="cb6-6"><a href="#cb6-6"></a>  <span class="fu">filter</span>(category <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"agricultural_area"</span>)) <span class="sc">|&gt;</span></span>
-<span id="cb6-7"><a href="#cb6-7"></a>  <span class="fu">select</span>(<span class="sc">-</span><span class="fu">c</span>(category,unit,element,element_code, value_footnotes)) <span class="sc">|&gt;</span></span>
-<span id="cb6-8"><a href="#cb6-8"></a>  <span class="fu">arrange</span>(Country, Year)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="co"># Remove plus sign from country name</span></span>
+<span id="cb8-2"><a href="#cb8-2"></a>land_use<span class="sc">$</span>Country <span class="ot">&lt;-</span> <span class="fu">sapply</span>(land_use<span class="sc">$</span>Country, <span class="cf">function</span>(x) <span class="fu">gsub</span>(<span class="st">' </span><span class="sc">\\</span><span class="st">+'</span>, <span class="st">''</span>, x))</span>
+<span id="cb8-3"><a href="#cb8-3"></a></span>
+<span id="cb8-4"><a href="#cb8-4"></a></span>
+<span id="cb8-5"><a href="#cb8-5"></a>land_use <span class="ot">&lt;-</span> land_use <span class="sc">|&gt;</span></span>
+<span id="cb8-6"><a href="#cb8-6"></a>  <span class="fu">filter</span>(category <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"agricultural_area"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb8-7"><a href="#cb8-7"></a>  <span class="fu">select</span>(<span class="sc">-</span><span class="fu">c</span>(category,unit,element,element_code, value_footnotes)) <span class="sc">|&gt;</span></span>
+<span id="cb8-8"><a href="#cb8-8"></a>  <span class="fu">arrange</span>(Country, Year)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>We also encountered unnecessary columns such as: Unit, Item.code, Year.Code etc,which won’t contribute to our analysis. Therefore, we removed the unnecessary columns from each table.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="co"># Remove unnecessary columns and arrange each table by Country &amp; Year</span></span>
-<span id="cb7-2"><a href="#cb7-2"></a>pesticides <span class="ot">&lt;-</span> pesticides <span class="sc">|&gt;</span></span>
-<span id="cb7-3"><a href="#cb7-3"></a>  <span class="fu">select</span>(<span class="sc">-</span><span class="fu">c</span>(Unit,Element, Domain,Item)) <span class="sc">|&gt;</span></span>
-<span id="cb7-4"><a href="#cb7-4"></a>  <span class="fu">arrange</span>(Country, Year)</span>
-<span id="cb7-5"><a href="#cb7-5"></a></span>
-<span id="cb7-6"><a href="#cb7-6"></a>yield <span class="ot">&lt;-</span> yield <span class="sc">|&gt;</span></span>
-<span id="cb7-7"><a href="#cb7-7"></a>  <span class="fu">select</span>(<span class="sc">-</span><span class="fu">c</span>(Domain, Domain.Code,Area.Code,Element.Code,</span>
-<span id="cb7-8"><a href="#cb7-8"></a>            Element,Item.Code,Year.Code,Unit)) <span class="sc">|&gt;</span></span>
-<span id="cb7-9"><a href="#cb7-9"></a>  <span class="fu">arrange</span>(Country, Year,Item)</span>
-<span id="cb7-10"><a href="#cb7-10"></a></span>
-<span id="cb7-11"><a href="#cb7-11"></a>pop <span class="ot">&lt;-</span> pop <span class="sc">|&gt;</span></span>
-<span id="cb7-12"><a href="#cb7-12"></a>  <span class="fu">select</span>(<span class="sc">-</span>country_code) <span class="sc">|&gt;</span></span>
-<span id="cb7-13"><a href="#cb7-13"></a>  <span class="fu">arrange</span>(Country, Year)</span>
-<span id="cb7-14"><a href="#cb7-14"></a></span>
-<span id="cb7-15"><a href="#cb7-15"></a>rainfall <span class="ot">&lt;-</span> rainfall <span class="sc">|&gt;</span></span>
-<span id="cb7-16"><a href="#cb7-16"></a>  <span class="fu">arrange</span>(Country, Year)</span>
-<span id="cb7-17"><a href="#cb7-17"></a></span>
-<span id="cb7-18"><a href="#cb7-18"></a>temp <span class="ot">&lt;-</span> temp <span class="sc">|&gt;</span></span>
-<span id="cb7-19"><a href="#cb7-19"></a>  <span class="fu">arrange</span>(Country, Year)</span>
-<span id="cb7-20"><a href="#cb7-20"></a></span>
-<span id="cb7-21"><a href="#cb7-21"></a>employees <span class="ot">&lt;-</span> employees <span class="sc">|&gt;</span></span>
-<span id="cb7-22"><a href="#cb7-22"></a>  <span class="fu">arrange</span>(Country, Year)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="co"># Remove unnecessary columns and arrange each table by Country &amp; Year</span></span>
+<span id="cb9-2"><a href="#cb9-2"></a>pesticides <span class="ot">&lt;-</span> pesticides <span class="sc">|&gt;</span></span>
+<span id="cb9-3"><a href="#cb9-3"></a>  <span class="fu">select</span>(<span class="sc">-</span><span class="fu">c</span>(Unit,Element, Domain,Item)) <span class="sc">|&gt;</span></span>
+<span id="cb9-4"><a href="#cb9-4"></a>  <span class="fu">arrange</span>(Country, Year)</span>
+<span id="cb9-5"><a href="#cb9-5"></a></span>
+<span id="cb9-6"><a href="#cb9-6"></a>yield <span class="ot">&lt;-</span> yield <span class="sc">|&gt;</span></span>
+<span id="cb9-7"><a href="#cb9-7"></a>  <span class="fu">select</span>(<span class="sc">-</span><span class="fu">c</span>(Domain, Domain.Code,Area.Code,Element.Code,</span>
+<span id="cb9-8"><a href="#cb9-8"></a>            Element,Item.Code,Year.Code,Unit)) <span class="sc">|&gt;</span></span>
+<span id="cb9-9"><a href="#cb9-9"></a>  <span class="fu">arrange</span>(Country, Year,Item)</span>
+<span id="cb9-10"><a href="#cb9-10"></a></span>
+<span id="cb9-11"><a href="#cb9-11"></a>pop <span class="ot">&lt;-</span> pop <span class="sc">|&gt;</span></span>
+<span id="cb9-12"><a href="#cb9-12"></a>  <span class="fu">select</span>(<span class="sc">-</span>country_code) <span class="sc">|&gt;</span></span>
+<span id="cb9-13"><a href="#cb9-13"></a>  <span class="fu">arrange</span>(Country, Year)</span>
+<span id="cb9-14"><a href="#cb9-14"></a></span>
+<span id="cb9-15"><a href="#cb9-15"></a>rainfall <span class="ot">&lt;-</span> rainfall <span class="sc">|&gt;</span></span>
+<span id="cb9-16"><a href="#cb9-16"></a>  <span class="fu">arrange</span>(Country, Year)</span>
+<span id="cb9-17"><a href="#cb9-17"></a></span>
+<span id="cb9-18"><a href="#cb9-18"></a>temp <span class="ot">&lt;-</span> temp <span class="sc">|&gt;</span></span>
+<span id="cb9-19"><a href="#cb9-19"></a>  <span class="fu">arrange</span>(Country, Year)</span>
+<span id="cb9-20"><a href="#cb9-20"></a></span>
+<span id="cb9-21"><a href="#cb9-21"></a>employees <span class="ot">&lt;-</span> employees <span class="sc">|&gt;</span></span>
+<span id="cb9-22"><a href="#cb9-22"></a>  <span class="fu">arrange</span>(Country, Year)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="tidying-the-data" class="slide level2">
 <h2>Tidying the data</h2>
 <p>After the tables where organized and ready, we standardized the prices to ensure consistency by converting all of the price data to USD. Then we tidy the price data to make it more readable:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="co"># get only the countries that use USD</span></span>
-<span id="cb8-2"><a href="#cb8-2"></a>usd_countries <span class="ot">&lt;-</span> price <span class="sc">%&gt;%</span></span>
-<span id="cb8-3"><a href="#cb8-3"></a>  <span class="fu">filter</span>(Unit <span class="sc">==</span> <span class="st">'USD'</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb8-4"><a href="#cb8-4"></a>  <span class="fu">select</span>(Country) <span class="sc">%&gt;%</span> <span class="fu">distinct</span>()</span>
-<span id="cb8-5"><a href="#cb8-5"></a></span>
-<span id="cb8-6"><a href="#cb8-6"></a><span class="co"># Only SLC countries</span></span>
-<span id="cb8-7"><a href="#cb8-7"></a>slc_countries_data <span class="ot">&lt;-</span> price <span class="sc">%&gt;%</span></span>
-<span id="cb8-8"><a href="#cb8-8"></a>  <span class="fu">filter</span>(Unit <span class="sc">!=</span> <span class="st">'LCU'</span> <span class="sc">&amp;</span> Unit <span class="sc">!=</span> <span class="st">'USD'</span>) <span class="sc">%&gt;%</span> <span class="fu">filter</span>(<span class="sc">!</span>(Country <span class="sc">%in%</span> usd_countries<span class="sc">$</span>Country))</span>
-<span id="cb8-9"><a href="#cb8-9"></a></span>
-<span id="cb8-10"><a href="#cb8-10"></a>price <span class="ot">&lt;-</span> price <span class="sc">%&gt;%</span></span>
-<span id="cb8-11"><a href="#cb8-11"></a>  <span class="fu">filter</span>(Unit <span class="sc">!=</span> <span class="st">'LCU'</span>) <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Unit <span class="sc">!=</span> <span class="st">'SLC'</span>) <span class="sc">%&gt;%</span> <span class="fu">bind_rows</span>(slc_countries_data) <span class="sc">%&gt;%</span></span>
-<span id="cb8-12"><a href="#cb8-12"></a>  <span class="fu">arrange</span>(Country, Year) <span class="sc">%&gt;%</span></span>
-<span id="cb8-13"><a href="#cb8-13"></a>  <span class="fu">mutate</span>(<span class="at">crop_price=</span></span>
-<span id="cb8-14"><a href="#cb8-14"></a>    <span class="fu">case_when</span>(</span>
-<span id="cb8-15"><a href="#cb8-15"></a>      Unit <span class="sc">==</span> <span class="st">'SLC'</span> <span class="sc">~</span> crop_price <span class="sc">*</span> <span class="fl">0.001537</span>,</span>
-<span id="cb8-16"><a href="#cb8-16"></a>      T <span class="sc">~</span> crop_price</span>
-<span id="cb8-17"><a href="#cb8-17"></a>    )</span>
-<span id="cb8-18"><a href="#cb8-18"></a>  ) <span class="sc">%&gt;%</span></span>
-<span id="cb8-19"><a href="#cb8-19"></a>  <span class="fu">select</span>(<span class="sc">-</span>Unit) <span class="sc">%&gt;%</span></span>
-<span id="cb8-20"><a href="#cb8-20"></a>  <span class="fu">pivot_wider</span>(</span>
-<span id="cb8-21"><a href="#cb8-21"></a>    <span class="at">names_from=</span>Item, </span>
-<span id="cb8-22"><a href="#cb8-22"></a>    <span class="at">values_from =</span> crop_price</span>
-<span id="cb8-23"><a href="#cb8-23"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="co"># get only the countries that use USD</span></span>
+<span id="cb10-2"><a href="#cb10-2"></a>usd_countries <span class="ot">&lt;-</span> price <span class="sc">%&gt;%</span></span>
+<span id="cb10-3"><a href="#cb10-3"></a>  <span class="fu">filter</span>(Unit <span class="sc">==</span> <span class="st">'USD'</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb10-4"><a href="#cb10-4"></a>  <span class="fu">select</span>(Country) <span class="sc">%&gt;%</span> <span class="fu">distinct</span>()</span>
+<span id="cb10-5"><a href="#cb10-5"></a></span>
+<span id="cb10-6"><a href="#cb10-6"></a><span class="co"># Only SLC countries</span></span>
+<span id="cb10-7"><a href="#cb10-7"></a>slc_countries_data <span class="ot">&lt;-</span> price <span class="sc">%&gt;%</span></span>
+<span id="cb10-8"><a href="#cb10-8"></a>  <span class="fu">filter</span>(Unit <span class="sc">!=</span> <span class="st">'LCU'</span> <span class="sc">&amp;</span> Unit <span class="sc">!=</span> <span class="st">'USD'</span>) <span class="sc">%&gt;%</span> <span class="fu">filter</span>(<span class="sc">!</span>(Country <span class="sc">%in%</span> usd_countries<span class="sc">$</span>Country))</span>
+<span id="cb10-9"><a href="#cb10-9"></a></span>
+<span id="cb10-10"><a href="#cb10-10"></a>price <span class="ot">&lt;-</span> price <span class="sc">%&gt;%</span></span>
+<span id="cb10-11"><a href="#cb10-11"></a>  <span class="fu">filter</span>(Unit <span class="sc">!=</span> <span class="st">'LCU'</span>) <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Unit <span class="sc">!=</span> <span class="st">'SLC'</span>) <span class="sc">%&gt;%</span> <span class="fu">bind_rows</span>(slc_countries_data) <span class="sc">%&gt;%</span></span>
+<span id="cb10-12"><a href="#cb10-12"></a>  <span class="fu">arrange</span>(Country, Year) <span class="sc">%&gt;%</span></span>
+<span id="cb10-13"><a href="#cb10-13"></a>  <span class="fu">mutate</span>(<span class="at">crop_price=</span></span>
+<span id="cb10-14"><a href="#cb10-14"></a>    <span class="fu">case_when</span>(</span>
+<span id="cb10-15"><a href="#cb10-15"></a>      Unit <span class="sc">==</span> <span class="st">'SLC'</span> <span class="sc">~</span> crop_price <span class="sc">*</span> <span class="fl">0.001537</span>,</span>
+<span id="cb10-16"><a href="#cb10-16"></a>      T <span class="sc">~</span> crop_price</span>
+<span id="cb10-17"><a href="#cb10-17"></a>    )</span>
+<span id="cb10-18"><a href="#cb10-18"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb10-19"><a href="#cb10-19"></a>  <span class="fu">select</span>(<span class="sc">-</span>Unit) <span class="sc">%&gt;%</span></span>
+<span id="cb10-20"><a href="#cb10-20"></a>  <span class="fu">pivot_wider</span>(</span>
+<span id="cb10-21"><a href="#cb10-21"></a>    <span class="at">names_from=</span>Item, </span>
+<span id="cb10-22"><a href="#cb10-22"></a>    <span class="at">values_from =</span> crop_price</span>
+<span id="cb10-23"><a href="#cb10-23"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="tidying-the-data-1" class="slide level2">
 <h2>Tidying the data</h2>
 <p>Although we have renamed some of the columns in the pre processing procedure, we decided to once again rename the columns so it’d be more easier to work with them:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="co"># Rename columns:</span></span>
-<span id="cb9-2"><a href="#cb9-2"></a></span>
-<span id="cb9-3"><a href="#cb9-3"></a>price <span class="ot">&lt;-</span> price <span class="sc">%&gt;%</span> </span>
-<span id="cb9-4"><a href="#cb9-4"></a>  <span class="fu">rename</span>(<span class="at">Maize.price=</span> <span class="st">`</span><span class="at">Maize </span><span class="st">`</span> ,</span>
-<span id="cb9-5"><a href="#cb9-5"></a>         <span class="at">Potatoes.price =</span> Potatoes,</span>
-<span id="cb9-6"><a href="#cb9-6"></a>         <span class="at">Rice.price =</span> Rice,</span>
-<span id="cb9-7"><a href="#cb9-7"></a>         <span class="at">Wheat.price =</span> Wheat,</span>
-<span id="cb9-8"><a href="#cb9-8"></a>         <span class="at">Soyabeans.price =</span> <span class="st">`</span><span class="at">Soya beans</span><span class="st">`</span>,</span>
-<span id="cb9-9"><a href="#cb9-9"></a>         <span class="at">Sorghum.price =</span> Sorghum,</span>
-<span id="cb9-10"><a href="#cb9-10"></a>         <span class="at">Cassava.price =</span> <span class="st">`</span><span class="at">Cassava, fresh</span><span class="st">`</span>,</span>
-<span id="cb9-11"><a href="#cb9-11"></a>         <span class="at">SweetPotatoes.price =</span> <span class="st">`</span><span class="at">Sweet potatoes</span><span class="st">`</span>,</span>
-<span id="cb9-12"><a href="#cb9-12"></a>         <span class="at">Yams.price =</span> Yams,</span>
-<span id="cb9-13"><a href="#cb9-13"></a>         <span class="at">Plantains.price =</span> Plantains)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="co"># Rename columns:</span></span>
+<span id="cb11-2"><a href="#cb11-2"></a></span>
+<span id="cb11-3"><a href="#cb11-3"></a>price <span class="ot">&lt;-</span> price <span class="sc">%&gt;%</span> </span>
+<span id="cb11-4"><a href="#cb11-4"></a>  <span class="fu">rename</span>(<span class="at">Maize.price=</span> <span class="st">`</span><span class="at">Maize </span><span class="st">`</span> ,</span>
+<span id="cb11-5"><a href="#cb11-5"></a>         <span class="at">Potatoes.price =</span> Potatoes,</span>
+<span id="cb11-6"><a href="#cb11-6"></a>         <span class="at">Rice.price =</span> Rice,</span>
+<span id="cb11-7"><a href="#cb11-7"></a>         <span class="at">Wheat.price =</span> Wheat,</span>
+<span id="cb11-8"><a href="#cb11-8"></a>         <span class="at">Soyabeans.price =</span> <span class="st">`</span><span class="at">Soya beans</span><span class="st">`</span>,</span>
+<span id="cb11-9"><a href="#cb11-9"></a>         <span class="at">Sorghum.price =</span> Sorghum,</span>
+<span id="cb11-10"><a href="#cb11-10"></a>         <span class="at">Cassava.price =</span> <span class="st">`</span><span class="at">Cassava, fresh</span><span class="st">`</span>,</span>
+<span id="cb11-11"><a href="#cb11-11"></a>         <span class="at">SweetPotatoes.price =</span> <span class="st">`</span><span class="at">Sweet potatoes</span><span class="st">`</span>,</span>
+<span id="cb11-12"><a href="#cb11-12"></a>         <span class="at">Yams.price =</span> Yams,</span>
+<span id="cb11-13"><a href="#cb11-13"></a>         <span class="at">Plantains.price =</span> Plantains)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>we did the same procedure to the yield table:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="co"># Tidy Yield Data:</span></span>
-<span id="cb10-2"><a href="#cb10-2"></a>yield <span class="ot">&lt;-</span> yield <span class="sc">%&gt;%</span></span>
-<span id="cb10-3"><a href="#cb10-3"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> Item, <span class="at">values_from =</span> yield, <span class="at">values_fill =</span> <span class="dv">0</span>)</span>
-<span id="cb10-4"><a href="#cb10-4"></a></span>
-<span id="cb10-5"><a href="#cb10-5"></a><span class="co"># Rename columns:</span></span>
-<span id="cb10-6"><a href="#cb10-6"></a>yield <span class="ot">&lt;-</span> yield <span class="sc">%&gt;%</span></span>
-<span id="cb10-7"><a href="#cb10-7"></a>  <span class="fu">rename</span>(</span>
-<span id="cb10-8"><a href="#cb10-8"></a>    <span class="at">Maize.amount =</span> Maize,</span>
-<span id="cb10-9"><a href="#cb10-9"></a>    <span class="at">Potatoes.amount =</span> Potatoes,</span>
-<span id="cb10-10"><a href="#cb10-10"></a>    <span class="at">Rice.amount =</span> <span class="st">`</span><span class="at">Rice, paddy</span><span class="st">`</span>,</span>
-<span id="cb10-11"><a href="#cb10-11"></a>    <span class="at">Wheat.amount =</span> Wheat,</span>
-<span id="cb10-12"><a href="#cb10-12"></a>    <span class="at">Soyabeans.amount =</span> Soybeans,</span>
-<span id="cb10-13"><a href="#cb10-13"></a>    <span class="at">Sorghum.amount =</span> Sorghum,</span>
-<span id="cb10-14"><a href="#cb10-14"></a>    <span class="at">Cassava.amount =</span> Cassava,</span>
-<span id="cb10-15"><a href="#cb10-15"></a>    <span class="at">SweetPotatoes.amount =</span> <span class="st">`</span><span class="at">Sweet potatoes</span><span class="st">`</span>,</span>
-<span id="cb10-16"><a href="#cb10-16"></a>    <span class="at">Yams.amount =</span> Yams,</span>
-<span id="cb10-17"><a href="#cb10-17"></a>    <span class="at">Plantains.amount =</span> <span class="st">`</span><span class="at">Plantains and others</span><span class="st">`</span></span>
-<span id="cb10-18"><a href="#cb10-18"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a><span class="co"># Tidy Yield Data:</span></span>
+<span id="cb12-2"><a href="#cb12-2"></a>yield <span class="ot">&lt;-</span> yield <span class="sc">%&gt;%</span></span>
+<span id="cb12-3"><a href="#cb12-3"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> Item, <span class="at">values_from =</span> yield, <span class="at">values_fill =</span> <span class="dv">0</span>)</span>
+<span id="cb12-4"><a href="#cb12-4"></a></span>
+<span id="cb12-5"><a href="#cb12-5"></a><span class="co"># Rename columns:</span></span>
+<span id="cb12-6"><a href="#cb12-6"></a>yield <span class="ot">&lt;-</span> yield <span class="sc">%&gt;%</span></span>
+<span id="cb12-7"><a href="#cb12-7"></a>  <span class="fu">rename</span>(</span>
+<span id="cb12-8"><a href="#cb12-8"></a>    <span class="at">Maize.amount =</span> Maize,</span>
+<span id="cb12-9"><a href="#cb12-9"></a>    <span class="at">Potatoes.amount =</span> Potatoes,</span>
+<span id="cb12-10"><a href="#cb12-10"></a>    <span class="at">Rice.amount =</span> <span class="st">`</span><span class="at">Rice, paddy</span><span class="st">`</span>,</span>
+<span id="cb12-11"><a href="#cb12-11"></a>    <span class="at">Wheat.amount =</span> Wheat,</span>
+<span id="cb12-12"><a href="#cb12-12"></a>    <span class="at">Soyabeans.amount =</span> Soybeans,</span>
+<span id="cb12-13"><a href="#cb12-13"></a>    <span class="at">Sorghum.amount =</span> Sorghum,</span>
+<span id="cb12-14"><a href="#cb12-14"></a>    <span class="at">Cassava.amount =</span> Cassava,</span>
+<span id="cb12-15"><a href="#cb12-15"></a>    <span class="at">SweetPotatoes.amount =</span> <span class="st">`</span><span class="at">Sweet potatoes</span><span class="st">`</span>,</span>
+<span id="cb12-16"><a href="#cb12-16"></a>    <span class="at">Yams.amount =</span> Yams,</span>
+<span id="cb12-17"><a href="#cb12-17"></a>    <span class="at">Plantains.amount =</span> <span class="st">`</span><span class="at">Plantains and others</span><span class="st">`</span></span>
+<span id="cb12-18"><a href="#cb12-18"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="joins" class="slide level2">
 <h2>Joins</h2>
 <p>In order to analyse the entire data in the most efficient way, we joined all of our tables into one big table:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="co"># Join tables</span></span>
-<span id="cb11-2"><a href="#cb11-2"></a>full_data <span class="ot">&lt;-</span> yield <span class="sc">%&gt;%</span></span>
-<span id="cb11-3"><a href="#cb11-3"></a>  <span class="fu">inner_join</span>(price,<span class="at">by=</span><span class="fu">c</span>(<span class="st">"Year"</span>,<span class="st">"Country"</span>)) <span class="sc">|&gt;</span></span>
-<span id="cb11-4"><a href="#cb11-4"></a>  <span class="fu">left_join</span>(pesticides,<span class="at">by=</span><span class="fu">c</span>(<span class="st">"Year"</span>,<span class="st">"Country"</span>)) <span class="sc">|&gt;</span></span>
-<span id="cb11-5"><a href="#cb11-5"></a>  <span class="fu">left_join</span>(pop,<span class="at">by=</span><span class="fu">c</span>(<span class="st">"Year"</span>,<span class="st">"Country"</span>)) <span class="sc">|&gt;</span></span>
-<span id="cb11-6"><a href="#cb11-6"></a>  <span class="fu">left_join</span>(rainfall,<span class="at">by=</span><span class="fu">c</span>(<span class="st">"Year"</span>,<span class="st">"Country"</span>)) <span class="sc">|&gt;</span></span>
-<span id="cb11-7"><a href="#cb11-7"></a>  <span class="fu">left_join</span>(temp,<span class="at">by=</span><span class="fu">c</span>(<span class="st">"Year"</span>,<span class="st">"Country"</span>)) <span class="sc">|&gt;</span></span>
-<span id="cb11-8"><a href="#cb11-8"></a>  <span class="fu">left_join</span>(employees,<span class="at">by=</span><span class="fu">c</span>(<span class="st">"Year"</span>,<span class="st">"Country"</span>)) <span class="sc">|&gt;</span></span>
-<span id="cb11-9"><a href="#cb11-9"></a>  <span class="fu">left_join</span>(land_use, <span class="at">by=</span><span class="fu">c</span>(<span class="st">"Year"</span>,<span class="st">"Country"</span>)) <span class="sc">|&gt;</span></span>
-<span id="cb11-10"><a href="#cb11-10"></a>  <span class="fu">arrange</span>(Country, Year)</span>
-<span id="cb11-11"><a href="#cb11-11"></a></span>
-<span id="cb11-12"><a href="#cb11-12"></a><span class="co"># Reordering columns</span></span>
-<span id="cb11-13"><a href="#cb11-13"></a>full_data <span class="ot">&lt;-</span> full_data <span class="sc">|&gt;</span>  <span class="fu">select</span>(Year, Country, pop_amount,number_employed_agri,avg_temp, avg_rainfall,land_price, pesticides_amount, <span class="fu">ends_with</span>(<span class="st">'.price'</span>), <span class="fu">ends_with</span>(<span class="st">'.amount'</span>)) <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">avg_rainfall =</span> <span class="fu">as.integer</span>(avg_rainfall))</span>
-<span id="cb11-14"><a href="#cb11-14"></a></span>
-<span id="cb11-15"><a href="#cb11-15"></a><span class="fu">head</span>(full_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="co"># Join tables</span></span>
+<span id="cb13-2"><a href="#cb13-2"></a>full_data <span class="ot">&lt;-</span> yield <span class="sc">%&gt;%</span></span>
+<span id="cb13-3"><a href="#cb13-3"></a>  <span class="fu">inner_join</span>(price,<span class="at">by=</span><span class="fu">c</span>(<span class="st">"Year"</span>,<span class="st">"Country"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb13-4"><a href="#cb13-4"></a>  <span class="fu">left_join</span>(pesticides,<span class="at">by=</span><span class="fu">c</span>(<span class="st">"Year"</span>,<span class="st">"Country"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb13-5"><a href="#cb13-5"></a>  <span class="fu">left_join</span>(pop,<span class="at">by=</span><span class="fu">c</span>(<span class="st">"Year"</span>,<span class="st">"Country"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb13-6"><a href="#cb13-6"></a>  <span class="fu">left_join</span>(rainfall,<span class="at">by=</span><span class="fu">c</span>(<span class="st">"Year"</span>,<span class="st">"Country"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb13-7"><a href="#cb13-7"></a>  <span class="fu">left_join</span>(temp,<span class="at">by=</span><span class="fu">c</span>(<span class="st">"Year"</span>,<span class="st">"Country"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb13-8"><a href="#cb13-8"></a>  <span class="fu">left_join</span>(employees,<span class="at">by=</span><span class="fu">c</span>(<span class="st">"Year"</span>,<span class="st">"Country"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb13-9"><a href="#cb13-9"></a>  <span class="fu">left_join</span>(land_use, <span class="at">by=</span><span class="fu">c</span>(<span class="st">"Year"</span>,<span class="st">"Country"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb13-10"><a href="#cb13-10"></a>  <span class="fu">arrange</span>(Country, Year)</span>
+<span id="cb13-11"><a href="#cb13-11"></a></span>
+<span id="cb13-12"><a href="#cb13-12"></a><span class="co"># Reordering columns</span></span>
+<span id="cb13-13"><a href="#cb13-13"></a>full_data <span class="ot">&lt;-</span> full_data <span class="sc">|&gt;</span>  </span>
+<span id="cb13-14"><a href="#cb13-14"></a>  <span class="fu">select</span>(Year, Country, pop_amount,</span>
+<span id="cb13-15"><a href="#cb13-15"></a>         number_employed_agri,avg_temp, avg_rainfall,land_price, </span>
+<span id="cb13-16"><a href="#cb13-16"></a>         pesticides_amount, <span class="fu">ends_with</span>(<span class="st">'.price'</span>), <span class="fu">ends_with</span>(<span class="st">'.amount'</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb13-17"><a href="#cb13-17"></a>         <span class="fu">mutate</span>(<span class="at">avg_rainfall =</span> <span class="fu">as.integer</span>(avg_rainfall))</span>
+<span id="cb13-18"><a href="#cb13-18"></a></span>
+<span id="cb13-19"><a href="#cb13-19"></a><span class="fu">head</span>(full_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 6 × 28
    Year Country pop_amount number_employed_agri avg_temp avg_rainfall land_price
@@ -717,77 +723,77 @@ Amir Boger &amp; Lidor Erez
 </div>
 <p>After joining the tables, we decided to work with the main crops in our data so we removed the rest from the table.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="co"># Choose only 5 crops to focus on</span></span>
-<span id="cb13-2"><a href="#cb13-2"></a>full_data <span class="ot">&lt;-</span> full_data <span class="sc">%&gt;%</span></span>
-<span id="cb13-3"><a href="#cb13-3"></a>  <span class="fu">select</span>(</span>
-<span id="cb13-4"><a href="#cb13-4"></a>    <span class="sc">-</span><span class="fu">c</span>(</span>
-<span id="cb13-5"><a href="#cb13-5"></a>      Sorghum.price,</span>
-<span id="cb13-6"><a href="#cb13-6"></a>      Cassava.price,</span>
-<span id="cb13-7"><a href="#cb13-7"></a>      SweetPotatoes.price,</span>
-<span id="cb13-8"><a href="#cb13-8"></a>      Yams.price,</span>
-<span id="cb13-9"><a href="#cb13-9"></a>      Plantains.price,</span>
-<span id="cb13-10"><a href="#cb13-10"></a>      Sorghum.amount,</span>
-<span id="cb13-11"><a href="#cb13-11"></a>      Cassava.amount,</span>
-<span id="cb13-12"><a href="#cb13-12"></a>      SweetPotatoes.amount,</span>
-<span id="cb13-13"><a href="#cb13-13"></a>      Yams.amount,</span>
-<span id="cb13-14"><a href="#cb13-14"></a>      Plantains.amount</span>
-<span id="cb13-15"><a href="#cb13-15"></a>    )</span>
-<span id="cb13-16"><a href="#cb13-16"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a><span class="co"># Choose only 5 crops to focus on</span></span>
+<span id="cb15-2"><a href="#cb15-2"></a>full_data <span class="ot">&lt;-</span> full_data <span class="sc">%&gt;%</span></span>
+<span id="cb15-3"><a href="#cb15-3"></a>  <span class="fu">select</span>(</span>
+<span id="cb15-4"><a href="#cb15-4"></a>    <span class="sc">-</span><span class="fu">c</span>(</span>
+<span id="cb15-5"><a href="#cb15-5"></a>      Sorghum.price,</span>
+<span id="cb15-6"><a href="#cb15-6"></a>      Cassava.price,</span>
+<span id="cb15-7"><a href="#cb15-7"></a>      SweetPotatoes.price,</span>
+<span id="cb15-8"><a href="#cb15-8"></a>      Yams.price,</span>
+<span id="cb15-9"><a href="#cb15-9"></a>      Plantains.price,</span>
+<span id="cb15-10"><a href="#cb15-10"></a>      Sorghum.amount,</span>
+<span id="cb15-11"><a href="#cb15-11"></a>      Cassava.amount,</span>
+<span id="cb15-12"><a href="#cb15-12"></a>      SweetPotatoes.amount,</span>
+<span id="cb15-13"><a href="#cb15-13"></a>      Yams.amount,</span>
+<span id="cb15-14"><a href="#cb15-14"></a>      Plantains.amount</span>
+<span id="cb15-15"><a href="#cb15-15"></a>    )</span>
+<span id="cb15-16"><a href="#cb15-16"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="filling-missing-values" class="slide level2">
 <h2>Filling missing values</h2>
 <p>To make our data more reasonable and also to deal with missing values, we decided to place 0 at the respective price column when a certain crop’s amount is 0. For example: if Maize.amount == 0 then Maize.price should be zero as well. by doing that we ensure that when there’s no yield for a certain crop, the price will be zero.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a><span class="fu">setDT</span>(full_data)</span>
-<span id="cb14-2"><a href="#cb14-2"></a></span>
-<span id="cb14-3"><a href="#cb14-3"></a><span class="co"># Get the crop amount columns</span></span>
-<span id="cb14-4"><a href="#cb14-4"></a>amounts <span class="ot">&lt;-</span> full_data <span class="sc">%&gt;%</span></span>
-<span id="cb14-5"><a href="#cb14-5"></a>  <span class="fu">select</span>(<span class="fu">ends_with</span>(<span class="st">'.amount'</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb14-6"><a href="#cb14-6"></a>  <span class="fu">colnames</span>()</span>
-<span id="cb14-7"><a href="#cb14-7"></a></span>
-<span id="cb14-8"><a href="#cb14-8"></a><span class="co"># get the crop price columns</span></span>
-<span id="cb14-9"><a href="#cb14-9"></a>prices_cols <span class="ot">&lt;-</span> full_data <span class="sc">%&gt;%</span></span>
-<span id="cb14-10"><a href="#cb14-10"></a>  <span class="fu">select</span>(<span class="fu">ends_with</span>(<span class="st">'.price'</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb14-11"><a href="#cb14-11"></a>  <span class="fu">colnames</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a><span class="fu">setDT</span>(full_data)</span>
+<span id="cb16-2"><a href="#cb16-2"></a></span>
+<span id="cb16-3"><a href="#cb16-3"></a><span class="co"># Get the crop amount columns</span></span>
+<span id="cb16-4"><a href="#cb16-4"></a>amounts <span class="ot">&lt;-</span> full_data <span class="sc">%&gt;%</span></span>
+<span id="cb16-5"><a href="#cb16-5"></a>  <span class="fu">select</span>(<span class="fu">ends_with</span>(<span class="st">'.amount'</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb16-6"><a href="#cb16-6"></a>  <span class="fu">colnames</span>()</span>
+<span id="cb16-7"><a href="#cb16-7"></a></span>
+<span id="cb16-8"><a href="#cb16-8"></a><span class="co"># get the crop price columns</span></span>
+<span id="cb16-9"><a href="#cb16-9"></a>prices_cols <span class="ot">&lt;-</span> full_data <span class="sc">%&gt;%</span></span>
+<span id="cb16-10"><a href="#cb16-10"></a>  <span class="fu">select</span>(<span class="fu">ends_with</span>(<span class="st">'.price'</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb16-11"><a href="#cb16-11"></a>  <span class="fu">colnames</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a><span class="co"># Place zeros when the amount of a certain crop is 0 using data.table.</span></span>
-<span id="cb15-2"><a href="#cb15-2"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(amounts)) {</span>
-<span id="cb15-3"><a href="#cb15-3"></a>  full_data[full_data[[amounts[i]]] <span class="sc">==</span> <span class="dv">0</span>, (prices_cols[i]) <span class="sc">:</span><span class="er">=</span> <span class="dv">0</span>]</span>
-<span id="cb15-4"><a href="#cb15-4"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a><span class="co"># Place zeros when the amount of a certain crop is 0 using data.table.</span></span>
+<span id="cb17-2"><a href="#cb17-2"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(amounts)) {</span>
+<span id="cb17-3"><a href="#cb17-3"></a>  full_data[full_data[[amounts[i]]] <span class="sc">==</span> <span class="dv">0</span>, (prices_cols[i]) <span class="sc">:</span><span class="er">=</span> <span class="dv">0</span>]</span>
+<span id="cb17-4"><a href="#cb17-4"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="removing-unnecessary-rows" class="slide level2">
 <h2>Removing unnecessary rows</h2>
 <p>we also removed countries that has less than 5 observations.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a>full_data <span class="ot">&lt;-</span> full_data <span class="sc">%&gt;%</span></span>
-<span id="cb16-2"><a href="#cb16-2"></a>  <span class="fu">group_by</span>(Country) <span class="sc">%&gt;%</span></span>
-<span id="cb16-3"><a href="#cb16-3"></a>  <span class="fu">mutate_at</span>(<span class="fu">vars</span>(<span class="sc">-</span><span class="fu">group_cols</span>()),<span class="sc">~</span> <span class="fu">ifelse</span>(<span class="fu">is.na</span>(.), <span class="fu">mean</span>(., <span class="at">na.rm=</span>T),.))  <span class="sc">%&gt;%</span></span>
-<span id="cb16-4"><a href="#cb16-4"></a>  <span class="fu">mutate</span>(<span class="at">n =</span> <span class="fu">n</span>()) <span class="sc">%&gt;%</span></span>
-<span id="cb16-5"><a href="#cb16-5"></a>  <span class="fu">filter</span>(n <span class="sc">&gt;</span> <span class="dv">4</span> ) <span class="sc">%&gt;%</span></span>
-<span id="cb16-6"><a href="#cb16-6"></a>  <span class="fu">select</span>(<span class="sc">-</span>n) <span class="sc">%&gt;%</span></span>
-<span id="cb16-7"><a href="#cb16-7"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span> <span class="fu">setDT</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a>full_data <span class="ot">&lt;-</span> full_data <span class="sc">%&gt;%</span></span>
+<span id="cb18-2"><a href="#cb18-2"></a>  <span class="fu">group_by</span>(Country) <span class="sc">%&gt;%</span></span>
+<span id="cb18-3"><a href="#cb18-3"></a>  <span class="fu">mutate_at</span>(<span class="fu">vars</span>(<span class="sc">-</span><span class="fu">group_cols</span>()),<span class="sc">~</span> <span class="fu">ifelse</span>(<span class="fu">is.na</span>(.), <span class="fu">mean</span>(., <span class="at">na.rm=</span>T),.))  <span class="sc">%&gt;%</span></span>
+<span id="cb18-4"><a href="#cb18-4"></a>  <span class="fu">mutate</span>(<span class="at">n =</span> <span class="fu">n</span>()) <span class="sc">%&gt;%</span></span>
+<span id="cb18-5"><a href="#cb18-5"></a>  <span class="fu">filter</span>(n <span class="sc">&gt;</span> <span class="dv">4</span> ) <span class="sc">%&gt;%</span></span>
+<span id="cb18-6"><a href="#cb18-6"></a>  <span class="fu">select</span>(<span class="sc">-</span>n) <span class="sc">%&gt;%</span></span>
+<span id="cb18-7"><a href="#cb18-7"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span> <span class="fu">setDT</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="mean-imputation" class="slide level2">
 <h2>Mean Imputation</h2>
 <p>At the end, we used mean imputation, since our goal is to use mean-based analysis in order to find which of the indices affect the most on crop yield outcome.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a><span class="co"># Change every na value into -1 -&gt; -1 indicates that there's no data about the price.</span></span>
-<span id="cb17-2"><a href="#cb17-2"></a>full_data[, (prices_cols) <span class="sc">:</span><span class="er">=</span> <span class="fu">lapply</span>(.SD, <span class="cf">function</span>(x) <span class="fu">ifelse</span>(<span class="fu">is.na</span>(x),<span class="sc">-</span><span class="dv">1</span>,x)), .SDcols <span class="ot">=</span> prices_cols]</span>
-<span id="cb17-3"><a href="#cb17-3"></a></span>
-<span id="cb17-4"><a href="#cb17-4"></a><span class="co"># Adding a crop price column.</span></span>
-<span id="cb17-5"><a href="#cb17-5"></a>full_data<span class="sc">$</span>avg_crop_price <span class="ot">&lt;-</span> full_data <span class="sc">%&gt;%</span></span>
-<span id="cb17-6"><a href="#cb17-6"></a>  <span class="fu">select</span>(<span class="fu">all_of</span>(prices_cols)) <span class="sc">%&gt;%</span></span>
-<span id="cb17-7"><a href="#cb17-7"></a>  <span class="fu">rowMeans</span>(<span class="at">na.rm=</span>T)</span>
-<span id="cb17-8"><a href="#cb17-8"></a></span>
-<span id="cb17-9"><a href="#cb17-9"></a><span class="co"># Add a total_yield column</span></span>
-<span id="cb17-10"><a href="#cb17-10"></a></span>
-<span id="cb17-11"><a href="#cb17-11"></a>full_data<span class="sc">$</span>total_yield <span class="ot">&lt;-</span> full_data <span class="sc">%&gt;%</span></span>
-<span id="cb17-12"><a href="#cb17-12"></a>  <span class="fu">select</span>(<span class="fu">all_of</span>(amounts)) <span class="sc">%&gt;%</span></span>
-<span id="cb17-13"><a href="#cb17-13"></a>  <span class="fu">rowSums</span>(<span class="at">na.rm=</span>T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a><span class="co"># Change every na value into -1 -&gt; -1 indicates that there's no data about the price.</span></span>
+<span id="cb19-2"><a href="#cb19-2"></a>full_data[, (prices_cols) <span class="sc">:</span><span class="er">=</span> <span class="fu">lapply</span>(.SD, <span class="cf">function</span>(x) <span class="fu">ifelse</span>(<span class="fu">is.na</span>(x),<span class="sc">-</span><span class="dv">1</span>,x)), .SDcols <span class="ot">=</span> prices_cols]</span>
+<span id="cb19-3"><a href="#cb19-3"></a></span>
+<span id="cb19-4"><a href="#cb19-4"></a><span class="co"># Adding a crop price column.</span></span>
+<span id="cb19-5"><a href="#cb19-5"></a>full_data<span class="sc">$</span>avg_crop_price <span class="ot">&lt;-</span> full_data <span class="sc">%&gt;%</span></span>
+<span id="cb19-6"><a href="#cb19-6"></a>  <span class="fu">select</span>(<span class="fu">all_of</span>(prices_cols)) <span class="sc">%&gt;%</span></span>
+<span id="cb19-7"><a href="#cb19-7"></a>  <span class="fu">rowMeans</span>(<span class="at">na.rm=</span>T)</span>
+<span id="cb19-8"><a href="#cb19-8"></a></span>
+<span id="cb19-9"><a href="#cb19-9"></a><span class="co"># Add a total_yield column</span></span>
+<span id="cb19-10"><a href="#cb19-10"></a></span>
+<span id="cb19-11"><a href="#cb19-11"></a>full_data<span class="sc">$</span>total_yield <span class="ot">&lt;-</span> full_data <span class="sc">%&gt;%</span></span>
+<span id="cb19-12"><a href="#cb19-12"></a>  <span class="fu">select</span>(<span class="fu">all_of</span>(amounts)) <span class="sc">%&gt;%</span></span>
+<span id="cb19-13"><a href="#cb19-13"></a>  <span class="fu">rowSums</span>(<span class="at">na.rm=</span>T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section></section>
 <section>
@@ -798,46 +804,16 @@ Amir Boger &amp; Lidor Erez
 <section id="scatter-plots" class="slide level2">
 <h2>Scatter plots</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a><span class="fu">set.seed</span>(<span class="dv">42</span>)</span>
-<span id="cb18-2"><a href="#cb18-2"></a>full_data <span class="sc">|&gt;</span></span>
-<span id="cb18-3"><a href="#cb18-3"></a>  <span class="fu">sample_n</span>(<span class="dv">800</span>, <span class="at">replace=</span>F) <span class="sc">|&gt;</span></span>
-<span id="cb18-4"><a href="#cb18-4"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span><span class="fu">log</span>(pop_amount <span class="sc">+</span> <span class="dv">1</span>), <span class="at">y=</span><span class="fu">log</span>(total_yield <span class="sc">+</span> <span class="dv">1</span>), <span class="at">color=</span><span class="fu">log</span>(total_yield <span class="sc">+</span> <span class="dv">1</span>))) <span class="sc">+</span></span>
-<span id="cb18-5"><a href="#cb18-5"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
-<span id="cb18-6"><a href="#cb18-6"></a>  <span class="fu">geom_smooth</span>(<span class="at">formula =</span> y<span class="sc">~</span>x, <span class="at">method=</span><span class="st">'lm'</span>,<span class="at">se=</span>F, <span class="at">color=</span><span class="st">"black"</span>) <span class="sc">+</span> </span>
-<span id="cb18-7"><a href="#cb18-7"></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="st">'Total Yield VS Population  (Log Scaled)'</span>,</span>
-<span id="cb18-8"><a href="#cb18-8"></a>       <span class="at">x=</span><span class="st">'log(Population)'</span>,</span>
-<span id="cb18-9"><a href="#cb18-9"></a>       <span class="at">y=</span><span class="st">'log(Total Yield)'</span>,</span>
-<span id="cb18-10"><a href="#cb18-10"></a>       <span class="at">colour =</span> <span class="st">"log(Total Yield)"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img data-src="index_files/figure-revealjs/unnamed-chunk-16-1.png" width="960"></p>
-</div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a><span class="fu">set.seed</span>(<span class="dv">42</span>)</span>
-<span id="cb19-2"><a href="#cb19-2"></a>full_data <span class="sc">|&gt;</span></span>
-<span id="cb19-3"><a href="#cb19-3"></a>  <span class="fu">sample_n</span>(<span class="dv">800</span>, <span class="at">replace=</span>F) <span class="sc">|&gt;</span></span>
-<span id="cb19-4"><a href="#cb19-4"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span><span class="fu">log</span>(number_employed_agri <span class="sc">+</span> <span class="dv">1</span>), <span class="at">y=</span><span class="fu">log</span>(total_yield<span class="sc">+</span><span class="dv">1</span>), <span class="at">color=</span><span class="fu">log</span>(total_yield <span class="sc">+</span> <span class="dv">1</span>))) <span class="sc">+</span></span>
-<span id="cb19-5"><a href="#cb19-5"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
-<span id="cb19-6"><a href="#cb19-6"></a>  <span class="fu">geom_smooth</span>(<span class="at">formula =</span> y<span class="sc">~</span>x, <span class="at">method=</span><span class="st">'lm'</span>, <span class="at">color =</span> <span class="st">'black'</span>,<span class="at">se=</span>F) <span class="sc">+</span> </span>
-<span id="cb19-7"><a href="#cb19-7"></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="st">'Total Yield VS Number of Employees (Log Scaled)'</span>,</span>
-<span id="cb19-8"><a href="#cb19-8"></a>       <span class="at">x=</span><span class="st">'log(Employees)'</span>,</span>
-<span id="cb19-9"><a href="#cb19-9"></a>       <span class="at">y=</span><span class="st">'log(Total Yield)'</span>,</span>
-<span id="cb19-10"><a href="#cb19-10"></a>       <span class="at">colour =</span> <span class="st">"log(Total Yield)"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img data-src="index_files/figure-revealjs/unnamed-chunk-17-1.png" width="960"></p>
-</div>
-</div>
-<div class="cell">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a><span class="fu">set.seed</span>(<span class="dv">42</span>)</span>
 <span id="cb20-2"><a href="#cb20-2"></a>full_data <span class="sc">|&gt;</span></span>
-<span id="cb20-3"><a href="#cb20-3"></a>  <span class="fu">sample_n</span>(<span class="dv">800</span>,<span class="at">replace=</span>F) <span class="sc">|&gt;</span></span>
-<span id="cb20-4"><a href="#cb20-4"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span><span class="fu">log</span>(avg_temp <span class="sc">+</span> <span class="dv">1</span>), <span class="at">y=</span><span class="fu">log</span>(total_yield <span class="sc">+</span> <span class="dv">1</span>), <span class="at">color=</span><span class="fu">log</span>(total_yield <span class="sc">+</span> <span class="dv">1</span>))) <span class="sc">+</span></span>
+<span id="cb20-3"><a href="#cb20-3"></a>  <span class="fu">sample_n</span>(<span class="dv">800</span>, <span class="at">replace=</span>F) <span class="sc">|&gt;</span></span>
+<span id="cb20-4"><a href="#cb20-4"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span><span class="fu">log</span>(pop_amount <span class="sc">+</span> <span class="dv">1</span>), <span class="at">y=</span><span class="fu">log</span>(total_yield <span class="sc">+</span> <span class="dv">1</span>), <span class="at">color=</span><span class="fu">log</span>(total_yield <span class="sc">+</span> <span class="dv">1</span>))) <span class="sc">+</span></span>
 <span id="cb20-5"><a href="#cb20-5"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
-<span id="cb20-6"><a href="#cb20-6"></a>  <span class="fu">geom_smooth</span>(<span class="at">formula =</span> y<span class="sc">~</span>x, <span class="at">method=</span><span class="st">'lm'</span>,<span class="at">se=</span>F,<span class="at">color=</span><span class="st">'black'</span>) <span class="sc">+</span></span>
-<span id="cb20-7"><a href="#cb20-7"></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="st">'Total Yield VS Avg Temperature (Log Scaled)'</span>,</span>
-<span id="cb20-8"><a href="#cb20-8"></a>       <span class="at">colour =</span> <span class="st">"log(Total Yield)"</span>,</span>
-<span id="cb20-9"><a href="#cb20-9"></a>       <span class="at">x=</span> <span class="st">'log(Avg Temp)'</span>,</span>
-<span id="cb20-10"><a href="#cb20-10"></a>       <span class="at">y=</span> <span class="st">"log(Total Yield)"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb20-6"><a href="#cb20-6"></a>  <span class="fu">geom_smooth</span>(<span class="at">formula =</span> y<span class="sc">~</span>x, <span class="at">method=</span><span class="st">'lm'</span>,<span class="at">se=</span>F, <span class="at">color=</span><span class="st">"black"</span>) <span class="sc">+</span> </span>
+<span id="cb20-7"><a href="#cb20-7"></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="st">'Total Yield VS Population  (Log Scaled)'</span>,</span>
+<span id="cb20-8"><a href="#cb20-8"></a>       <span class="at">x=</span><span class="st">'log(Population)'</span>,</span>
+<span id="cb20-9"><a href="#cb20-9"></a>       <span class="at">y=</span><span class="st">'log(Total Yield)'</span>,</span>
+<span id="cb20-10"><a href="#cb20-10"></a>       <span class="at">colour =</span> <span class="st">"log(Total Yield)"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img data-src="index_files/figure-revealjs/unnamed-chunk-18-1.png" width="960"></p>
 </div>
@@ -846,12 +822,12 @@ Amir Boger &amp; Lidor Erez
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a><span class="fu">set.seed</span>(<span class="dv">42</span>)</span>
 <span id="cb21-2"><a href="#cb21-2"></a>full_data <span class="sc">|&gt;</span></span>
 <span id="cb21-3"><a href="#cb21-3"></a>  <span class="fu">sample_n</span>(<span class="dv">800</span>, <span class="at">replace=</span>F) <span class="sc">|&gt;</span></span>
-<span id="cb21-4"><a href="#cb21-4"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span><span class="fu">log</span>(avg_rainfall <span class="sc">+</span> <span class="dv">1</span>), <span class="at">y=</span><span class="fu">log</span>(total_yield <span class="sc">+</span> <span class="dv">1</span>), <span class="at">color=</span><span class="fu">log</span>(total_yield <span class="sc">+</span> <span class="dv">1</span>))) <span class="sc">+</span> </span>
+<span id="cb21-4"><a href="#cb21-4"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span><span class="fu">log</span>(number_employed_agri <span class="sc">+</span> <span class="dv">1</span>), <span class="at">y=</span><span class="fu">log</span>(total_yield<span class="sc">+</span><span class="dv">1</span>), <span class="at">color=</span><span class="fu">log</span>(total_yield <span class="sc">+</span> <span class="dv">1</span>))) <span class="sc">+</span></span>
 <span id="cb21-5"><a href="#cb21-5"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
-<span id="cb21-6"><a href="#cb21-6"></a>  <span class="fu">geom_smooth</span>(<span class="at">formula =</span> y<span class="sc">~</span>x, <span class="at">method=</span><span class="st">'lm'</span>,<span class="at">se=</span>F, <span class="at">color=</span><span class="st">'black'</span>) <span class="sc">+</span> </span>
-<span id="cb21-7"><a href="#cb21-7"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">'Total Yield VS Avg Rainfall (Log Scaled)'</span>,</span>
-<span id="cb21-8"><a href="#cb21-8"></a>       <span class="at">x=</span> <span class="st">"log(Avg Rainfall)"</span>,</span>
-<span id="cb21-9"><a href="#cb21-9"></a>       <span class="at">y=</span><span class="st">"log(Total Yield)"</span>,</span>
+<span id="cb21-6"><a href="#cb21-6"></a>  <span class="fu">geom_smooth</span>(<span class="at">formula =</span> y<span class="sc">~</span>x, <span class="at">method=</span><span class="st">'lm'</span>, <span class="at">color =</span> <span class="st">'black'</span>,<span class="at">se=</span>F) <span class="sc">+</span> </span>
+<span id="cb21-7"><a href="#cb21-7"></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="st">'Total Yield VS Number of Employees (Log Scaled)'</span>,</span>
+<span id="cb21-8"><a href="#cb21-8"></a>       <span class="at">x=</span><span class="st">'log(Employees)'</span>,</span>
+<span id="cb21-9"><a href="#cb21-9"></a>       <span class="at">y=</span><span class="st">'log(Total Yield)'</span>,</span>
 <span id="cb21-10"><a href="#cb21-10"></a>       <span class="at">colour =</span> <span class="st">"log(Total Yield)"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img data-src="index_files/figure-revealjs/unnamed-chunk-19-1.png" width="960"></p>
@@ -860,14 +836,14 @@ Amir Boger &amp; Lidor Erez
 <div class="cell">
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a><span class="fu">set.seed</span>(<span class="dv">42</span>)</span>
 <span id="cb22-2"><a href="#cb22-2"></a>full_data <span class="sc">|&gt;</span></span>
-<span id="cb22-3"><a href="#cb22-3"></a>  <span class="fu">sample_n</span>(<span class="dv">800</span>, <span class="at">replace=</span>F) <span class="sc">|&gt;</span></span>
-<span id="cb22-4"><a href="#cb22-4"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span><span class="fu">log</span>(land_price <span class="sc">+</span> <span class="dv">1</span>), <span class="at">y=</span><span class="fu">log</span>(total_yield <span class="sc">+</span> <span class="dv">1</span>), <span class="at">color=</span><span class="fu">log</span>(total_yield <span class="sc">+</span> <span class="dv">1</span>))) <span class="sc">+</span> </span>
+<span id="cb22-3"><a href="#cb22-3"></a>  <span class="fu">sample_n</span>(<span class="dv">800</span>,<span class="at">replace=</span>F) <span class="sc">|&gt;</span></span>
+<span id="cb22-4"><a href="#cb22-4"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span><span class="fu">log</span>(avg_temp <span class="sc">+</span> <span class="dv">1</span>), <span class="at">y=</span><span class="fu">log</span>(total_yield <span class="sc">+</span> <span class="dv">1</span>), <span class="at">color=</span><span class="fu">log</span>(total_yield <span class="sc">+</span> <span class="dv">1</span>))) <span class="sc">+</span></span>
 <span id="cb22-5"><a href="#cb22-5"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
-<span id="cb22-6"><a href="#cb22-6"></a>  <span class="fu">geom_smooth</span>(<span class="at">formula =</span> y<span class="sc">~</span>x, <span class="at">method=</span><span class="st">'lm'</span>,<span class="at">se=</span>F, <span class="at">color=</span><span class="st">'black'</span>) <span class="sc">+</span> </span>
-<span id="cb22-7"><a href="#cb22-7"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">'Total Yield VS Land Price (Log Scaled)'</span>,</span>
-<span id="cb22-8"><a href="#cb22-8"></a>       <span class="at">x=</span><span class="st">'log(Land Price)'</span>,</span>
-<span id="cb22-9"><a href="#cb22-9"></a>       <span class="at">y=</span><span class="st">'log(Total Yield)'</span>,</span>
-<span id="cb22-10"><a href="#cb22-10"></a>       <span class="at">colour =</span> <span class="st">"log(Total Yield)"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb22-6"><a href="#cb22-6"></a>  <span class="fu">geom_smooth</span>(<span class="at">formula =</span> y<span class="sc">~</span>x, <span class="at">method=</span><span class="st">'lm'</span>,<span class="at">se=</span>F,<span class="at">color=</span><span class="st">'black'</span>) <span class="sc">+</span></span>
+<span id="cb22-7"><a href="#cb22-7"></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="st">'Total Yield VS Avg Temperature (Log Scaled)'</span>,</span>
+<span id="cb22-8"><a href="#cb22-8"></a>       <span class="at">colour =</span> <span class="st">"log(Total Yield)"</span>,</span>
+<span id="cb22-9"><a href="#cb22-9"></a>       <span class="at">x=</span> <span class="st">'log(Avg Temp)'</span>,</span>
+<span id="cb22-10"><a href="#cb22-10"></a>       <span class="at">y=</span> <span class="st">"log(Total Yield)"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img data-src="index_files/figure-revealjs/unnamed-chunk-20-1.png" width="960"></p>
 </div>
@@ -875,13 +851,13 @@ Amir Boger &amp; Lidor Erez
 <div class="cell">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a><span class="fu">set.seed</span>(<span class="dv">42</span>)</span>
 <span id="cb23-2"><a href="#cb23-2"></a>full_data <span class="sc">|&gt;</span></span>
-<span id="cb23-3"><a href="#cb23-3"></a>  <span class="fu">sample_n</span>(<span class="dv">800</span>,<span class="at">replace=</span>F) <span class="sc">|&gt;</span></span>
-<span id="cb23-4"><a href="#cb23-4"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span><span class="fu">log</span>(pesticides_amount<span class="sc">+</span><span class="dv">1</span>), <span class="at">y=</span><span class="fu">log</span>(total_yield<span class="sc">+</span><span class="dv">1</span>), <span class="at">color=</span><span class="fu">log</span>(total_yield<span class="sc">+</span><span class="dv">1</span>))) <span class="sc">+</span> </span>
+<span id="cb23-3"><a href="#cb23-3"></a>  <span class="fu">sample_n</span>(<span class="dv">800</span>, <span class="at">replace=</span>F) <span class="sc">|&gt;</span></span>
+<span id="cb23-4"><a href="#cb23-4"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span><span class="fu">log</span>(avg_rainfall <span class="sc">+</span> <span class="dv">1</span>), <span class="at">y=</span><span class="fu">log</span>(total_yield <span class="sc">+</span> <span class="dv">1</span>), <span class="at">color=</span><span class="fu">log</span>(total_yield <span class="sc">+</span> <span class="dv">1</span>))) <span class="sc">+</span> </span>
 <span id="cb23-5"><a href="#cb23-5"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
-<span id="cb23-6"><a href="#cb23-6"></a>  <span class="fu">geom_smooth</span>(<span class="at">formula =</span> y<span class="sc">~</span>x, <span class="at">method=</span><span class="st">'lm'</span>,<span class="at">se=</span>F, <span class="at">color=</span><span class="st">"black"</span>) <span class="sc">+</span> </span>
-<span id="cb23-7"><a href="#cb23-7"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">'Total Yield VS Amount of Pesticides used (Log Scaled)'</span>,</span>
-<span id="cb23-8"><a href="#cb23-8"></a>       <span class="at">x=</span><span class="st">'log(Amount of Pesticides)'</span>,</span>
-<span id="cb23-9"><a href="#cb23-9"></a>       <span class="at">y=</span><span class="st">'log(Total Yield)'</span>,</span>
+<span id="cb23-6"><a href="#cb23-6"></a>  <span class="fu">geom_smooth</span>(<span class="at">formula =</span> y<span class="sc">~</span>x, <span class="at">method=</span><span class="st">'lm'</span>,<span class="at">se=</span>F, <span class="at">color=</span><span class="st">'black'</span>) <span class="sc">+</span> </span>
+<span id="cb23-7"><a href="#cb23-7"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">'Total Yield VS Avg Rainfall (Log Scaled)'</span>,</span>
+<span id="cb23-8"><a href="#cb23-8"></a>       <span class="at">x=</span> <span class="st">"log(Avg Rainfall)"</span>,</span>
+<span id="cb23-9"><a href="#cb23-9"></a>       <span class="at">y=</span><span class="st">"log(Total Yield)"</span>,</span>
 <span id="cb23-10"><a href="#cb23-10"></a>       <span class="at">colour =</span> <span class="st">"log(Total Yield)"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img data-src="index_files/figure-revealjs/unnamed-chunk-21-1.png" width="960"></p>
@@ -890,16 +866,46 @@ Amir Boger &amp; Lidor Erez
 <div class="cell">
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a><span class="fu">set.seed</span>(<span class="dv">42</span>)</span>
 <span id="cb24-2"><a href="#cb24-2"></a>full_data <span class="sc">|&gt;</span></span>
-<span id="cb24-3"><a href="#cb24-3"></a>  <span class="fu">sample_n</span>(<span class="dv">800</span>,<span class="at">replace=</span>F) <span class="sc">|&gt;</span></span>
-<span id="cb24-4"><a href="#cb24-4"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span><span class="fu">log</span>(avg_crop_price<span class="sc">+</span><span class="dv">1</span>), <span class="at">y=</span><span class="fu">log</span>(total_yield<span class="sc">+</span><span class="dv">1</span>), <span class="at">color=</span><span class="fu">log</span>(total_yield<span class="sc">+</span><span class="dv">1</span>))) <span class="sc">+</span> </span>
+<span id="cb24-3"><a href="#cb24-3"></a>  <span class="fu">sample_n</span>(<span class="dv">800</span>, <span class="at">replace=</span>F) <span class="sc">|&gt;</span></span>
+<span id="cb24-4"><a href="#cb24-4"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span><span class="fu">log</span>(land_price <span class="sc">+</span> <span class="dv">1</span>), <span class="at">y=</span><span class="fu">log</span>(total_yield <span class="sc">+</span> <span class="dv">1</span>), <span class="at">color=</span><span class="fu">log</span>(total_yield <span class="sc">+</span> <span class="dv">1</span>))) <span class="sc">+</span> </span>
 <span id="cb24-5"><a href="#cb24-5"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
-<span id="cb24-6"><a href="#cb24-6"></a>  <span class="fu">geom_smooth</span>(<span class="at">formula =</span> y<span class="sc">~</span>x, <span class="at">method=</span><span class="st">'lm'</span>,<span class="at">se=</span>F, <span class="at">color=</span><span class="st">"black"</span>) <span class="sc">+</span> </span>
-<span id="cb24-7"><a href="#cb24-7"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">'Total Yield VS Avg Crop Price (Log Scaled)'</span>,</span>
-<span id="cb24-8"><a href="#cb24-8"></a>       <span class="at">x=</span><span class="st">'log(Avg Crop Price)'</span>,</span>
+<span id="cb24-6"><a href="#cb24-6"></a>  <span class="fu">geom_smooth</span>(<span class="at">formula =</span> y<span class="sc">~</span>x, <span class="at">method=</span><span class="st">'lm'</span>,<span class="at">se=</span>F, <span class="at">color=</span><span class="st">'black'</span>) <span class="sc">+</span> </span>
+<span id="cb24-7"><a href="#cb24-7"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">'Total Yield VS Land Price (Log Scaled)'</span>,</span>
+<span id="cb24-8"><a href="#cb24-8"></a>       <span class="at">x=</span><span class="st">'log(Land Price)'</span>,</span>
 <span id="cb24-9"><a href="#cb24-9"></a>       <span class="at">y=</span><span class="st">'log(Total Yield)'</span>,</span>
 <span id="cb24-10"><a href="#cb24-10"></a>       <span class="at">colour =</span> <span class="st">"log(Total Yield)"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img data-src="index_files/figure-revealjs/unnamed-chunk-22-1.png" width="960"></p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a><span class="fu">set.seed</span>(<span class="dv">42</span>)</span>
+<span id="cb25-2"><a href="#cb25-2"></a>full_data <span class="sc">|&gt;</span></span>
+<span id="cb25-3"><a href="#cb25-3"></a>  <span class="fu">sample_n</span>(<span class="dv">800</span>,<span class="at">replace=</span>F) <span class="sc">|&gt;</span></span>
+<span id="cb25-4"><a href="#cb25-4"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span><span class="fu">log</span>(pesticides_amount<span class="sc">+</span><span class="dv">1</span>), <span class="at">y=</span><span class="fu">log</span>(total_yield<span class="sc">+</span><span class="dv">1</span>), <span class="at">color=</span><span class="fu">log</span>(total_yield<span class="sc">+</span><span class="dv">1</span>))) <span class="sc">+</span> </span>
+<span id="cb25-5"><a href="#cb25-5"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb25-6"><a href="#cb25-6"></a>  <span class="fu">geom_smooth</span>(<span class="at">formula =</span> y<span class="sc">~</span>x, <span class="at">method=</span><span class="st">'lm'</span>,<span class="at">se=</span>F, <span class="at">color=</span><span class="st">"black"</span>) <span class="sc">+</span> </span>
+<span id="cb25-7"><a href="#cb25-7"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">'Total Yield VS Amount of Pesticides used (Log Scaled)'</span>,</span>
+<span id="cb25-8"><a href="#cb25-8"></a>       <span class="at">x=</span><span class="st">'log(Amount of Pesticides)'</span>,</span>
+<span id="cb25-9"><a href="#cb25-9"></a>       <span class="at">y=</span><span class="st">'log(Total Yield)'</span>,</span>
+<span id="cb25-10"><a href="#cb25-10"></a>       <span class="at">colour =</span> <span class="st">"log(Total Yield)"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-23-1.png" width="960"></p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a><span class="fu">set.seed</span>(<span class="dv">42</span>)</span>
+<span id="cb26-2"><a href="#cb26-2"></a>full_data <span class="sc">|&gt;</span></span>
+<span id="cb26-3"><a href="#cb26-3"></a>  <span class="fu">sample_n</span>(<span class="dv">800</span>,<span class="at">replace=</span>F) <span class="sc">|&gt;</span></span>
+<span id="cb26-4"><a href="#cb26-4"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span><span class="fu">log</span>(avg_crop_price<span class="sc">+</span><span class="dv">1</span>), <span class="at">y=</span><span class="fu">log</span>(total_yield<span class="sc">+</span><span class="dv">1</span>), <span class="at">color=</span><span class="fu">log</span>(total_yield<span class="sc">+</span><span class="dv">1</span>))) <span class="sc">+</span> </span>
+<span id="cb26-5"><a href="#cb26-5"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb26-6"><a href="#cb26-6"></a>  <span class="fu">geom_smooth</span>(<span class="at">formula =</span> y<span class="sc">~</span>x, <span class="at">method=</span><span class="st">'lm'</span>,<span class="at">se=</span>F, <span class="at">color=</span><span class="st">"black"</span>) <span class="sc">+</span> </span>
+<span id="cb26-7"><a href="#cb26-7"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">'Total Yield VS Avg Crop Price (Log Scaled)'</span>,</span>
+<span id="cb26-8"><a href="#cb26-8"></a>       <span class="at">x=</span><span class="st">'log(Avg Crop Price)'</span>,</span>
+<span id="cb26-9"><a href="#cb26-9"></a>       <span class="at">y=</span><span class="st">'log(Total Yield)'</span>,</span>
+<span id="cb26-10"><a href="#cb26-10"></a>       <span class="at">colour =</span> <span class="st">"log(Total Yield)"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-24-1.png" width="960"></p>
 </div>
 </div>
 </section></section>
@@ -908,77 +914,56 @@ Amir Boger &amp; Lidor Erez
 <h1>Distribution analysis</h1>
 <p>Prior to our analysis, we also wanted to understand what is the distribution of our response variable. Thus, we created a histogram to present it’s distribution. Furthermore, we also tried to use various transformation to transform the distribution into a normal one.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a>yield_hist <span class="ot">&lt;-</span> full_data <span class="sc">|&gt;</span></span>
-<span id="cb25-2"><a href="#cb25-2"></a>  <span class="fu">na.omit</span>() <span class="sc">|&gt;</span></span>
-<span id="cb25-3"><a href="#cb25-3"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>total_yield)) <span class="sc">+</span> </span>
-<span id="cb25-4"><a href="#cb25-4"></a>  <span class="fu">geom_histogram</span>(<span class="at">fill=</span><span class="st">"#69b3a2"</span>, <span class="at">color=</span><span class="st">"black"</span>, <span class="at">alpha=</span><span class="fl">0.8</span>,<span class="at">bins=</span><span class="dv">30</span>)<span class="sc">+</span></span>
-<span id="cb25-5"><a href="#cb25-5"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle=</span><span class="dv">20</span>, <span class="at">hjust=</span><span class="fl">0.5</span>)) <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">y=</span><span class="st">""</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a>yield_hist_log <span class="ot">&lt;-</span> full_data <span class="sc">|&gt;</span></span>
-<span id="cb26-2"><a href="#cb26-2"></a>  <span class="fu">na.omit</span>() <span class="sc">|&gt;</span></span>
-<span id="cb26-3"><a href="#cb26-3"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span><span class="fu">log</span>(total_yield <span class="sc">+</span> <span class="dv">1</span>))) <span class="sc">+</span> </span>
-<span id="cb26-4"><a href="#cb26-4"></a>  <span class="fu">geom_histogram</span>(<span class="at">fill=</span><span class="st">"#69b3a2"</span>, <span class="at">color=</span><span class="st">"black"</span>, <span class="at">alpha=</span><span class="fl">0.8</span>,<span class="at">bins=</span><span class="dv">30</span>)<span class="sc">+</span></span>
-<span id="cb26-5"><a href="#cb26-5"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">'log(yield)'</span>) <span class="sc">+</span> </span>
-<span id="cb26-6"><a href="#cb26-6"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle=</span><span class="dv">20</span>, <span class="at">hjust=</span><span class="fl">0.5</span>),</span>
-<span id="cb26-7"><a href="#cb26-7"></a>        <span class="at">axis.title.y =</span> <span class="fu">element_blank</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1"></a>yield_hist_sqrt <span class="ot">&lt;-</span> full_data <span class="sc">|&gt;</span></span>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1"></a>yield_hist <span class="ot">&lt;-</span> full_data <span class="sc">|&gt;</span></span>
 <span id="cb27-2"><a href="#cb27-2"></a>  <span class="fu">na.omit</span>() <span class="sc">|&gt;</span></span>
-<span id="cb27-3"><a href="#cb27-3"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span><span class="fu">sqrt</span>(total_yield))) <span class="sc">+</span></span>
-<span id="cb27-4"><a href="#cb27-4"></a>  <span class="fu">geom_histogram</span>(<span class="at">fill=</span><span class="st">"#69b3a2"</span>, <span class="at">color=</span><span class="st">"black"</span>, <span class="at">alpha=</span><span class="fl">0.8</span> ,<span class="at">bins=</span><span class="dv">30</span>) <span class="sc">+</span> </span>
-<span id="cb27-5"><a href="#cb27-5"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle=</span><span class="dv">20</span>, <span class="at">hjust=</span><span class="fl">0.5</span>),</span>
-<span id="cb27-6"><a href="#cb27-6"></a>        <span class="at">axis.title.y =</span> <span class="fu">element_blank</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb27-3"><a href="#cb27-3"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>total_yield)) <span class="sc">+</span> </span>
+<span id="cb27-4"><a href="#cb27-4"></a>  <span class="fu">geom_histogram</span>(<span class="at">fill=</span><span class="st">"#69b3a2"</span>, <span class="at">color=</span><span class="st">"black"</span>, <span class="at">alpha=</span><span class="fl">0.8</span>,<span class="at">bins=</span><span class="dv">30</span>)<span class="sc">+</span></span>
+<span id="cb27-5"><a href="#cb27-5"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle=</span><span class="dv">20</span>, <span class="at">hjust=</span><span class="fl">0.5</span>)) <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">y=</span><span class="st">""</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1"></a>yield_hist_log10 <span class="ot">&lt;-</span> full_data <span class="sc">|&gt;</span></span>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1"></a>yield_hist_log <span class="ot">&lt;-</span> full_data <span class="sc">|&gt;</span></span>
 <span id="cb28-2"><a href="#cb28-2"></a>  <span class="fu">na.omit</span>() <span class="sc">|&gt;</span></span>
-<span id="cb28-3"><a href="#cb28-3"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span><span class="fu">log</span>(total_yield <span class="sc">+</span> <span class="dv">1</span>,<span class="at">base=</span><span class="dv">10</span>))) <span class="sc">+</span> </span>
-<span id="cb28-4"><a href="#cb28-4"></a>  <span class="fu">geom_histogram</span>(<span class="at">fill=</span><span class="st">"#69b3a2"</span>, <span class="at">color=</span><span class="st">"black"</span>, <span class="at">alpha=</span><span class="fl">0.8</span> ,<span class="at">bins=</span><span class="dv">30</span>) <span class="sc">+</span> </span>
-<span id="cb28-5"><a href="#cb28-5"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle=</span><span class="dv">20</span>, <span class="at">hjust=</span><span class="fl">0.5</span>),</span>
-<span id="cb28-6"><a href="#cb28-6"></a>        <span class="at">axis.title.y =</span> <span class="fu">element_blank</span>()) <span class="sc">+</span> </span>
-<span id="cb28-7"><a href="#cb28-7"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">'log_10(total_yield)'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb28-3"><a href="#cb28-3"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span><span class="fu">log</span>(total_yield <span class="sc">+</span> <span class="dv">1</span>))) <span class="sc">+</span> </span>
+<span id="cb28-4"><a href="#cb28-4"></a>  <span class="fu">geom_histogram</span>(<span class="at">fill=</span><span class="st">"#69b3a2"</span>, <span class="at">color=</span><span class="st">"black"</span>, <span class="at">alpha=</span><span class="fl">0.8</span>,<span class="at">bins=</span><span class="dv">30</span>)<span class="sc">+</span></span>
+<span id="cb28-5"><a href="#cb28-5"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">'log(yield)'</span>) <span class="sc">+</span> </span>
+<span id="cb28-6"><a href="#cb28-6"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle=</span><span class="dv">20</span>, <span class="at">hjust=</span><span class="fl">0.5</span>),</span>
+<span id="cb28-7"><a href="#cb28-7"></a>        <span class="at">axis.title.y =</span> <span class="fu">element_blank</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1"></a>yield_hist_sqrt <span class="ot">&lt;-</span> full_data <span class="sc">|&gt;</span></span>
+<span id="cb29-2"><a href="#cb29-2"></a>  <span class="fu">na.omit</span>() <span class="sc">|&gt;</span></span>
+<span id="cb29-3"><a href="#cb29-3"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span><span class="fu">sqrt</span>(total_yield))) <span class="sc">+</span></span>
+<span id="cb29-4"><a href="#cb29-4"></a>  <span class="fu">geom_histogram</span>(<span class="at">fill=</span><span class="st">"#69b3a2"</span>, <span class="at">color=</span><span class="st">"black"</span>, <span class="at">alpha=</span><span class="fl">0.8</span> ,<span class="at">bins=</span><span class="dv">30</span>) <span class="sc">+</span> </span>
+<span id="cb29-5"><a href="#cb29-5"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle=</span><span class="dv">20</span>, <span class="at">hjust=</span><span class="fl">0.5</span>),</span>
+<span id="cb29-6"><a href="#cb29-6"></a>        <span class="at">axis.title.y =</span> <span class="fu">element_blank</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1"></a>yield_hist_log10 <span class="ot">&lt;-</span> full_data <span class="sc">|&gt;</span></span>
+<span id="cb30-2"><a href="#cb30-2"></a>  <span class="fu">na.omit</span>() <span class="sc">|&gt;</span></span>
+<span id="cb30-3"><a href="#cb30-3"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span><span class="fu">log</span>(total_yield <span class="sc">+</span> <span class="dv">1</span>,<span class="at">base=</span><span class="dv">10</span>))) <span class="sc">+</span> </span>
+<span id="cb30-4"><a href="#cb30-4"></a>  <span class="fu">geom_histogram</span>(<span class="at">fill=</span><span class="st">"#69b3a2"</span>, <span class="at">color=</span><span class="st">"black"</span>, <span class="at">alpha=</span><span class="fl">0.8</span> ,<span class="at">bins=</span><span class="dv">30</span>) <span class="sc">+</span> </span>
+<span id="cb30-5"><a href="#cb30-5"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle=</span><span class="dv">20</span>, <span class="at">hjust=</span><span class="fl">0.5</span>),</span>
+<span id="cb30-6"><a href="#cb30-6"></a>        <span class="at">axis.title.y =</span> <span class="fu">element_blank</span>()) <span class="sc">+</span> </span>
+<span id="cb30-7"><a href="#cb30-7"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">'log_10(total_yield)'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="distribution-plot" class="slide level2">
 <h2>Distribution plot</h2>
 <p>From the plot, we understood our data could be bi-modal(two modes). Thus, it’ll be hard to change it into a normal distribution using monotonic transformation.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1"></a>full_plot <span class="ot">&lt;-</span> yield_hist <span class="sc">+</span> yield_hist_log <span class="sc">+</span> yield_hist_sqrt <span class="sc">+</span>  yield_hist_log10 <span class="sc">+</span> <span class="fu">plot_annotation</span>(</span>
-<span id="cb29-2"><a href="#cb29-2"></a>  <span class="at">title =</span> <span class="st">'Response Variable Distribution (Yield)'</span>,</span>
-<span id="cb29-3"><a href="#cb29-3"></a>  <span class="at">theme =</span> <span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust=</span><span class="fl">0.5</span>)))</span>
-<span id="cb29-4"><a href="#cb29-4"></a></span>
-<span id="cb29-5"><a href="#cb29-5"></a></span>
-<span id="cb29-6"><a href="#cb29-6"></a>full_plot</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1"></a>full_plot <span class="ot">&lt;-</span> yield_hist <span class="sc">+</span> yield_hist_log <span class="sc">+</span> yield_hist_sqrt <span class="sc">+</span>  yield_hist_log10 <span class="sc">+</span> <span class="fu">plot_annotation</span>(</span>
+<span id="cb31-2"><a href="#cb31-2"></a>  <span class="at">title =</span> <span class="st">'Response Variable Distribution (Yield)'</span>,</span>
+<span id="cb31-3"><a href="#cb31-3"></a>  <span class="at">theme =</span> <span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust=</span><span class="fl">0.5</span>)))</span>
+<span id="cb31-4"><a href="#cb31-4"></a></span>
+<span id="cb31-5"><a href="#cb31-5"></a></span>
+<span id="cb31-6"><a href="#cb31-6"></a>full_plot</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 </div>
-<img data-src="index_files/figure-revealjs/unnamed-chunk-27-1.png" width="960" class="r-stretch"></section>
-<section id="bi-modal-test" class="slide level2">
-<h2>Bi-modal Test</h2>
-<p>We used the Laplace demon R package in order to check whether the distribution of our response variable is bi-modal or not. In addition to that, we also calculated the modes of the distribution (bi-modal = two modes).</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1"></a><span class="fu">is.bimodal</span>(full_data<span class="sc">$</span>total_yield)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] TRUE</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1"></a><span class="fu">Modes</span>(full_data<span class="sc">$</span>total_yield)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>$modes
-[1] 251329.6 440359.0
-
-$mode.dens
-[1] 4.064497e-06 1.468560e-06
-
-$size
-[1] 0.7181597 0.2292068</code></pre>
-</div>
-</div>
-</section>
+<img data-src="index_files/figure-revealjs/unnamed-chunk-29-1.png" width="960" class="r-stretch"></section>
 <section id="normality-check" class="slide level2">
 <h2>Normality check</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1"></a><span class="fu">ad.test</span>(full_data<span class="sc">$</span>total_yield)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1"></a><span class="fu">ad.test</span>(full_data<span class="sc">$</span>total_yield)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Anderson-Darling normality test
@@ -986,7 +971,7 @@ $size
 data:  full_data$total_yield
 A = 36.363, p-value &lt; 2.2e-16</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1"></a><span class="fu">ad.test</span>(<span class="fu">log</span>(full_data<span class="sc">$</span>total_yield <span class="sc">+</span> <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1"></a><span class="fu">ad.test</span>(<span class="fu">log</span>(full_data<span class="sc">$</span>total_yield <span class="sc">+</span> <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Anderson-Darling normality test
@@ -994,7 +979,7 @@ A = 36.363, p-value &lt; 2.2e-16</code></pre>
 data:  log(full_data$total_yield + 1)
 A = 572.7, p-value &lt; 2.2e-16</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1"></a><span class="fu">ad.test</span>(<span class="fu">sqrt</span>(full_data<span class="sc">$</span>total_yield))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1"></a><span class="fu">ad.test</span>(<span class="fu">sqrt</span>(full_data<span class="sc">$</span>total_yield))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Anderson-Darling normality test
@@ -1002,7 +987,7 @@ A = 572.7, p-value &lt; 2.2e-16</code></pre>
 data:  sqrt(full_data$total_yield)
 A = 36.645, p-value &lt; 2.2e-16</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1"></a><span class="fu">ad.test</span>(<span class="fu">log</span>(full_data<span class="sc">$</span>total_yield <span class="sc">+</span> <span class="dv">1</span>, <span class="at">base=</span><span class="dv">10</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1"></a><span class="fu">ad.test</span>(<span class="fu">log</span>(full_data<span class="sc">$</span>total_yield <span class="sc">+</span> <span class="dv">1</span>, <span class="at">base=</span><span class="dv">10</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Anderson-Darling normality test
@@ -1015,29 +1000,51 @@ A = 572.7, p-value &lt; 2.2e-16</code></pre>
 <section id="qqplot-another-normality-check" class="slide level2">
 <h2>QQPlot (another normality check)</h2>
 
-<img data-src="index_files/figure-revealjs/unnamed-chunk-30-1.png" width="960" class="r-stretch"><p>When doing an analysis to a bi-modal distributed response variable one needs to try to separate the data into clusters and conduct his analysis on each of the clusters. However, one can also use a mixed model in order to understand the distribution of each cluster.</p>
+<img data-src="index_files/figure-revealjs/unnamed-chunk-31-1.png" width="960" class="r-stretch"><p>The data distribution is not a Gaussian and it seems to follow a bi-modal distribution.</p>
+</section>
+<section id="bi-modal-test" class="slide level2">
+<h2>Bi-modal Test</h2>
+<p>In propose of determining whether the distribution is bi-modal or not we used the Laplace demon R package.In addition, we also calculated the modes of the distribution (bi-modal = two modes).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1"></a><span class="fu">is.bimodal</span>(full_data<span class="sc">$</span>total_yield)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1"></a><span class="fu">Modes</span>(full_data<span class="sc">$</span>total_yield)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>$modes
+[1] 251329.6 440359.0
+
+$mode.dens
+[1] 4.064497e-06 1.468560e-06
+
+$size
+[1] 0.7181597 0.2292068</code></pre>
+</div>
+</div>
 </section>
 <section id="mixed-model" class="slide level2">
 <h2>Mixed Model</h2>
+<p>When doing an analysis to a bi-modal distributed response variable one needs to try to separate the data into clusters and conduct his analysis on each of the clusters. However, one can also use a mixed model in order to understand the distribution of each cluster.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1"></a>gmm.model <span class="ot">&lt;-</span> <span class="fu">normalmixEM</span>(full_data<span class="sc">$</span>total_yield,<span class="at">k=</span><span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1"></a>gmm.model <span class="ot">&lt;-</span> <span class="fu">normalmixEM</span>(full_data<span class="sc">$</span>total_yield,<span class="at">k=</span><span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>number of iterations= 356 </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1"></a>mu  <span class="ot">&lt;-</span> gmm.model<span class="sc">$</span>mu</span>
-<span id="cb44-2"><a href="#cb44-2"></a>sigma <span class="ot">&lt;-</span> gmm.model<span class="sc">$</span>sigma</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1"></a>mu  <span class="ot">&lt;-</span> gmm.model<span class="sc">$</span>mu</span>
+<span id="cb46-2"><a href="#cb46-2"></a>sigma <span class="ot">&lt;-</span> gmm.model<span class="sc">$</span>sigma</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>We fit a GMM (Gaussian Mixed Model) into our response variable (total_yield) in order to determine whether each cluster distribution follows a Gaussian or at least approaches to a Gaussian.</p>
+<p>We fit a GMM (Gaussian Mixed Model) into our response variable (total_yield) in order to determine whether each cluster distribution follows a Gaussian or at least approaches to it.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1"></a>full_data <span class="sc">%&gt;%</span></span>
-<span id="cb45-2"><a href="#cb45-2"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>total_yield))<span class="sc">+</span></span>
-<span id="cb45-3"><a href="#cb45-3"></a>  <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">y=</span>..density..),<span class="at">fill=</span><span class="st">"#69b3a2"</span>, <span class="at">color=</span><span class="st">"black"</span>, <span class="at">bins=</span><span class="dv">30</span>) <span class="sc">+</span></span>
-<span id="cb45-4"><a href="#cb45-4"></a>  <span class="fu">stat_function</span>(<span class="at">fun =</span> <span class="cf">function</span>(x) <span class="fu">dnorm</span>(x,<span class="at">mean=</span>mu[<span class="dv">2</span>],<span class="at">sd=</span>sigma[<span class="dv">2</span>]),<span class="at">color=</span><span class="st">'blue'</span>) <span class="sc">+</span> </span>
-<span id="cb45-5"><a href="#cb45-5"></a>  <span class="fu">stat_function</span>(<span class="at">fun =</span> <span class="cf">function</span>(x) <span class="fu">dnorm</span>(x,<span class="at">mean=</span>mu[<span class="dv">1</span>],<span class="at">sd=</span>sigma[<span class="dv">1</span>]),<span class="at">color=</span><span class="st">'red'</span>) <span class="sc">+</span></span>
-<span id="cb45-6"><a href="#cb45-6"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">'Yield'</span>, <span class="at">title =</span> <span class="st">'Gaussian Mixed Model Fit'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1"></a>full_data <span class="sc">%&gt;%</span></span>
+<span id="cb47-2"><a href="#cb47-2"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>total_yield))<span class="sc">+</span></span>
+<span id="cb47-3"><a href="#cb47-3"></a>  <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">y=</span>..density..),<span class="at">fill=</span><span class="st">"#69b3a2"</span>, <span class="at">color=</span><span class="st">"black"</span>, <span class="at">bins=</span><span class="dv">30</span>) <span class="sc">+</span></span>
+<span id="cb47-4"><a href="#cb47-4"></a>  <span class="fu">stat_function</span>(<span class="at">fun =</span> <span class="cf">function</span>(x) <span class="fu">dnorm</span>(x,<span class="at">mean=</span>mu[<span class="dv">2</span>],<span class="at">sd=</span>sigma[<span class="dv">2</span>]),<span class="at">color=</span><span class="st">'blue'</span>) <span class="sc">+</span> </span>
+<span id="cb47-5"><a href="#cb47-5"></a>  <span class="fu">stat_function</span>(<span class="at">fun =</span> <span class="cf">function</span>(x) <span class="fu">dnorm</span>(x,<span class="at">mean=</span>mu[<span class="dv">1</span>],<span class="at">sd=</span>sigma[<span class="dv">1</span>]),<span class="at">color=</span><span class="st">'red'</span>) <span class="sc">+</span></span>
+<span id="cb47-6"><a href="#cb47-6"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">'Yield'</span>, <span class="at">title =</span> <span class="st">'Gaussian Mixed Model Fit'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 </div>
-<img data-src="index_files/figure-revealjs/unnamed-chunk-32-1.png" width="960" class="r-stretch"><p>Though we can’t really determine if the data distribute normally or not, we can say that each cluster is approaching to a normal distribution. Thus, we can use the linear regression model.</p>
+<img data-src="index_files/figure-revealjs/unnamed-chunk-34-1.png" width="960" class="r-stretch"><p>Though we can’t really determine if the data distribute normally or not, we can say that each cluster is approaching to a normal distribution. Thus, we can use the linear regression model.</p>
 </section></section>
 <section>
 <section id="data-analysis" class="title-slide slide level1 center">
@@ -1050,15 +1057,18 @@ A = 572.7, p-value &lt; 2.2e-16</code></pre>
 <section id="regression-analysis" class="slide level2">
 <h2>Regression Analysis</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1"></a>lm.data <span class="ot">&lt;-</span> full_data <span class="sc">%&gt;%</span></span>
-<span id="cb46-2"><a href="#cb46-2"></a>  <span class="fu">select</span>(<span class="sc">-</span><span class="fu">ends_with</span>(<span class="st">'.amount'</span>),<span class="sc">-</span><span class="fu">ends_with</span>(<span class="st">'.price'</span>),<span class="sc">-</span>Country) <span class="sc">%&gt;%</span> <span class="fu">na.omit</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1"></a>lm.data <span class="ot">&lt;-</span> full_data <span class="sc">%&gt;%</span></span>
+<span id="cb48-2"><a href="#cb48-2"></a>  <span class="fu">select</span>(<span class="sc">-</span><span class="fu">ends_with</span>(<span class="st">'.amount'</span>),<span class="sc">-</span><span class="fu">ends_with</span>(<span class="st">'.price'</span>),<span class="sc">-</span>Country) <span class="sc">%&gt;%</span> <span class="fu">na.omit</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>When we observed the scatter plots we understood it might be more appropriate to model our response variable in log scale. Since, most of the plots pointed a linear relation between the independent and dependent variable.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1"></a>model <span class="ot">&lt;-</span> lm.data <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="sc">-</span>Year) <span class="sc">%&gt;%</span></span>
-<span id="cb47-2"><a href="#cb47-2"></a>  <span class="fu">lm</span>(<span class="fu">log</span>(total_yield <span class="sc">+</span> <span class="dv">1</span>)<span class="sc">~</span><span class="fu">log</span>(pop_amount <span class="sc">+</span> <span class="dv">1</span>) <span class="sc">+</span> <span class="fu">log</span>(number_employed_agri <span class="sc">+</span> <span class="dv">1</span>) <span class="sc">+</span> <span class="fu">log</span>(avg_temp <span class="sc">+</span> <span class="dv">1</span>) <span class="sc">+</span> <span class="fu">log</span>(avg_rainfall <span class="sc">+</span> <span class="dv">1</span>) <span class="sc">+</span> <span class="fu">log</span>(land_price <span class="sc">+</span> <span class="dv">1</span>) <span class="sc">+</span> <span class="fu">log</span>(avg_crop_price <span class="sc">+</span> <span class="dv">1</span>) <span class="sc">+</span> <span class="fu">log</span>(pesticides_amount <span class="sc">+</span> <span class="dv">1</span>) , <span class="at">data=</span>.)</span>
-<span id="cb47-3"><a href="#cb47-3"></a></span>
-<span id="cb47-4"><a href="#cb47-4"></a>model <span class="sc">%&gt;%</span> <span class="fu">summary</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1"></a>model <span class="ot">&lt;-</span> lm.data <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="sc">-</span>Year) <span class="sc">%&gt;%</span></span>
+<span id="cb49-2"><a href="#cb49-2"></a>  <span class="fu">lm</span>(<span class="fu">log</span>(total_yield <span class="sc">+</span> <span class="dv">1</span>)<span class="sc">~</span><span class="fu">log</span>(pop_amount <span class="sc">+</span> <span class="dv">1</span>) <span class="sc">+</span> </span>
+<span id="cb49-3"><a href="#cb49-3"></a>       <span class="fu">log</span>(number_employed_agri <span class="sc">+</span> <span class="dv">1</span>) <span class="sc">+</span> <span class="fu">log</span>(avg_temp <span class="sc">+</span> <span class="dv">1</span>) <span class="sc">+</span> </span>
+<span id="cb49-4"><a href="#cb49-4"></a>       <span class="fu">log</span>(avg_rainfall <span class="sc">+</span> <span class="dv">1</span>) <span class="sc">+</span> <span class="fu">log</span>(land_price <span class="sc">+</span> <span class="dv">1</span>) <span class="sc">+</span> </span>
+<span id="cb49-5"><a href="#cb49-5"></a>       <span class="fu">log</span>(avg_crop_price <span class="sc">+</span> <span class="dv">1</span>) <span class="sc">+</span> <span class="fu">log</span>(pesticides_amount <span class="sc">+</span> <span class="dv">1</span>) , <span class="at">data=</span>.)</span>
+<span id="cb49-6"><a href="#cb49-6"></a></span>
+<span id="cb49-7"><a href="#cb49-7"></a>model <span class="sc">%&gt;%</span> <span class="fu">summary</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -1152,10 +1162,10 @@ F-statistic: 465.7 on 7 and 3739 DF,  p-value: &lt; 2.2e-16</code></pre>
 <section id="correlation-analysis" class="slide level2">
 <h2>Correlation Analysis</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1"></a>corel <span class="ot">&lt;-</span> full_data <span class="sc">|&gt;</span></span>
-<span id="cb49-2"><a href="#cb49-2"></a>  <span class="fu">select</span>(<span class="sc">-</span>total_yield, <span class="sc">-</span><span class="fu">ends_with</span>(<span class="st">'.amount'</span>), <span class="sc">-</span><span class="fu">ends_with</span>(<span class="st">'.price'</span>),<span class="sc">-</span>Country,<span class="sc">-</span>Year) <span class="sc">|&gt;</span></span>
-<span id="cb49-3"><a href="#cb49-3"></a>  <span class="fu">select_if</span>(is.numeric) <span class="sc">|&gt;</span></span>
-<span id="cb49-4"><a href="#cb49-4"></a>  <span class="fu">lapply</span>(<span class="cf">function</span>(col) <span class="fu">cor.test</span>(col,full_data<span class="sc">$</span>total_yield,<span class="at">method =</span> <span class="st">'kendal'</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1"></a>corel <span class="ot">&lt;-</span> full_data <span class="sc">|&gt;</span></span>
+<span id="cb51-2"><a href="#cb51-2"></a>  <span class="fu">select</span>(<span class="sc">-</span>total_yield, <span class="sc">-</span><span class="fu">ends_with</span>(<span class="st">'.amount'</span>), <span class="sc">-</span><span class="fu">ends_with</span>(<span class="st">'.price'</span>),<span class="sc">-</span>Country,<span class="sc">-</span>Year) <span class="sc">|&gt;</span></span>
+<span id="cb51-3"><a href="#cb51-3"></a>  <span class="fu">select_if</span>(is.numeric) <span class="sc">|&gt;</span></span>
+<span id="cb51-4"><a href="#cb51-4"></a>  <span class="fu">lapply</span>(<span class="cf">function</span>(col) <span class="fu">cor.test</span>(col,full_data<span class="sc">$</span>total_yield,<span class="at">method =</span> <span class="st">'kendal'</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <table>
 <caption>Kendal Correlation Test Results</caption>
@@ -1404,10 +1414,10 @@ F-statistic: 465.7 on 7 and 3739 DF,  p-value: &lt; 2.2e-16</code></pre>
         previewLinks: false,
 
         // Transition style (none/fade/slide/convex/concave/zoom)
-        transition: 'none',
+        transition: 'slide',
 
         // Transition speed (default/fast/slow)
-        transitionSpeed: 'default',
+        transitionSpeed: 'slow',
 
         // Transition style for full page slide backgrounds
         // (none/fade/slide/convex/concave/zoom)
