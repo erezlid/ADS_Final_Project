@@ -3,15 +3,18 @@ title: "ADS Final Project - What affect agriculture"
 author: "Amir Boger 208989954 & Lidor Erez 318661444"
 format: 
   revealjs:
+    css: custom.css
     smaller: true
     scrollable: true
-    theme: dark
+    transition: slide
+    transition-speed: slow
+    theme: custom.scss
 editor: visual
 ---
 
 ## Introduction
 
--   Agriculture, in our modern world, holds a central position in our lives. It has ushered in transformative changes that have forever impacted us and others. Therefore, it's important to understand what can truly affect it.
+-   in our modern world, Agriculture holds a central position in our lives. It has ushered in transformative changes that have forever impacted us and others. Therefore, it's important to understand what can truly affect it.
 
 -   In this project, we will present our findings along with the data we collected regarding the factors that can influence our agriculture output, and will try to understand what can affect our agricultural industry.
 
@@ -51,7 +54,23 @@ For this project, we gathered our data from the following resources:
 
 -   FAO (Food and agriculture organization of the united nations)
 
-## Data pre processing - first inspection
+## Libraries
+
+Aside from the usual libraries we used in class, we decided to use some other libraries, such as "mix tools" and "nortests". Here are the libraries we used for this project:
+
+```{r echo=TRUE, warning=FALSE}
+library(ggplot2)
+library(dplyr)
+library(data.table)
+library(tidyverse)
+library(patchwork)
+library(qqplotr)
+library(mixtools)
+library(nortest)
+library(LaplacesDemon)
+```
+
+## First Inspection of the Data
 
 Firstly, we loaded our raw data and inspected it.
 
@@ -69,7 +88,9 @@ temp <- read.csv("https://raw.githubusercontent.com/erezlid/ADS_Final_Project/ma
 
 pesticides <- read.csv("https://raw.githubusercontent.com/erezlid/ADS_Final_Project/main/Data/Climate%20Change/pesticides.csv")
 
+```
 
+```{r echo=TRUE}
 # Land Use data
 
 land_use <- read.csv("https://raw.githubusercontent.com/erezlid/ADS_Final_Project/main/Data/Land%20Use%20/fao_data_land_data.csv")
@@ -83,31 +104,18 @@ price <- read.csv("https://raw.githubusercontent.com/erezlid/ADS_Final_Project/m
 
 # Agriculture yield data
 yield <- read.csv("https://raw.githubusercontent.com/erezlid/ADS_Final_Project/main/Data/Yield/yield.csv")
+```
 
+```{r echo=TRUE}
 head(yield)
 ```
 
-## Libraries
-
-Aside from the usual libraries we used in class, we decided to use some other libraries, such as "mix tools" and "nortests". Here are the libraries we used for this project:
-
-```{r echo=TRUE, warning=FALSE}
-library(ggplot2)
-library(dplyr)
-library(data.table)
-library(tidyverse)
-library(patchwork)
-library(qqplotr)
-library(mixtools)
-library(nortest)
-library(LaplacesDemon)
-```
 
 # Data pre processing 
  - Ensuring columns uniformity
  - Arranging & Organizing data
- - Cleaing Data (remvoing unnecessary columns)
- - Tiding Data
+ - Cleaning Data (removing unnecessary columns)
+ - Tidying Data
  - Join tables
  - Filling missing values
  - Cleaning Data (removing unnecessary observations)
@@ -211,7 +219,7 @@ employees <- employees |>
 
 
 
-## Tiding the data
+## Tidying the data
 
 After the tables where organized and ready, we standardized the prices to ensure consistency by converting all of the price data to USD. Then we tidy the price data to make it more readable:
 
@@ -241,7 +249,7 @@ price <- price %>%
   )
 ```
 
-## Tiding the data
+## Tidying the data
 
 Although we have renamed some of the columns in the pre processing procedure, we decided to once again rename the columns so it'd be more easier to work with them:
 
@@ -304,7 +312,11 @@ full_data <- yield %>%
   arrange(Country, Year)
 
 # Reordering columns
-full_data <- full_data |>  select(Year, Country, pop_amount,number_employed_agri,avg_temp, avg_rainfall,land_price, pesticides_amount, ends_with('.price'), ends_with('.amount')) %>% mutate(avg_rainfall = as.integer(avg_rainfall))
+full_data <- full_data |>  
+  select(Year, Country, pop_amount,
+         number_employed_agri,avg_temp, avg_rainfall,land_price, 
+         pesticides_amount, ends_with('.price'), ends_with('.amount')) %>% 
+         mutate(avg_rainfall = as.integer(avg_rainfall))
 
 head(full_data)
 ```
@@ -542,14 +554,6 @@ full_plot <- yield_hist + yield_hist_log + yield_hist_sqrt +  yield_hist_log10 +
 full_plot
 ```
 
-## Bi-modal Test
-
-We used the Laplace demon R package in order to check whether the distribution of our response variable is bi-modal or not. In addition to that, we also calculated the modes of the distribution (bi-modal = two modes).
-
-```{r, echo=TRUE}
-is.bimodal(full_data$total_yield)
-Modes(full_data$total_yield)
-```
 
 ## Normality check
 
@@ -567,17 +571,27 @@ qqplot(qnorm(ppoints(length(full_data$total_yield))),full_data$total_yield, xlab
 qqline(full_data$total_yield,distribution=qnorm)
 ```
 
-When doing an analysis to a bi-modal distributed response variable one needs to try to separate the data into clusters and conduct his analysis on each of the clusters. However, one can also use a mixed model in order to understand the distribution of each cluster.
+The data distribution is not a Gaussian and it seems to follow a bi-modal distribution.
+
+## Bi-modal Test
+
+In propose of determining whether the distribution is bi-modal or not we used the Laplace demon R package.In addition, we also calculated the modes of the distribution (bi-modal = two modes).
+
+```{r, echo=TRUE}
+is.bimodal(full_data$total_yield)
+Modes(full_data$total_yield)
+```
 
 ## Mixed Model
 
+When doing an analysis to a bi-modal distributed response variable one needs to try to separate the data into clusters and conduct his analysis on each of the clusters. However, one can also use a mixed model in order to understand the distribution of each cluster.
 ```{r, echo=TRUE}
 gmm.model <- normalmixEM(full_data$total_yield,k=2)
 mu  <- gmm.model$mu
 sigma <- gmm.model$sigma
 ```
 
-We fit a GMM (Gaussian Mixed Model) into our response variable (total_yield) in order to determine whether each cluster distribution follows a Gaussian or at least approaches to a Gaussian.
+We fit a GMM (Gaussian Mixed Model) into our response variable (total_yield) in order to determine whether each cluster distribution follows a Gaussian or at least approaches to it.
 
 ```{r , echo=TRUE}
 
@@ -590,6 +604,7 @@ full_data %>%
 ```
 
 Though we can't really determine if the data distribute normally or not, we can say that each cluster is approaching to a normal distribution. Thus, we can use the linear regression model.
+
 
 # Data Analysis
 
@@ -609,7 +624,10 @@ When we observed the scatter plots we understood it might be more appropriate to
 
 ```{r,echo=TRUE}
 model <- lm.data %>% select(-Year) %>%
-  lm(log(total_yield + 1)~log(pop_amount + 1) + log(number_employed_agri + 1) + log(avg_temp + 1) + log(avg_rainfall + 1) + log(land_price + 1) + log(avg_crop_price + 1) + log(pesticides_amount + 1) , data=.)
+  lm(log(total_yield + 1)~log(pop_amount + 1) + 
+       log(number_employed_agri + 1) + log(avg_temp + 1) + 
+       log(avg_rainfall + 1) + log(land_price + 1) + 
+       log(avg_crop_price + 1) + log(pesticides_amount + 1) , data=.)
 
 model %>% summary()
 ```

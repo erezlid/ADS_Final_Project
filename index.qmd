@@ -14,7 +14,7 @@ editor: visual
 
 ## Introduction
 
--   Agriculture, in our modern world, holds a central position in our lives. It has ushered in transformative changes that have forever impacted us and others. Therefore, it's important to understand what can truly affect it.
+-   in our modern world, Agriculture holds a central position in our lives. It has ushered in transformative changes that have forever impacted us and others. Therefore, it's important to understand what can truly affect it.
 
 -   In this project, we will present our findings along with the data we collected regarding the factors that can influence our agriculture output, and will try to understand what can affect our agricultural industry.
 
