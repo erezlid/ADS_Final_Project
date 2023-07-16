@@ -14,13 +14,15 @@ editor: visual
 
 ## Introduction
 
--   in our modern world, Agriculture holds a central position in our lives. It has ushered in transformative changes that have forever impacted us and others. Therefore, it's important to understand what can truly affect it.
+-   In our modern world, agriculture occupies a central position in our lives. 
+It has brought about transformative changes that have forever impacted us and others. 
+Therefore, it's important to understand what can truly affect it.
 
--   In this project, we will present our findings along with the data we collected regarding the factors that can influence our agriculture output, and will try to understand what can affect our agricultural industry.
+-   In this project, we will present our findings along with the data we collected regarding the factors that can influence our agricultural output, and we will try to understand what can affect our agricultural industry.
 
-## Our Research Hypothesis
+## Research Hypothesis
 
-We believe that there is a connection between several factors and agriculture. Some aspects, might have a positive effect on the agriculture industry, While others may have a negative one. Therefore, our project aims to investigate the correlations and regressions between the agriculture output and the key variables, namely population, climate change, land use, employment and product price.
+We believe that there is a connection between several factors and agricultural output. Some aspects, might have a positive effect on the agriculture industry, While others may have a negative one. Therefore, our project aims to investigate the correlations and regressions between the agriculture output and the key variables, namely population, climate change, land use, employment and product price.
 
 ![](https://github.com/erezlid/ADS_Final_Project/blob/main/images/research.png?raw=true){width="377"}
 
@@ -40,9 +42,11 @@ the purpose of the literature review was to gain an understanding of what should
 
 [employment and labor]{.underline} - as for the labor index, we wanted to understand the impact of changes in agriculture employment on agricultural output. For instance, a study conducted in China, revealed that areas with higher concentration of agricultural labor tend to experience higher level of productivity in the agricultural sector. (Dazhuan et.al, 2018).
 
-[Land use]{.underline} - although Land use might have an effect on agricultural output, the literature we read has shown no straight connection between the Land use's change and the agriculture yield. The findings confirm that recovery of cropland to forest or grassland at western China did not result in significant loss of agricultural production (Yan et.al, 2009).  
+[Land use]{.underline} - although Land use might have an effect on agricultural output, the literature we read has shown no straight connection between the Land use's change and the agriculture yield. 
+The findings confirm that recovery of cropland to forest or grassland at western China did not result in significant loss of agricultural production (Yan et.al, 2009).  
 
-[economy]{.underline} - regarding the economy index, we decided to focus on the producer crop price, as it can have both positive and negative affects on the agriculture output. higher products prices encourage producers to increase their production, because high prices mean higher income. on the other hand, lower products prices would decrease production, which would cause the income of the producers to be smaller (Cruz-Lazaro, et.al, 2023)
+[economy]{.underline} - regarding the economy index, we decided to focus on the producer crop price, as it can have both positive and negative affects on the agriculture output. 
+higher products prices encourage producers to increase their production, because high prices mean higher income. on the other hand, lower products prices would decrease production, which would cause the income of the producers to be smaller (Cruz-Lazaro, et.al, 2023)
 
 ## Data gathering
 
