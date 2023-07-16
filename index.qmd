@@ -28,7 +28,7 @@ We believe that there is a connection between several factors and agricultural o
 
 ## Literature Review
 
-the purpose of the literature review was to gain an understanding of what should be anticipated when analyzing our data. while some of the articles we found aligned with what we where anticipating to observe, others didn't.
+The purpose of the literature review was to gain an understanding of what should be anticipated when analyzing our data. while some of the articles we found aligned with what we where anticipating to observe, others didn't.
 
 ![](https://github.com/erezlid/ADS_Final_Project/blob/main/images/books.JPG?raw=true){width="448"}
 
@@ -40,12 +40,12 @@ the purpose of the literature review was to gain an understanding of what should
 
 ## Literature Review
 
-[employment and labor]{.underline} - as for the labor index, we wanted to understand the impact of changes in agriculture employment on agricultural output. For instance, a study conducted in China, revealed that areas with higher concentration of agricultural labor tend to experience higher level of productivity in the agricultural sector. (Dazhuan et.al, 2018).
+[Employment and Labor]{.underline} - As for the labor index, we wanted to understand the impact of changes in agriculture employment on agricultural output. For instance, a study conducted in China, revealed that areas with higher concentration of agricultural labor tend to experience higher level of productivity in the agricultural sector. (Dazhuan et.al, 2018).
 
-[Land use]{.underline} - although Land use might have an effect on agricultural output, the literature we read has shown no straight connection between the Land use's change and the agriculture yield. 
+[Land use]{.underline} - Although Land use might have an effect on agricultural output, the literature we read has shown no straight connection between the Land use's change and the agriculture yield. 
 The findings confirm that recovery of cropland to forest or grassland at western China did not result in significant loss of agricultural production (Yan et.al, 2009).  
 
-[economy]{.underline} - regarding the economy index, we decided to focus on the producer crop price, as it can have both positive and negative affects on the agriculture output. 
+[Economy]{.underline} - Regarding the economy index, we decided to focus on the producer crop price, as it can have both positive and negative affects on the agriculture output. 
 higher products prices encourage producers to increase their production, because high prices mean higher income. on the other hand, lower products prices would decrease production, which would cause the income of the producers to be smaller (Cruz-Lazaro, et.al, 2023)
 
 ## Data gathering
@@ -169,7 +169,7 @@ yield <- yield %>%
 
 Another thing we had to do was to remove some unnecessary notes inside the cells themselves.
 
-for example: in the "price" table, we removed unnecessary notes which where inside the "items" columns:
+For example: in the "price" table, we removed unnecessary notes which where inside the "items" columns:
 ```{r echo=TRUE}
 # Change Maize(corn) to Maize only
 price$Item <- sapply(price$Item, function(x) gsub('corn', '', x)) %>%
@@ -225,7 +225,7 @@ employees <- employees |>
 
 ## Tidying the data
 
-After the tables where organized and ready, we standardized the prices to ensure consistency by converting all of the price data to USD. Then we tidy the price data to make it more readable:
+After the tables where organized and ready, we standardized the prices to ensure consistency by converting all of the price data to USD. Then we, tidy the price data to make it more readable:
 
 ```{r echo=TRUE}
 # get only the countries that use USD
@@ -255,7 +255,7 @@ price <- price %>%
 
 ## Tidying the data
 
-Although we have renamed some of the columns in the pre processing procedure, we decided to once again rename the columns so it'd be more easier to work with them:
+Although we have renamed some of the columns on the pre processing procedure, we decided to once again rename the columns so it'd be more easier to work with them:
 
 ```{r echo=TRUE}
 
@@ -301,7 +301,7 @@ yield <- yield %>%
 
 ## Joins
 
-In order to analyse the entire data in the most efficient way, we joined all of our tables into one big table:
+For data analysis efficinecy, we joined all of our tables into one big table:
 
 ```{r echo=TRUE}
 # Join tables
@@ -374,7 +374,7 @@ for (i in 1:length(amounts)) {
 
 ## Removing unnecessary rows
 
-we also removed countries that has less than 5 observations.
+We also removed countries that has less than 5 observations.
 
 ```{r echo=TRUE}
 full_data <- full_data %>%

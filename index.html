@@ -417,7 +417,7 @@ Amir Boger &amp; Lidor Erez
 <img data-src="https://github.com/erezlid/ADS_Final_Project/blob/main/images/research.png?raw=true" class="quarto-discovered-preview-image r-stretch" width="377"></section>
 <section id="literature-review" class="slide level2">
 <h2>Literature Review</h2>
-<p>the purpose of the literature review was to gain an understanding of what should be anticipated when analyzing our data. while some of the articles we found aligned with what we where anticipating to observe, others didn’t.</p>
+<p>The purpose of the literature review was to gain an understanding of what should be anticipated when analyzing our data. while some of the articles we found aligned with what we where anticipating to observe, others didn’t.</p>
 
 <img data-src="https://github.com/erezlid/ADS_Final_Project/blob/main/images/books.JPG?raw=true" width="448" class="r-stretch"></section>
 <section id="literature-review-1" class="slide level2">
@@ -427,9 +427,9 @@ Amir Boger &amp; Lidor Erez
 </section>
 <section id="literature-review-2" class="slide level2">
 <h2>Literature Review</h2>
-<p><u>employment and labor</u> - as for the labor index, we wanted to understand the impact of changes in agriculture employment on agricultural output. For instance, a study conducted in China, revealed that areas with higher concentration of agricultural labor tend to experience higher level of productivity in the agricultural sector. (Dazhuan et.al, 2018).</p>
-<p><u>Land use</u> - although Land use might have an effect on agricultural output, the literature we read has shown no straight connection between the Land use’s change and the agriculture yield. The findings confirm that recovery of cropland to forest or grassland at western China did not result in significant loss of agricultural production (Yan et.al, 2009).</p>
-<p><u>economy</u> - regarding the economy index, we decided to focus on the producer crop price, as it can have both positive and negative affects on the agriculture output. higher products prices encourage producers to increase their production, because high prices mean higher income. on the other hand, lower products prices would decrease production, which would cause the income of the producers to be smaller (Cruz-Lazaro, et.al, 2023)</p>
+<p><u>Employment and Labor</u> - As for the labor index, we wanted to understand the impact of changes in agriculture employment on agricultural output. For instance, a study conducted in China, revealed that areas with higher concentration of agricultural labor tend to experience higher level of productivity in the agricultural sector. (Dazhuan et.al, 2018).</p>
+<p><u>Land use</u> - Although Land use might have an effect on agricultural output, the literature we read has shown no straight connection between the Land use’s change and the agriculture yield. The findings confirm that recovery of cropland to forest or grassland at western China did not result in significant loss of agricultural production (Yan et.al, 2009).</p>
+<p><u>Economy</u> - Regarding the economy index, we decided to focus on the producer crop price, as it can have both positive and negative affects on the agriculture output. higher products prices encourage producers to increase their production, because high prices mean higher income. on the other hand, lower products prices would decrease production, which would cause the income of the producers to be smaller (Cruz-Lazaro, et.al, 2023)</p>
 </section>
 <section id="data-gathering" class="slide level2">
 <h2>Data gathering</h2>
@@ -563,7 +563,7 @@ Amir Boger &amp; Lidor Erez
 <section id="arranging-organizing-data" class="slide level2">
 <h2>Arranging &amp; Organizing Data</h2>
 <p>Another thing we had to do was to remove some unnecessary notes inside the cells themselves.</p>
-<p>for example: in the “price” table, we removed unnecessary notes which where inside the “items” columns:</p>
+<p>For example: in the “price” table, we removed unnecessary notes which where inside the “items” columns:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="co"># Change Maize(corn) to Maize only</span></span>
 <span id="cb7-2"><a href="#cb7-2"></a>price<span class="sc">$</span>Item <span class="ot">&lt;-</span> <span class="fu">sapply</span>(price<span class="sc">$</span>Item, <span class="cf">function</span>(x) <span class="fu">gsub</span>(<span class="st">'corn'</span>, <span class="st">''</span>, x)) <span class="sc">%&gt;%</span></span>
@@ -612,7 +612,7 @@ Amir Boger &amp; Lidor Erez
 </section>
 <section id="tidying-the-data" class="slide level2">
 <h2>Tidying the data</h2>
-<p>After the tables where organized and ready, we standardized the prices to ensure consistency by converting all of the price data to USD. Then we tidy the price data to make it more readable:</p>
+<p>After the tables where organized and ready, we standardized the prices to ensure consistency by converting all of the price data to USD. Then we, tidy the price data to make it more readable:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="co"># get only the countries that use USD</span></span>
 <span id="cb10-2"><a href="#cb10-2"></a>usd_countries <span class="ot">&lt;-</span> price <span class="sc">%&gt;%</span></span>
@@ -641,7 +641,7 @@ Amir Boger &amp; Lidor Erez
 </section>
 <section id="tidying-the-data-1" class="slide level2">
 <h2>Tidying the data</h2>
-<p>Although we have renamed some of the columns in the pre processing procedure, we decided to once again rename the columns so it’d be more easier to work with them:</p>
+<p>Although we have renamed some of the columns on the pre processing procedure, we decided to once again rename the columns so it’d be more easier to work with them:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="co"># Rename columns:</span></span>
 <span id="cb11-2"><a href="#cb11-2"></a></span>
@@ -681,7 +681,7 @@ Amir Boger &amp; Lidor Erez
 </section>
 <section id="joins" class="slide level2">
 <h2>Joins</h2>
-<p>In order to analyse the entire data in the most efficient way, we joined all of our tables into one big table:</p>
+<p>For data analysis efficinecy, we joined all of our tables into one big table:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="co"># Join tables</span></span>
 <span id="cb13-2"><a href="#cb13-2"></a>full_data <span class="ot">&lt;-</span> yield <span class="sc">%&gt;%</span></span>
@@ -766,7 +766,7 @@ Amir Boger &amp; Lidor Erez
 </section>
 <section id="removing-unnecessary-rows" class="slide level2">
 <h2>Removing unnecessary rows</h2>
-<p>we also removed countries that has less than 5 observations.</p>
+<p>We also removed countries that has less than 5 observations.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a>full_data <span class="ot">&lt;-</span> full_data <span class="sc">%&gt;%</span></span>
 <span id="cb18-2"><a href="#cb18-2"></a>  <span class="fu">group_by</span>(Country) <span class="sc">%&gt;%</span></span>
